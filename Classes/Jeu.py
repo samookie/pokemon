@@ -10,15 +10,15 @@ class Jeu:
 
         # créer la fenêtre du jeu
 
-        self.screen = pygame.display.set_mode((800, 600))
+        self.screen = pygame.display.set_mode((700, 600))
         pygame.display.set_caption("Powebmon")
 
         # charger la carte
 
-        tmx_data = pytmx.util_pygame.load_pygame("Map/ville.tmx")
+        tmx_data = pytmx.util_pygame.load_pygame("Map/magasin.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-
+        map_layer.zoom = 3
         # dessiner le groupe de calsques
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
 
