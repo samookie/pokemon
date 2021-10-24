@@ -1,30 +1,26 @@
+import pygame
 import pyscroll
 import pytmx
 
 class Carte:
 
-    '''Méthode permettant de charger la map principale du jeu'''
-    def carte_princiaple(self, taille):
-        tmx_data = pytmx.util_pygame.load_pygame("Map/ville.tmx")
-        map_data = pyscroll.data.TiledMapData(tmx_data)
-        map_layer = pyscroll.orthographic.BufferedRenderer(map_data, taille)
-        map_layer.zoom = 3
+    def __init__(self, leJeu):
+        self.jeu = leJeu
 
-        return map_layer
+    '''Méthode permettant de charger une carte spécifique'''
+    def chargerCarte(self, nomCarte):
+        self.tmx_data = pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx")
+        self.map_data = pyscroll.data.TiledMapData(self.tmx_data)
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.jeu.screen.get_size())
+        self.map_layer.zoom = 3
 
-    '''Méthode permettant de retourner les tmx_data de la map'''
-    def carte_principale_data(self):
-        return pytmx.util_pygame.load_pygame("Map/ville.tmx")
+        return self.map_layer
 
-    '''Méthode permettant de charger la map magasin'''
-    def carte_magasin(self, taille):
-        tmx_data = pytmx.util_pygame.load_pygame("Map/magasin.tmx")
-        map_data = pyscroll.data.TiledMapData(tmx_data)
-        map_layer = pyscroll.orthographic.BufferedRenderer(map_data, taille)
-        map_layer.zoom = 3
+    def get_collisions(self, nomCarte):
+        collision = []
 
-        return map_layer
+        for obj in pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx").objects:
+            if obj.type == "collision":
+                collision.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
-    '''Méthode permettant de retourner les tmx_data de la map magasin'''
-    def carte_magasin_data(self):
-        return pytmx.util_pygame.load_pygame("Map/magasin.tmx")
+        return collision
