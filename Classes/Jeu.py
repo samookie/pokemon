@@ -17,7 +17,7 @@ class Jeu:
     def lancement(self):
 
         # Variables
-        self.ecran_affiche = "jeu"
+        self.ecran_affiche = "home"
         self.mettre_a_jour = True
 
         jeu = True
@@ -39,6 +39,7 @@ class Jeu:
                 ecran_accueil.gestion_touches()
             elif self.ecran_affiche == "intro":
                 intro.affichageTxtProfesseur()
+                intro.gestion_touches()
             elif self.ecran_affiche == "jeu":
                 carte.affichage_carte()
             else:
