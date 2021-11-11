@@ -2,6 +2,7 @@ import pygame
 
 from Classes.Carte import Carte
 from Classes.Home_Screen import Home_Screen
+from Classes.Intro import Intro
 
 pygame.init()
 
@@ -16,7 +17,7 @@ class Jeu:
     def lancement(self):
 
         # Variables
-        self.ecran_affiche = "home"
+        self.ecran_affiche = "jeu"
         self.mettre_a_jour = True
 
         jeu = True
@@ -24,10 +25,11 @@ class Jeu:
         clock = pygame.time.Clock()
 
         # Variables pour les cartes
-        carte.chargerCarte("ville")
+        carte.chargerCarte("carte")
 
         # VARS ECRANS
         ecran_accueil = Home_Screen(self)
+        intro = Intro(self)
 
         # boucle du jeu
         while jeu:
@@ -35,6 +37,8 @@ class Jeu:
             if self.ecran_affiche == "home":
                 ecran_accueil.afficher_ecran()
                 ecran_accueil.gestion_touches()
+            elif self.ecran_affiche == "intro":
+                intro.affichageTxtProfesseur()
             elif self.ecran_affiche == "jeu":
                 carte.affichage_carte()
             else:

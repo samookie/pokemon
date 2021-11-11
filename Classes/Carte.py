@@ -9,7 +9,7 @@ class Carte:
     def __init__(self, leJeu):
         self.jeu = leJeu
         self.joueur = Joueur(500, 500)
-        self.nom_carte = "ville"
+        self.nom_carte = "carte"
 
     '''Méthode permettant de charger une carte spécifique'''
     def chargerCarte(self, nomCarte):

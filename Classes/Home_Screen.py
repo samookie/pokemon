@@ -34,8 +34,8 @@ class Home_Screen:
             pygame.display.flip()  # MAJ de l'affichage
         elif pygame.key.get_pressed()[pygame.K_UP]:
             self.curseur = "continuer"
-            pygame.display.flip()  # MAJ de l'affichage
+            pygame.display.flip()  # MAJ de l'affichagez
         elif pygame.key.get_pressed()[pygame.K_RETURN] and self.curseur == "nouv":
             self.leJeu.mettre_a_jour = True
-            self.leJeu.ecran_affiche = "jeu"
+            self.leJeu.ecran_affiche = "intro"
             self.musique.fadeout(2000)
