@@ -103,8 +103,7 @@ c = conn.cursor()
 #);
 #""")
 
-# c.execute("INSERT INTO Dialoque VALUES ('Je test si ça marche')")
-
+c.execute("INSERT Dialogue VALUES ('Je test') ")
 
 conn.commit()
 

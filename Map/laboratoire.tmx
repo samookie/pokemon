@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="7" height="7" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="16">
+ <tileset firstgid="1" name="laboratoire" tilewidth="32" tileheight="32" tilecount="169" columns="13">
+  <image source="Images/laboratoire.png" trans="000000" width="433" height="447"/>
+ </tileset>
+ <layer id="1" name="Calque de Tuiles 1" width="7" height="7">
+  <data encoding="csv">
+43,44,45,46,47,48,49,
+56,57,58,59,60,61,62,
+69,70,71,72,73,74,75,
+82,83,84,85,86,87,88,
+95,96,97,98,99,100,101,
+108,109,110,111,112,113,114,
+121,122,123,124,125,126,127
+</data>
+ </layer>
+ <objectgroup id="2" name="collision">
+  <object id="1" type="collision" x="-1" y="16.6667" width="109" height="39.6667"/>
+  <object id="2" type="collision" x="107.333" y="16.6667" width="50" height="30.3333"/>
+  <object id="3" type="collision" x="157.333" y="16.6667" width="64.3333" height="40.3333"/>
+  <object id="4" type="collision" x="221.333" y="16" width="6" height="212.667"/>
+  <object id="5" type="collision" x="10.6667" y="223.333" width="216.667" height="5.66667"/>
+  <object id="6" type="collision" x="-0.666667" y="16.6667" width="13" height="209.333"/>
+  <object id="8" type="collision" x="31.75" y="79.75" width="26.75" height="33.25"/>
+  <object id="9" type="collision" x="14.75" y="65.75" width="11" height="30.25"/>
+  <object id="11" type="collision" x="141.25" y="89.75" width="47.25" height="18.75"/>
+  <object id="12" type="collision" x="141.5" y="143.25" width="78.25" height="25.5"/>
+  <object id="13" type="collision" x="12.75" y="141.75" width="79.75" height="27.5"/>
+  <object id="14" type="collision" x="14" y="202.25" width="11.75" height="21"/>
+  <object id="15" type="collision" x="206.25" y="202" width="12.5" height="20.5"/>
+ </objectgroup>
+</map>
