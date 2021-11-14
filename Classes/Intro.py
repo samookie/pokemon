@@ -3,10 +3,15 @@ import random
 
 import pygame
 
+from Classes.Keyboard import KeyboardUser
+
+
 class Intro:
 
     def __init__(self, leJeu):
         self.leJeu = leJeu
+
+        self.nomJoueur = ""
 
         self.txtIntro = ["Bien le bonjour ! Bienvenue dans le monde magique des POKEMON",
                          "Mon nom est CHEN ! Les gens souvent m'appellent le PROF POKEMON",
@@ -17,7 +22,7 @@ class Intro:
                          "De nombreux mystères planent sur le sujet.",
                          "Et c'est pourquoi j'étudie les Pokémon tous les jours",
                          "Heu... C'est quoi ton nom ?",
-                         "[NOMJOUEUR], est-tu prêt ?",
+                         ", est-tu prêt ?",
                          "Ta quête Pokémon est sur le point de commencer.",
                          "Joies et périls parveront ta route...",
                          "Un monde de rêve, de dangers et de Pokémon t'attend !",
@@ -28,7 +33,7 @@ class Intro:
         self.heureNext = int(datetime.datetime.now().strftime("%S")) #Récupérer la seconde ou le texte à été affiché
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 11)  # Initialiser la police pour le texte
 
-        self.nomJoueur = ""
+        self.clavier = KeyboardUser(self.leJeu, "Quel est ton nom ?")
 
     def affichageTxtProfesseur(self):
         imgProfesseur = pygame.image.load("Map/Images/professeur.png")
@@ -41,11 +46,14 @@ class Intro:
         self.leJeu.screen.blit(dialogBox, (0, 0))
         self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
 
-        '''if self.txtNum == 8:
-            self.definir_nom_Joueur()
-            self.nomJoueur = self.nomJoueur
+        if self.txtNum == 8:
+            self.clavier.affichage()
+            self.clavier.gestionTouches()
+            self.nomJoueur = self.clavier.inputUser
+        elif self.txtNum == 9:
+            self.leJeu.screen.blit(self.text.render(self.nomJoueur + self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
         else:
-            self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))'''
+            self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
 
         pygame.display.flip()
 
@@ -64,6 +72,3 @@ class Intro:
             self.leJeu.ecran_affiche = "jeu"
             self.leJeu.mettre_a_jour = True
             self.musique.fadeout(2000)
-
-    def definir_nom_Joueur(self):
-        self.leJeu.screen.blit(self.text.render("Mon nom est :" + self.nomJoueur, True, (0, 0, 0)), (45, 490))
