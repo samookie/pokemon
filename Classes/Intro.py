@@ -30,7 +30,7 @@ class Intro:
                          "... A plus tard."]
 
         self.txtNum = 0
-        self.heureNext = int(datetime.datetime.now().strftime("%S")) #Récupérer la seconde ou le texte à été affiché
+        self.passer = True
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 11)  # Initialiser la police pour le texte
 
         self.clavier = KeyboardUser(self.leJeu, "Quel est ton nom ?")
@@ -51,6 +51,7 @@ class Intro:
             self.clavier.gestionTouches()
             self.nomJoueur = self.clavier.inputUser
         elif self.txtNum == 9:
+            self.leJeu.screen.blit(dialogBox, (0, 0))
             self.leJeu.screen.blit(self.text.render(self.nomJoueur + self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
         else:
             self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
@@ -65,10 +66,12 @@ class Intro:
 
     '''Méthode permettant de vérifier la frappe des touches sur cette classe'''
     def gestion_touches(self):
-        if pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum < len(self.txtIntro) - 1 and (self.heureNext < int(datetime.datetime.now().strftime("%S")) or int(datetime.datetime.now().strftime("%S")) == 0):
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum < len(self.txtIntro) - 1 and self.passer:
             self.txtNum = self.txtNum + 1
-            self.heureNext = int(datetime.datetime.now().strftime("%S")) #Redéfinir la seconde ou le texte à été lu
-        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum == len(self.txtIntro) - 1:
+            self.passer = False
+        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum == len(self.txtIntro) - 1 and self.passer:
             self.leJeu.ecran_affiche = "jeu"
             self.leJeu.mettre_a_jour = True
             self.musique.fadeout(2000)
+        elif not pygame.key.get_pressed()[pygame.K_SPACE]:
+            self.passer = True
