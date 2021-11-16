@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="18">
+ <tileset firstgid="1" name="centre1" tilewidth="32" tileheight="32" tilecount="60" columns="10">
+  <image source="Images/centre1.png" trans="000000" width="335" height="208"/>
+ </tileset>
+ <layer id="1" name="Calque de Tuiles 1" width="8" height="6">
+  <data encoding="csv">
+2,3,4,5,6,7,8,9,
+12,13,14,15,16,17,18,19,
+22,23,24,25,26,27,28,29,
+32,33,34,35,36,37,38,39,
+42,43,44,45,46,47,48,49,
+52,53,54,55,56,57,58,59
+</data>
+ </layer>
+ <objectgroup id="2" name="Collision">
+  <object id="1" type="collision" x="31.75" y="28.75" width="224.5" height="32.5"/>
+  <object id="2" type="collision" x="13.5" y="42.25" width="3" height="120.5"/>
+  <object id="3" type="collision" x="35.5" y="58.75" width="8.5" height="10.5"/>
+  <object id="4" type="collision" x="49.5" y="58.25" width="28.25" height="11"/>
+  <object id="5" type="collision" x="79.5" y="57.75" width="47.75" height="35.5"/>
+  <object id="6" type="collision" x="175.75" y="55.5" width="14.25" height="37.75"/>
+  <object id="7" type="collision" x="126.25" y="73.75" width="51.5" height="18.75"/>
+  <object id="8" type="collision" x="191" y="59" width="15.75" height="11.25"/>
+  <object id="9" type="collision" x="192" y="127.5" width="29.25" height="29.75"/>
+  <object id="10" type="collision" x="29.25" y="173.5" width="213.5" height="3.5"/>
+  <object id="11" type="collision" x="254.25" y="60" width="2.5" height="103.5"/>
+  <object id="12" type="collision" x="16.5" y="110">
+   <polygon points="0,0 15.5,7.875 26.875,8 31.125,12.625 30.875,16.5 15.375,15.875 15.25,13.875 7.75,13.125 7.375,9.125 -0.375,8.875"/>
+  </object>
+  <object id="13" type="collision" x="16.625" y="134.75">
+   <polygon points="0,0 15.5,7.625 30.625,8.25 31,15.25 -0.25,14.5"/>
+  </object>
+  <object id="14" type="collision" x="16.6364" y="159.091">
+   <polygon points="0,0 13.8182,14.8182 13,17.7273"/>
+  </object>
+  <object id="15" type="collision" x="254.091" y="159.364">
+   <polygon points="0,0 -14.7273,14.3636 -11.0909,14.4545"/>
+  </object>
+  <object id="16" x="238.182" y="61.0909">
+   <polygon points="0,0 15.9091,16.3636 16.2727,-0.363636"/>
+  </object>
+  <object id="17" type="collision" x="32.5455" y="60.9091">
+   <polygon points="0,0 -16,17 -16.6364,2.27273"/>
+  </object>
+ </objectgroup>
+</map>
