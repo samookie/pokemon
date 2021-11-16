@@ -4,6 +4,7 @@ import random
 import pygame
 
 from Classes.Keyboard import KeyboardUser
+from Model.PokemonBDD import PokemonBDD
 
 
 class Intro:
@@ -31,9 +32,12 @@ class Intro:
 
         self.txtNum = 0
         self.passer = True
+        self.ecran = "dialogue"
+        self.sexe = "g"
+        self.bdd = PokemonBDD()
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 11)  # Initialiser la police pour le texte
 
-        self.clavier = KeyboardUser(self.leJeu, "Quel est ton nom ?")
+        self.clavier = KeyboardUser(self.leJeu, "Heu... C'est quoi ton nom ?")
 
     def affichageTxtProfesseur(self):
         imgProfesseur = pygame.image.load("Map/Images/professeur.png")
@@ -41,20 +45,31 @@ class Intro:
 
         imgProfesseurScale = pygame.transform.scale(imgProfesseur, (171, 273))
 
-        pygame.draw.rect(self.leJeu.screen, (0, 0, 0), pygame.Rect(0, 0, 700, 600))
-        self.leJeu.screen.blit(imgProfesseurScale, (random.randint(0, 700), random.randint(0, 600)))
-        self.leJeu.screen.blit(dialogBox, (0, 0))
-        self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
-
-        if self.txtNum == 8:
-            self.clavier.affichage()
-            self.clavier.gestionTouches()
-            self.nomJoueur = self.clavier.inputUser
-        elif self.txtNum == 9:
+        if self.ecran == "dialogue":
+            pygame.draw.rect(self.leJeu.screen, (0, 0, 0), pygame.Rect(0, 0, 700, 600))
+            self.leJeu.screen.blit(imgProfesseurScale, (random.randint(0, 700), random.randint(0, 600)))
             self.leJeu.screen.blit(dialogBox, (0, 0))
-            self.leJeu.screen.blit(self.text.render(self.nomJoueur + self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
-        else:
             self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
+
+            if self.txtNum == 8:
+                self.clavier.affichage()
+                self.clavier.gestionTouches()
+                self.nomJoueur = self.clavier.inputUser
+            elif self.txtNum == 9:
+                self.leJeu.screen.blit(dialogBox, (0, 0))
+                self.leJeu.screen.blit(self.text.render(self.nomJoueur + self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
+            else:
+                self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
+        else:
+            pygame.draw.rect(self.leJeu.screen, (0, 0, 0), pygame.Rect(0, 0, 700, 600))
+            self.leJeu.screen.blit(self.text.render("Est-tu un garçon ou une fille ?", True, (255, 255, 255)), (45, 200))
+            if self.sexe == "g":
+                self.leJeu.screen.blit(self.text.render("> Garçon <", True, (255, 255, 255)), (45, 250))
+                self.leJeu.screen.blit(self.text.render("Fille", True, (255, 255, 255)), (45, 270))
+            else:
+                self.leJeu.screen.blit(self.text.render("Garçon", True, (255, 255, 255)), (45, 250))
+                self.leJeu.screen.blit(self.text.render("> Fille <", True, (255, 255, 255)), (45, 270))
+
 
         pygame.display.flip()
 
@@ -69,9 +84,19 @@ class Intro:
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum < len(self.txtIntro) - 1 and self.passer:
             self.txtNum = self.txtNum + 1
             self.passer = False
-        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum == len(self.txtIntro) - 1 and self.passer:
+        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum == len(self.txtIntro) - 1 and self.passer and self.ecran == "dialogue":
+            self.ecran = "choix"
+            self.passer = False
+        elif pygame.key.get_pressed()[pygame.K_UP] and self.passer:
+            self.sexe = "g"
+            self.passer = False
+        elif pygame.key.get_pressed()[pygame.K_DOWN] and self.passer:
+            self.sexe = "f"
+            self.passer = False
+        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum == len(self.txtIntro) - 1 and self.passer and self.ecran == "choix":
+            self.bdd.creationPersonnage(self.nomJoueur, self.sexe)
             self.leJeu.ecran_affiche = "jeu"
             self.leJeu.mettre_a_jour = True
             self.musique.fadeout(2000)
-        elif not pygame.key.get_pressed()[pygame.K_SPACE]:
+        elif not pygame.key.get_pressed()[pygame.K_SPACE] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_DOWN]:
             self.passer = True

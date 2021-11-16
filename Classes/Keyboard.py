@@ -44,11 +44,17 @@ class KeyboardUser:
             elif pygame.key.get_pressed()[pygame.K_RETURN]:
                 self.validEntree()
                 self.passer = False
-        elif not pygame.key.get_pressed()[pygame.K_DOWN] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_RIGHT] and not pygame.key.get_pressed()[pygame.K_LEFT] and not pygame.key.get_pressed()[pygame.K_RETURN]:
+            elif pygame.key.get_pressed()[pygame.K_BACKSPACE]:
+                self.supprCrac()
+                self.passer = False
+        elif not pygame.key.get_pressed()[pygame.K_DOWN] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_RIGHT] and not pygame.key.get_pressed()[pygame.K_LEFT] and not pygame.key.get_pressed()[pygame.K_RETURN] and not pygame.key.get_pressed()[pygame.K_BACKSPACE]:
             self.passer = True
 
             self.secInput = int(datetime.datetime.now().strftime("%S"))
             self.minInput = int(datetime.datetime.now().strftime("%M"))
+
+    def supprCrac(self):
+        self.inputUser = self.inputUser[:-1]
 
     def modifPos(self, direction):
         if direction == "haut":
@@ -61,7 +67,7 @@ class KeyboardUser:
             if self.xSelec > 107:
                 self.xSelec -= 55
         elif direction == "droite":
-            if self.xSelec < 547:
+            if self.xSelec < 492:
                 self.xSelec += 55
 
     def validEntree(self):
@@ -71,12 +77,54 @@ class KeyboardUser:
             self.inputUser += "B"
         elif self.xSelec < 272 and self.ySelec < 330:
             self.inputUser += "C"
-        elif self.xSelec < 382 and self.ySelec < 330:
+        elif self.xSelec < 327 and self.ySelec < 330:
             self.inputUser += "D"
-        elif self.xSelec < 437 and self.ySelec < 330:
+        elif self.xSelec < 382 and self.ySelec < 330:
             self.inputUser += "E"
-        elif self.xSelec < 492 and self.ySelec < 330:
+        elif self.xSelec < 437 and self.ySelec < 330:
             self.inputUser += "F"
         elif self.xSelec < 547 and self.ySelec < 330:
             self.inputUser += "."
+        elif self.xSelec < 162 and self.ySelec < 384:
+            self.inputUser += "G"
+        elif self.xSelec < 217 and self.ySelec < 384:
+            self.inputUser += "H"
+        elif self.xSelec < 272 and self.ySelec < 384:
+            self.inputUser += "I"
+        elif self.xSelec < 327 and self.ySelec < 384:
+            self.inputUser += "J"
+        elif self.xSelec < 382 and self.ySelec < 384:
+            self.inputUser += "K"
+        elif self.xSelec < 437 and self.ySelec < 384:
+            self.inputUser += "L"
+        elif self.xSelec < 547 and self.ySelec < 384:
+            self.inputUser += ","
+        elif self.xSelec < 162 and self.ySelec < 438:
+            self.inputUser += "M"
+        elif self.xSelec < 217 and self.ySelec < 438:
+            self.inputUser += "N"
+        elif self.xSelec < 272 and self.ySelec < 438:
+            self.inputUser += "O"
+        elif self.xSelec < 327 and self.ySelec < 438:
+            self.inputUser += "P"
+        elif self.xSelec < 382 and self.ySelec < 438:
+            self.inputUser += "Q"
+        elif self.xSelec < 437 and self.ySelec < 438:
+            self.inputUser += "R"
+        elif self.xSelec < 547 and self.ySelec < 438:
+            self.inputUser += "S"
+        elif self.xSelec < 162 and self.ySelec < 492:
+            self.inputUser += "T"
+        elif self.xSelec < 217 and self.ySelec < 492:
+            self.inputUser += "U"
+        elif self.xSelec < 272 and self.ySelec < 492:
+            self.inputUser += "V"
+        elif self.xSelec < 327 and self.ySelec < 492:
+            self.inputUser += "W"
+        elif self.xSelec < 382 and self.ySelec < 492:
+            self.inputUser += "X"
+        elif self.xSelec < 437 and self.ySelec < 492:
+            self.inputUser += "Y"
+        elif self.xSelec < 547 and self.ySelec < 492:
+            self.inputUser += "Z"
 

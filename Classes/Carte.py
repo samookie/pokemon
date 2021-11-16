@@ -2,12 +2,14 @@ import pygame
 import pyscroll
 import pytmx
 from Classes.Joueur import Joueur
+from Model.PokemonBDD import PokemonBDD
 
 
 class Carte:
 
     def __init__(self, leJeu):
         self.jeu = leJeu
+        self.bdd = PokemonBDD()
         self.joueur = Joueur(500, 500)
         self.nom_carte = "carte"
 

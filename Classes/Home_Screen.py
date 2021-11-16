@@ -1,11 +1,15 @@
 import pygame
 
+from Model.PokemonBDD import PokemonBDD
+
+
 class Home_Screen:
 
     def __init__(self, leJeu):
         self.leJeu = leJeu #CLasse jeu
         self.curseur = "continuer" #Variable pour savoir ou le curseur est situé
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 15) #Initialiser la police pour le texte
+        self.bdd = PokemonBDD()
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
     def afficher_ecran(self):
@@ -36,6 +40,7 @@ class Home_Screen:
             self.curseur = "continuer"
             pygame.display.flip()  # MAJ de l'affichagez
         elif pygame.key.get_pressed()[pygame.K_RETURN] and self.curseur == "nouv":
+            self.bdd.resetBDD()
             self.leJeu.mettre_a_jour = True
             self.leJeu.ecran_affiche = "intro"
             self.musique.fadeout(2000)

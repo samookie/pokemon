@@ -21,11 +21,11 @@ class Jeu:
         self.mettre_a_jour = True
 
         jeu = True
-        carte = Carte(self)
+        self.carte = Carte(self)
         clock = pygame.time.Clock()
 
         # Variables pour les cartes
-        carte.chargerCarte("carte")
+        self.carte.chargerCarte("carte")
 
         # VARS ECRANS
         ecran_accueil = Home_Screen(self)
@@ -41,7 +41,7 @@ class Jeu:
                 intro.affichageTxtProfesseur()
                 intro.gestion_touches()
             elif self.ecran_affiche == "jeu":
-                carte.affichage_carte()
+                self.carte.affichage_carte()
             else:
                 pass
 
