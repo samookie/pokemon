@@ -58,6 +58,16 @@ class Intro:
             elif self.txtNum == 9:
                 self.leJeu.screen.blit(dialogBox, (0, 0))
                 self.leJeu.screen.blit(self.text.render(self.nomJoueur + self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
+
+                # Pouvoir changer de nom si il aime pas du coup je pense qu c'est un do While ou while stv 
+                # self.leJeu.screen.blit(self.text.render("Est-tu sûr de t'appeler " + self.nomJoueur + " ?", True, (255, 255, 255)),(45, 200))
+                # if self.sexe == "oui":
+                #    self.leJeu.screen.blit(self.text.render("> Oui <", True, (255, 255, 255)), (45, 250))
+                #    self.leJeu.screen.blit(self.text.render("Non", True, (255, 255, 255)), (45, 270))
+                # else:
+                #    self.leJeu.screen.blit(self.text.render("Oui", True, (255, 255, 255)), (45, 250))
+                #    self.leJeu.screen.blit(self.text.render("> Non <", True, (255, 255, 255)), (45, 270))
+
             else:
                 self.leJeu.screen.blit(self.text.render(self.txtIntro[self.txtNum], True, (0, 0, 0)), (45, 490))
         else:
