@@ -1,6 +1,6 @@
 import pygame
 
-from pokemon.Classes.Animation import Animation
+from Classes.Animation import Animation
 
 
 class Joueur(Animation):

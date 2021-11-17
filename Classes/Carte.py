@@ -47,3 +47,7 @@ class Carte:
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe
             if sprite.pieds.collidelist(self.collision) > -1:  # Si le sprite pied est dans la zone de collision
                 sprite.revenir_en_arriere()  # Faire revenir le sprite (Donc ici l'image du joueur) en arrière
+
+    def majSexePerso(self):
+        print(self.bdd.getSexePersonnage())
+        self.joueur.chgSexePerso(self.bdd.getSexePersonnage())

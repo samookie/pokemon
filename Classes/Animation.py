@@ -15,6 +15,12 @@ class Animation(pygame.sprite.Sprite):
         }
         self.speed = 2
 
+    def chgSexePerso(self, name):
+        if name == "g":
+            self.sprite_sheet = pygame.image.load(f"Map/Images/joueur_garcon.png")
+        else:
+            self.sprite_sheet = pygame.image.load(f"Map/Images/joueur_fille.png")
+
     def get_image(self, x, y):
         image = pygame.Surface([16, 20])  # Définir la surface de l'image
         image.blit(self.sprite_sheet, (0, 0), (x, y, 16, 20))  # Récupérer du spritesheet une seule image d'action
@@ -23,7 +29,7 @@ class Animation(pygame.sprite.Sprite):
     def get_images(self , y):
         images = []
         for i in range(0 , 3):
-            x = i * 32
+            x = i * 16
             image = self.get_image( x, y)
             images.append(image)
 

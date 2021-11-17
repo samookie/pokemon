@@ -4,31 +4,34 @@ import pygame
 
 class KeyboardUser:
 
+    '''Classe Keyboard permettant d'afficher un clavier pour permettre à l'utilisateur d'entrer des données'''
     def __init__(self, leJeu, txtInfo):
-        self.leJeu = leJeu
-        self.txtInfo = txtInfo
-        self.inputUser = ""
+        self.leJeu = leJeu #La classe jeu
+        self.txtInfo = txtInfo #Le texte d'info affiché à l'utilisateur
+        self.inputUser = "" #Ce que l'utilisateur à entré
 
-        self.imgKeyboard = pygame.image.load("Map/Images/keyboard.png")
-        self.selectKey = pygame.image.load("Map/Images/keyboardSelec.png")
+        self.imgKeyboard = pygame.image.load("Map/Images/keyboard.png") #Image du clavier
+        self.selectKey = pygame.image.load("Map/Images/keyboardSelec.png") #Image du rectangle indiquant la lettre sélectionné
 
-        self.xSelec = 107
-        self.ySelec = 276
+        self.xSelec = 107 #Cordonnée x de base
+        self.ySelec = 276 #Cordonée y de base
 
-        self.passer = True
+        self.passer = True #Variable pour savoir si on peut valider l'entrée
 
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 15)  # Initialiser la police pour le texte
 
+    '''Méthode permettant d'afficher les éléments'''
     def affichage(self):
 
-        self.leJeu.screen.blit(self.imgKeyboard, (0, 0))
-        self.leJeu.screen.blit(self.text.render(self.txtInfo, True, (255, 255, 255)), (0, 100))
-        self.leJeu.screen.blit(self.text.render(self.inputUser, True, (255, 255, 255)), (0, 150))
-        self.leJeu.screen.blit(self.selectKey, (self.xSelec, self.ySelec))
-        pygame.display.flip()
+        self.leJeu.screen.blit(self.imgKeyboard, (0, 0)) #Afficher le clavier
+        self.leJeu.screen.blit(self.text.render(self.txtInfo, True, (255, 255, 255)), (0, 100)) #Afficher le texte d'info
+        self.leJeu.screen.blit(self.text.render(self.inputUser, True, (255, 255, 255)), (0, 150)) #Afficher l'entrée de l'utilisateur
+        self.leJeu.screen.blit(self.selectKey, (self.xSelec, self.ySelec)) #Afficher le carée de sélection de la lettre
+        pygame.display.flip() #MAJ affichage
 
+    '''Méthode permettant de gérer les touches sur cet écran'''
     def gestionTouches(self):
-        if self.passer:
+        if self.passer: #Si la variable passer est à True
             if pygame.key.get_pressed()[pygame.K_DOWN]:
                 self.modifPos("bas")
                 self.passer = False
@@ -47,29 +50,29 @@ class KeyboardUser:
             elif pygame.key.get_pressed()[pygame.K_BACKSPACE]:
                 self.supprCrac()
                 self.passer = False
-        elif not pygame.key.get_pressed()[pygame.K_DOWN] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_RIGHT] and not pygame.key.get_pressed()[pygame.K_LEFT] and not pygame.key.get_pressed()[pygame.K_RETURN] and not pygame.key.get_pressed()[pygame.K_BACKSPACE]:
+        elif not pygame.key.get_pressed()[pygame.K_DOWN] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_RIGHT] and not pygame.key.get_pressed()[pygame.K_LEFT] and not pygame.key.get_pressed()[pygame.K_RETURN] and not pygame.key.get_pressed()[pygame.K_BACKSPACE]: #Si aucune touche n'est enfoncé
             self.passer = True
 
-            self.secInput = int(datetime.datetime.now().strftime("%S"))
-            self.minInput = int(datetime.datetime.now().strftime("%M"))
-
+    '''Méthode permettant de supprimer le dernier caractère de l'enrtée utilisateur'''
     def supprCrac(self):
-        self.inputUser = self.inputUser[:-1]
+        self.inputUser = self.inputUser[:-1] #Supprimer le dernier caractère de la chaine
 
+    '''Méthode permettant de bouger le carée de sélection de lettre'''
     def modifPos(self, direction):
-        if direction == "haut":
+        if direction == "haut": #Si la modification de la position est haut
             if self.ySelec > 276:
                 self.ySelec -= 54
-        elif direction == "bas":
+        elif direction == "bas":  #Si la modification de la position est bas
             if self.ySelec < 438:
                 self.ySelec += 54
-        elif direction == "gauche":
+        elif direction == "gauche":  #Si la modification de la position est gauche
             if self.xSelec > 107:
                 self.xSelec -= 55
-        elif direction == "droite":
+        elif direction == "droite":  #Si la modification de la position est droite
             if self.xSelec < 492:
                 self.xSelec += 55
 
+    '''Méthode permettant d'insérer la lettre sélectionné par l'utilisateur'''
     def validEntree(self):
         if self.xSelec < 162 and self.ySelec < 330:
             self.inputUser += "A"
