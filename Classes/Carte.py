@@ -10,7 +10,7 @@ class Carte:
     def __init__(self, leJeu):
         self.jeu = leJeu
         self.bdd = PokemonBDD()
-        self.joueur = Joueur(500, 500)
+        self.joueur = Joueur("joueur_fille",500, 500)
         self.nom_carte = "carte"
 
     '''Méthode permettant de charger une carte spécifique'''
