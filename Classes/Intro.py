@@ -34,6 +34,7 @@ class Intro:
         self.passer = True
         self.ecran = "dialogue"
         self.sexe = "g"
+        self.choix = "oui"
         self.bdd = PokemonBDD()
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 11)  # Initialiser la police pour le texte
 
@@ -61,7 +62,7 @@ class Intro:
 
                 # Pouvoir changer de nom si il aime pas du coup je pense qu c'est un do While ou while stv 
                 # self.leJeu.screen.blit(self.text.render("Est-tu sûr de t'appeler " + self.nomJoueur + " ?", True, (255, 255, 255)),(45, 200))
-                # if self.sexe == "oui":
+                # if self.choix == "oui":
                 #    self.leJeu.screen.blit(self.text.render("> Oui <", True, (255, 255, 255)), (45, 250))
                 #    self.leJeu.screen.blit(self.text.render("Non", True, (255, 255, 255)), (45, 270))
                 # else:

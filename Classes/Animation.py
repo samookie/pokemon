@@ -23,7 +23,7 @@ class Animation(pygame.sprite.Sprite):
     def get_images(self , y):
         images = []
         for i in range(0 , 3):
-            x = i * 32
+            x = i * 16
             image = self.get_image( x, y)
             images.append(image)
 

@@ -25,7 +25,7 @@ class Jeu:
         clock = pygame.time.Clock()
 
         # Variables pour les cartes
-        self.carte.chargerCarte("carte")
+        self.carte.chargerCarte("carte","spawn_sortie_maisonH")
 
         # VARS ECRANS
         ecran_accueil = Home_Screen(self)

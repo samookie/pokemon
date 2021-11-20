@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="7" height="9" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="7" height="9" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="30">
  <tileset firstgid="1" name="areneP" tilewidth="32" tileheight="32" tilecount="80" columns="8">
   <image source="Images/areneP.png" trans="000000" width="268" height="342"/>
  </tileset>
@@ -16,4 +16,37 @@
 74,75,76,77,78,79,80
 </data>
  </layer>
+ <objectgroup id="2" name="collision">
+  <object id="1" type="collision" x="63.0909" y="193.636" width="14.7273" height="31.2727"/>
+  <object id="2" type="collision" x="78" y="192.727" width="16.1818" height="15.8182"/>
+  <object id="3" type="collision" x="110.364" y="192.727" width="15.6364" height="16.7273"/>
+  <object id="4" type="collision" x="126.364" y="193.273" width="14.9091" height="32.1818"/>
+  <object id="5" type="collision" x="110" y="160.727" width="49.2727" height="17.2727"/>
+  <object id="6" type="collision" x="141.455" y="177.273" width="1.27273" height="31.6364"/>
+  <object id="7" type="collision" x="141.818" y="204.909" width="57.2727" height="3.81818"/>
+  <object id="8" type="collision" x="5.27273" y="204.182" width="56.9091" height="5.81818"/>
+  <object id="9" type="collision" x="5.45455" y="210" width="7.81818" height="48.1818"/>
+  <object id="10" type="collision" x="4.72727" y="256.364" width="194" height="4.54545"/>
+  <object id="11" type="collision" x="190.182" y="208.545" width="8" height="48.3636"/>
+  <object id="12" type="collision" x="46.125" y="160.875" width="47.625" height="16.375"/>
+  <object id="13" type="collision" x="60.875" y="177.75" width="1.125" height="26.625"/>
+  <object id="14" type="collision" x="44.875" y="144.625" width="1.375" height="18.5"/>
+  <object id="15" type="collision" x="157.875" y="144.125" width="1.875" height="18"/>
+  <object id="17" type="collision" x="45.875" y="129.125" width="47.75" height="15.75"/>
+  <object id="18" type="collision" x="58.375" y="113.5" width="3.5" height="16"/>
+  <object id="19" type="collision" x="58.25" y="97.375" width="20" height="15.25"/>
+  <object id="20" type="collision" x="125.75" y="96.875" width="17.25" height="16"/>
+  <object id="21" type="collision" x="141.625" y="112.5" width="3.625" height="17.625"/>
+  <object id="22" type="collision" x="109.75" y="129.375" width="48.625" height="15.625"/>
+  <object id="23" type="collision" x="77.75" y="80.25" width="16.125" height="16.5"/>
+  <object id="24" type="collision" x="94" y="80.5" width="16.875" height="0.75"/>
+  <object id="25" type="collision" x="109.875" y="79.625" width="16.375" height="17.5"/>
+  <object id="27" type="collision" x="94.1818" y="97.7273">
+   <polygon points="0,0 -6.45455,4.72727 -6.81818,17.7273 -0.454545,22.5455 16.9091,22.5455 22.1818,18.7273 22.3636,4.18182 15.0909,0.0909091"/>
+  </object>
+  <object id="28" name="sortie_arene" type="entree" x="89.375" y="244.875" width="25.125" height="11.5"/>
+  <object id="29" name="spawn_entree_arene" type="spawn" x="101.333" y="229">
+   <point/>
+  </object>
+ </objectgroup>
 </map>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="15" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="27">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="15" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="34">
  <tileset firstgid="1" name="theatreG" tilewidth="32" tileheight="32" tilecount="133" columns="19">
   <image source="Images/theatreG.png" trans="000000" width="628" height="230"/>
  </tileset>
@@ -42,5 +42,17 @@
   <object id="26" type="collision" x="170.5" y="124.125">
    <polygon points="0,0 -0.125,5.125 31.5,-9.5 31.5,-15.875"/>
   </object>
+  <object id="27" name="sortie_musee2" type="entree" x="357.5" y="149.5" width="24.5" height="10.25"/>
+  <object id="28" name="sortie_musee1" type="entree" x="245.25" y="148.75" width="24.75" height="10.5"/>
+  <object id="29" name="spawn_musee1" type="spawn" x="227.75" y="141.25">
+   <point/>
+  </object>
+  <object id="30" name="spawn_musee2" type="spawn" x="334.5" y="145.75">
+   <point/>
+  </object>
+  <object id="31" name="spawn_etage_musee" type="spawn" x="159.75" y="142.25">
+   <point/>
+  </object>
+  <object id="33" name="etage_musee" type="entree" x="195.75" y="117.25" width="6.75" height="16"/>
  </objectgroup>
 </map>
