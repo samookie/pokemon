@@ -2,10 +2,12 @@ import sqlite3
 
 class PokemonBDD():
 
+    '''Modèle pour la BDD'''
     def __init__(self):
         self.conn = sqlite3.connect('Model/PokemonBDD.db')
         self.c = self.conn.cursor()
 
+    '''Méthode permettant de créer la BDD'''
     def createBDD(self):
         self.c.execute("""
         CREATE TABLE Dialogue(
@@ -105,6 +107,7 @@ class PokemonBDD():
         );
         """)
 
+    '''Méthode permettant de reset la BDD'''
     def resetBDD(self):
         self.c.execute("DROP TABLE Dialogue")
         self.c.execute("DROP TABLE Game")
@@ -118,10 +121,11 @@ class PokemonBDD():
         self.c.execute("DROP TABLE Liste_Attaque")
         self.createBDD()
 
+    '''Méthode permettant de créer le Héro'''
     def creationPersonnage(self, nomJoueur, sexe):
         self.c.execute("INSERT INTO Sac VALUES (null, 10)")
         self.c.execute("INSERT INTO Hero VALUES (null, ?, ?, 0, 0, 0, 1)", (nomJoueur, sexe))
 
+    '''Méthode permettant de récupérer le sexe du Héro'''
     def getSexePersonnage(self):
-        print(self.c.execute("SELECT sexe FROM Hero").fetchone())
         return self.c.execute("SELECT sexe FROM Hero").fetchone()
