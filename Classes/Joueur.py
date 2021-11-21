@@ -54,6 +54,4 @@ class Joueur(Animation):
     def modifPosition(self, pos):
         self.old_position = pos
         self.position = pos
-        print("POSITION JOUEUR ", self.position)
-        print("POSITION DONNEE", pos)
 

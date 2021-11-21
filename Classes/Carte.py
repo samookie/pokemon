@@ -66,8 +66,6 @@ class Carte:
     def update(self):
         self.group.update()  # Faire les majs du groupe
 
-        print(self.joueur.position)
-
         for entreeObjKey, entreeObjValue in self.entreeDict.items():
             if self.joueur.pieds.colliderect(entreeObjValue):
                 self.chargerCarte(re.sub("(^entree_|^sortie_)|(-\w+)", "", entreeObjKey), re.sub("(\w+)-", "", entreeObjKey))
