@@ -17,14 +17,6 @@ class PokemonBDD():
         """)
 
         self.c.execute("""
-        CREATE TABLE Game(
-          idGame INTEGER PRIMARY KEY,
-          sauvegarde_dh TEXT
-        );
-
-        """)
-
-        self.c.execute("""
         CREATE TABLE Sac(
           idSac INTEGER PRIMARY KEY,
           taille INTEGER
@@ -72,6 +64,16 @@ class PokemonBDD():
         """)
 
         self.c.execute("""
+        CREATE TABLE Game(
+          idGame INTEGER PRIMARY KEY,
+          sauvegarde_dh TEXT,
+          monde TEXT,
+          idHero INTEGER,
+          FOREIGN KEY (idHero) REFERENCES Hero(idHero)
+        );
+        """)
+
+        self.c.execute("""
         CREATE TABLE Pokemon(
           idPoke INTEGER PRIMARY KEY,
           nomPoke TEXT,
@@ -106,6 +108,7 @@ class PokemonBDD():
           FOREIGN KEY (idPoke) REFERENCES Pokemon(idPoke)
         );
         """)
+
 
     '''Méthode permettant de reset la BDD'''
     def resetBDD(self):
