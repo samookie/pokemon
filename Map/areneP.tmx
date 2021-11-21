@@ -44,7 +44,7 @@
   <object id="27" type="collision" x="94.1818" y="97.7273">
    <polygon points="0,0 -6.45455,4.72727 -6.81818,17.7273 -0.454545,22.5455 16.9091,22.5455 22.1818,18.7273 22.3636,4.18182 15.0909,0.0909091"/>
   </object>
-  <object id="28" name="sortie_arene" type="entree" x="89.375" y="244.875" width="25.125" height="11.5"/>
+  <object id="28" name="sortie_carte-spawn_sortie_arene" type="entree" x="89.375" y="244.875" width="25.125" height="11.5"/>
   <object id="29" name="spawn_entree_arene" type="spawn" x="101.333" y="229">
    <point/>
   </object>

@@ -36,23 +36,20 @@
   <object id="22" type="collision" x="412" y="137.75" width="11.25" height="20.75"/>
   <object id="23" type="collision" x="427.75" y="137.75" width="12.25" height="21.25"/>
   <object id="24" type="collision" x="283.75" y="137.75" width="11.75" height="20.75"/>
-  <object id="25" type="collision" x="170.5" y="147.375">
-   <polygon points="0,0 31.625,-16.875 31.25,9 -0.125,9.125"/>
+  <object id="25" type="collision" x="170.139" y="151.894">
+   <polygon points="0,0 32.3494,-10.0306 31.9658,5.34965 -0.127863,5.42395"/>
   </object>
-  <object id="26" type="collision" x="170.5" y="124.125">
-   <polygon points="0,0 -0.125,5.125 31.5,-9.5 31.5,-15.875"/>
-  </object>
-  <object id="27" name="sortie_musee2" type="entree" x="357.5" y="149.5" width="24.5" height="10.25"/>
-  <object id="28" name="sortie_musee1" type="entree" x="245.25" y="148.75" width="24.75" height="10.5"/>
+  <object id="27" name="sortie_carte-spawn_sortie_musee2" type="entree" x="357.5" y="149.5" width="24.5" height="10.25"/>
+  <object id="28" name="sortie_carte-spawn_sortie_musee1" type="entree" x="245.25" y="148.75" width="24.75" height="10.5"/>
   <object id="29" name="spawn_musee1" type="spawn" x="227.75" y="141.25">
    <point/>
   </object>
-  <object id="30" name="spawn_musee2" type="spawn" x="334.5" y="145.75">
+  <object id="30" name="spawn_musee2" type="spawn" x="371.045" y="114.659">
    <point/>
   </object>
-  <object id="31" name="spawn_etage_musee" type="spawn" x="159.75" y="142.25">
+  <object id="31" name="spawn_red_musee" type="spawn" x="140.023" y="138.341">
    <point/>
   </object>
-  <object id="33" name="etage_musee" type="entree" x="195.75" y="117.25" width="6.75" height="16"/>
+  <object id="33" name="entree_musee2-spawn_etage_musee" type="entree" x="195.75" y="117.25" width="6.75" height="16"/>
  </objectgroup>
 </map>

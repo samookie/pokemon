@@ -312,56 +312,56 @@
   <object id="191" name="entree_maisonR-spawn_maisonR" type="entree" x="288.25" y="3247.5" width="15.25" height="23.5"/>
   <object id="192" name="entree_laboratoire-spawn_labo" type="entree" x="448.25" y="3343.5" width="15.25" height="21.25"/>
   <object id="193" name="entree_centre1-spawn_centre" type="entree" x="416" y="2302.38" width="15.875" height="21"/>
-  <object id="194" name="entree_mag" type="entree" x="576.364" y="2190.36" width="15.4545" height="20.5455"/>
-  <object id="195" name="entree_maison" type="entree" x="399" y="2061.33" width="17" height="22.3333"/>
-  <object id="196" name="entree_maison" type="entree" x="400" y="2173.33" width="15.6667" height="25.6667"/>
-  <object id="198" name="entree_musee" type="entree" x="261.818" y="102" width="36.7273" height="21.6364"/>
-  <object id="199" name="entree_arene" type="entree" x="239.818" y="256.545" width="16.1818" height="21.4545"/>
-  <object id="200" name="entree_centre" type="entree" x="272.25" y="400.5" width="15.875" height="19.875"/>
-  <object id="201" name="entree_maison" type="entree" x="144.273" y="479.182" width="15.5455" height="20.5455"/>
+  <object id="194" name="entree_magasin-spawn_entree_mag-1" type="entree" x="576.364" y="2190.36" width="15.4545" height="20.5455"/>
+  <object id="195" name="entree_ecole-spawn_entree_ecole" type="entree" x="399" y="2061.33" width="17" height="22.3333"/>
+  <object id="196" name="entree_maisonV-spawn_entree_maisonV" type="entree" x="400" y="2173.33" width="15.6667" height="25.6667"/>
+  <object id="198" name="entree_musee1-spawn_musee1" type="entree" x="261.818" y="102" width="36.7273" height="21.6364"/>
+  <object id="199" name="entree_areneP-spawn_entree_arene" type="entree" x="239.818" y="256.545" width="16.1818" height="21.4545"/>
+  <object id="200" name="entree_centre1-spawn_centre" type="entree" x="272.25" y="400.5" width="15.875" height="19.875"/>
+  <object id="201" name="entree_maisonB-spawn_entree_maisonB" type="entree" x="144.273" y="479.182" width="15.5455" height="20.5455"/>
   <object id="202" name="entree_mag" type="entree" x="448.364" y="288.182" width="15.6364" height="19.8182"/>
   <object id="203" name="entree_maison" type="entree" x="528.273" y="175.455" width="15.4545" height="20.3636"/>
-  <object id="204" name="entree_musee2" type="entree" x="399.818" y="63.2727" width="16" height="20.5455"/>
+  <object id="204" name="entree_musee1-spawn_musee2" type="entree" x="399.818" y="63.2727" width="16" height="20.5455"/>
   <object id="205" name="spawn_sortie_labo" type="spawn" x="455.962" y="3370.99">
    <point/>
   </object>
   <object id="206" name="spawn_sortie_maisonH" type="spawn" x="440.682" y="3274.9">
    <point/>
   </object>
-  <object id="207" name="spawn_sortie_maisonR" type="spawn" x="294.667" y="3283.42">
+  <object id="207" name="spawn_sortie_maisonR" type="spawn" x="297.03" y="3275.78">
    <point/>
   </object>
-  <object id="208" name="spawn_sortie_centre1" type="spawn" x="424.25" y="2350.75">
+  <object id="208" name="spawn_sortie_centre1" type="spawn" x="424.375" y="2326.38">
    <point/>
   </object>
-  <object id="209" name="spawn_sortie_mag1" type="spawn" x="584" y="2232.67">
+  <object id="209" name="spawn_sortie_mag1" type="spawn" x="583.939" y="2214.79">
    <point/>
   </object>
-  <object id="210" name="spawn_sortie_maison1" type="spawn" x="408" y="2222.33">
+  <object id="210" name="spawn_sortie_maisonV" type="spawn" x="408.879" y="2203.18">
    <point/>
   </object>
-  <object id="211" name="spawn_sortie_maison2" type="spawn" x="407" y="2108.25">
+  <object id="211" name="spawn_sortie_ecole" type="spawn" x="407.855" y="2088.21">
    <point/>
   </object>
-  <object id="212" name="spawn_sortie_maison3" type="spawn" x="152.75" y="524">
+  <object id="212" name="spawn_sortie_maisonB" type="spawn" x="152.5" y="503.5">
    <point/>
   </object>
-  <object id="213" name="spawn_sortie_centre2" type="spawn" x="279.25" y="443">
+  <object id="213" name="spawn_sortie_centre2" type="spawn" x="280.193" y="424.182">
    <point/>
   </object>
-  <object id="214" name="spawn_sortie_mag2" type="spawn" x="455.75" y="328.5">
+  <object id="214" name="spawn_sortie_mag2" type="spawn" x="455.75" y="313.5">
    <point/>
   </object>
-  <object id="215" name="spawn_sortie_arene" type="spawn" x="247.667" y="302.333">
+  <object id="215" name="spawn_sortie_arene" type="spawn" x="247.758" y="282.333">
    <point/>
   </object>
-  <object id="216" name="spawn_sortie_maison4" type="spawn" x="535.333" y="224">
+  <object id="216" name="spawn_sortie_maison4" type="spawn" x="536.333" y="202">
    <point/>
   </object>
-  <object id="217" name="spawn_sortie_musee2" type="spawn" x="383.333" y="108.667">
+  <object id="217" name="spawn_sortie_musee2" type="spawn" x="383" y="87.0003">
    <point/>
   </object>
-  <object id="219" name="spawn_sortie_musee" type="spawn" x="280.667" y="152.667">
+  <object id="219" name="spawn_sortie_musee1" type="spawn" x="279.788" y="134.364">
    <point/>
   </object>
  </objectgroup>

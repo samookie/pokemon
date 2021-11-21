@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="22">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="8" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="23">
  <tileset firstgid="1" name="centre1" tilewidth="32" tileheight="32" tilecount="60" columns="10">
   <image source="Images/centre1.png" trans="000000" width="335" height="208"/>
  </tileset>
@@ -25,11 +25,8 @@
   <object id="9" type="collision" x="192" y="127.5" width="29.25" height="29.75"/>
   <object id="10" type="collision" x="29.25" y="173.5" width="213.5" height="3.5"/>
   <object id="11" type="collision" x="254.25" y="60" width="2.5" height="103.5"/>
-  <object id="12" type="collision" x="16.5" y="110">
-   <polygon points="0,0 15.5,7.875 26.875,8 31.125,12.625 30.875,16.5 15.375,15.875 15.25,13.875 7.75,13.125 7.375,9.125 -0.375,8.875"/>
-  </object>
-  <object id="13" type="collision" x="16.625" y="134.75">
-   <polygon points="0,0 15.5,7.625 30.625,8.25 31,15.25 -0.25,14.5"/>
+  <object id="13" type="collision" x="16.2526" y="137.932">
+   <polygon points="0,0 14.9589,5.71591 29.5559,6.18443 29.9178,11.4318 -0.241273,10.8696"/>
   </object>
   <object id="14" type="collision" x="16.6364" y="159.091">
    <polygon points="0,0 13.8182,14.8182 13,17.7273"/>
@@ -50,6 +47,9 @@
   </object>
   <object id="21" name="spawn_centre" type="spawn" x="134.909" y="134">
    <point/>
+  </object>
+  <object id="22" type="collision" x="16.6364" y="108.273">
+   <polygon points="0,0 16.7273,9.36364 29.9091,10.5455 29.2727,17.4545 -1.18182,6.72727"/>
   </object>
  </objectgroup>
 </map>
