@@ -3,6 +3,7 @@ import pygame
 from Classes.Carte import Carte
 from Classes.Home_Screen import Home_Screen
 from Classes.Intro import Intro
+from Classes.Joueur import Joueur
 
 pygame.init()
 
@@ -21,11 +22,8 @@ class Jeu:
         self.mettre_a_jour = True
 
         jeu = True
-        self.carte = Carte(self)
+        self.carte = Carte(self, Joueur("joueur_fille"))
         clock = pygame.time.Clock()
-
-        # Variables pour les cartes
-        self.carte.chargerCarte("carte","spawn_sortie_maisonH")
 
         # VARS ECRANS
         ecran_accueil = Home_Screen(self)

@@ -5,14 +5,14 @@ from Classes.Animation import Animation
 
 class Joueur(Animation):
 
-    def __init__(self, name, x, y):
+    def __init__(self, name):
         super().__init__(name) #Initialiser le constructeur parent (Sprite)
 
         #Varibales
         self.image = self.get_image(0, 0) #Appeler la méthode permettant de découper le sprite sheet
         self.rect = self.image.get_rect() #Récupérer le rectangle de collision de l'image
         self.pieds = pygame.Rect(0, 0, self.rect.width * 0.5, 6)
-        self.position = [x, y]  # Définir la position de l'image
+        self.position = [0, 0]  # Définir la position de l'image
         self.old_position = self.position.copy()
 
         #Correction de l'image

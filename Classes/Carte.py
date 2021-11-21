@@ -9,10 +9,10 @@ from Model.PokemonBDD import PokemonBDD
 
 class Carte:
 
-    def __init__(self, leJeu):
+    def __init__(self, leJeu, joueur):
         self.jeu = leJeu
         self.bdd = PokemonBDD()
-        self.joueur = Joueur("joueur_fille",500, 500)
+        self.joueur = joueur
         self.nom_carte = "carte"
 
         self.tableauTp = {}
@@ -74,7 +74,3 @@ class Carte:
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe
             if sprite.pieds.collidelist(self.collision) > -1:  # Si le sprite pied est dans la zone de collision
                 sprite.revenir_en_arriere()  # Faire revenir le sprite (Donc ici l'image du joueur) en arrière
-
-    def majSexePerso(self):
-        print("sexe du joueur", self.bdd.getSexePersonnage())
-        self.joueur.chgSexePerso(self.bdd.getSexePersonnage())

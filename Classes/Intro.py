@@ -1,6 +1,7 @@
 import random
 import pygame
 
+from Classes.Joueur import Joueur
 from Classes.Keyboard import KeyboardUser
 from Model.PokemonBDD import PokemonBDD
 
@@ -93,7 +94,7 @@ class Intro:
         if self.leJeu.mettre_a_jour: #Si la variable mettre à jour dans la classe jeu est à True
             pygame.mixer.init() #Initialiser le mixeur musique
             self.musique = pygame.mixer.Sound("Map/Musiques/03-Professor Oak.wav" )#Lancer la musique de fond
-            self.musique.play()
+            self.musique.play(-1)
             self.leJeu.mettre_a_jour = False #Passer la variable à faux
 
     '''Méthode permettant de vérifier la frappe des touches sur cette classe'''
@@ -119,8 +120,12 @@ class Intro:
                 self.okNom = False
                 self.passer = False
         elif pygame.key.get_pressed()[pygame.K_SPACE] and self.txtNum == len(self.txtIntro) - 1 and self.passer and self.ecran == "choix": #Si la touche espace est appuyé, que l'on est à la fin du dialogue et que on est sur l'écran choix
-            self.bdd.creationPersonnage(self.nomJoueur, self.sexe)
-            self.leJeu.carte.majSexePerso()
+            self.bdd.creationPersonnage(self.nomJoueur, self.sexe)  #Stocker le sexe du personnage dans la BDD
+            if self.sexe == "g": # Si le sexe est garçon
+                self.leJeu.carte.joueur = Joueur("joueur_garcon")
+            else:  # Si le joueur est fille
+                self.leJeu.carte.joueur = Joueur("joueur_fille")
+            self.leJeu.carte.chargerCarte("maisonH2", "spawn_etage_maisonH") # Charger la carte pour d'arrivée
             self.leJeu.ecran_affiche = "jeu"
             self.leJeu.mettre_a_jour = True
             self.musique.fadeout(2000)

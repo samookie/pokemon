@@ -124,7 +124,8 @@ class PokemonBDD():
     '''Méthode permettant de créer le Héro'''
     def creationPersonnage(self, nomJoueur, sexe):
         self.c.execute("INSERT INTO Sac VALUES (null, 10)")
-        self.c.execute("INSERT INTO Hero VALUES (null, ?, ?, 0, 0, 0, 1)", (nomJoueur, sexe))
+        self.c.execute("INSERT INTO Hero VALUES (null, ?, ?, 0, 0, 0, 1)", [nomJoueur, sexe])
+        self.conn.commit()
 
     '''Méthode permettant de récupérer le sexe du Héro'''
     def getSexePersonnage(self):

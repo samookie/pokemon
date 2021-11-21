@@ -27,7 +27,7 @@ class Home_Screen:
         if self.leJeu.mettre_a_jour: #Si la variable mettre à jour dans la classe jeu est à True
             pygame.mixer.init() #Initialiser le mixeur musique
             self.musique = pygame.mixer.Sound("Map/Musiques/01-Opening.wav" )#Lancer la musique de fond
-            self.musique.play()
+            self.musique.play(-1)
             self.leJeu.mettre_a_jour = False #Passer la variable à faux
             pygame.display.flip()  # MAJ de l'affichage
 
