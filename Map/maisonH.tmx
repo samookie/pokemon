@@ -38,12 +38,12 @@
   <object id="19" type="collision" x="132" y="80.25" width="3" height="9.25"/>
   <object id="20" type="collision" x="72.25" y="65.75" width="4.5" height="7.75"/>
   <object id="22" type="collision" x="72.75" y="81.25" width="3.75" height="8.25"/>
-  <object id="23" name="monter_maisonH" type="entree" x="192.875" y="17" width="6.875" height="14.25"/>
-  <object id="24" name="sortie_maisonH" type="entree" x="51" y="132" width="25.375" height="10.375"/>
-  <object id="25" name="entree_red_maisonH" type="spawn" x="160.25" y="42.25">
+  <object id="23" name="entree_maisonH2-spawn_etage_maisonH" type="entree" x="192.875" y="17" width="6.875" height="14.25"/>
+  <object id="24" name="sortie_carte-spawn_sortie_labo" type="entree" x="51.3636" y="131.568" width="25.375" height="10.375"/>
+  <object id="25" name="spawn_red_maisonH" type="spawn" x="159.5" y="32.25">
    <point/>
   </object>
-  <object id="26" name="entree_maisonH" type="spawn" x="32.25" y="118.75">
+  <object id="26" name="spawn_maisonH" type="spawn" x="32.25" y="118.75">
    <point/>
   </object>
  </objectgroup>

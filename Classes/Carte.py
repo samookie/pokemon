@@ -26,9 +26,8 @@ class Carte:
 
         self.get_collisions(nomCarte) # prendre toutes les collisions de la map
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
-        self.joueur.position = self.getCoordonnee(spawn)  # changer les coordonnées du joueurs par celui du spown
         self.group.add(self.joueur)
-        self.tps() # chargement des entrées
+        self.joueur.position = self.getCoordonnee(spawn) # changer les coordonnées du joueurs par celui du spown
 
 
     """ Méthode permettant de récupérer les coordonnées du spawn actuelle (récupéré dans la méthodes getCollision) """
@@ -39,20 +38,6 @@ class Carte:
                 result = [obj.x , obj.y] # coordonnée x y du spawn
 
         return result
-
-    def tps(self):
-        # Maison du héro METTRE LES CONDITIONS
-        """self.descendre_maisonH = self.tmx_data.get_object_by_name('descendre_maisonH')  # descendre les escaliers maison du héro
-        self.tpDescendre_maisonH = pygame.Rect(self.descendre_maisonH.x, self.descendre_maisonH.y,self.descendre_maisonH.width, self.descendre_maisonH.height)
-
-        self.monter_maisonH = self.tmx_data.get_object_by_name('monter_maisonH')  # monter les escaliers maison du héro
-        self.tpMonter_maisonH = pygame.Rect(self.monter_maisonH.x, self.monter_maisonH.y, self.monter_maisonH.width,self.monter_maisonH.height)
-
-        self.sortie_maisonH = self.tmx_data.get_object_by_name('sortie_maisonH')  # sortir de la maison du héro
-        self.tpSortie_maisonH = pygame.Rect(self.sortie_maisonH.x, self.sortie_maisonH.y, self.sortie_maisonH.width,self.sortie_maisonH.height)
-
-        self.entree_maisonH = self.tmx_data.get_object_by_name('entree_maisonH')  # entrer dans la maison du héro"""
-        #self.tpEntree_maisonH = pygame.Rect(self.entree_maisonH.x, self.entree_maisonH.y, self.entree_maisonH.width,self.entree_maisonH.height)
 
     def get_collisions(self, nomCarte):
         self.collision = []
@@ -81,13 +66,6 @@ class Carte:
     def update(self):
         self.group.update()  # Faire les majs du groupe
 
-        """# vérifier l'entré dans la maison METTRE LES CONDITIONS
-        if self.joueur.pieds.collidelist(self.entree) > -1:
-            self.chargerCarte('maisonH','entree_maisonH')
-
-        if self.joueur.pieds.collidelist(self.entree):
-            print(self.joueur.pieds.collidelist())"""
-
         for entreeObjKey, entreeObjValue in self.entreeDict.items():
             if self.joueur.pieds.colliderect(entreeObjValue):
                 self.chargerCarte(re.sub("(^entree_|^sortie_)|(-\w+)", "", entreeObjKey), re.sub("(\w+)-", "", entreeObjKey))
@@ -101,5 +79,5 @@ class Carte:
                 sprite.revenir_en_arriere()  # Faire revenir le sprite (Donc ici l'image du joueur) en arrière
 
     def majSexePerso(self):
-        print(self.bdd.getSexePersonnage())
+        print("sexe du joueur", self.bdd.getSexePersonnage())
         self.joueur.chgSexePerso(self.bdd.getSexePersonnage())

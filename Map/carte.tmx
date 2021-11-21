@@ -308,10 +308,10 @@
   <object id="187" type="collision" x="-1.25" y="2142" width="5.25" height="69"/>
   <object id="188" type="collision" x="-1.33333" y="1816" width="7" height="68.3333"/>
   <object id="189" type="collision" x="-3.66667" y="2547" width="8.66667" height="32.3333"/>
-  <object id="190" name="entree_maisonH" type="entree" x="432.545" y="3247.27" width="15.2727" height="22.3636"/>
-  <object id="191" name="entree_maisonR" type="entree" x="288.25" y="3247.5" width="15.25" height="23.5"/>
-  <object id="192" name="entree_labo" type="entree" x="448.25" y="3343.5" width="15.25" height="21.25"/>
-  <object id="193" name="entree_centre" type="entree" x="416" y="2302.38" width="15.875" height="21"/>
+  <object id="190" name="entree_maisonH-spawn_maisonH" type="entree" x="432.545" y="3247.27" width="15.2727" height="22.3636"/>
+  <object id="191" name="entree_maisonR-spawn_maisonR" type="entree" x="288.25" y="3247.5" width="15.25" height="23.5"/>
+  <object id="192" name="entree_laboratoire-spawn_labo" type="entree" x="448.25" y="3343.5" width="15.25" height="21.25"/>
+  <object id="193" name="entree_centre1-spawn_centre" type="entree" x="416" y="2302.38" width="15.875" height="21"/>
   <object id="194" name="entree_mag" type="entree" x="576.364" y="2190.36" width="15.4545" height="20.5455"/>
   <object id="195" name="entree_maison" type="entree" x="399" y="2061.33" width="17" height="22.3333"/>
   <object id="196" name="entree_maison" type="entree" x="400" y="2173.33" width="15.6667" height="25.6667"/>
@@ -322,13 +322,13 @@
   <object id="202" name="entree_mag" type="entree" x="448.364" y="288.182" width="15.6364" height="19.8182"/>
   <object id="203" name="entree_maison" type="entree" x="528.273" y="175.455" width="15.4545" height="20.3636"/>
   <object id="204" name="entree_musee2" type="entree" x="399.818" y="63.2727" width="16" height="20.5455"/>
-  <object id="205" name="spawn_sortie_labo" type="spawn" x="455.75" y="3384.75">
+  <object id="205" name="spawn_sortie_labo" type="spawn" x="455.962" y="3370.99">
    <point/>
   </object>
-  <object id="206" name="spawn_sortie_maisonH" type="spawn" x="440.5" y="3286.75">
+  <object id="206" name="spawn_sortie_maisonH" type="spawn" x="440.682" y="3274.9">
    <point/>
   </object>
-  <object id="207" name="spawn_sortie_maisonR" type="spawn" x="296" y="3287.75">
+  <object id="207" name="spawn_sortie_maisonR" type="spawn" x="294.667" y="3283.42">
    <point/>
   </object>
   <object id="208" name="spawn_sortie_centre1" type="spawn" x="424.25" y="2350.75">

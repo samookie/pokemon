@@ -31,7 +31,7 @@
   <object id="13" type="collision" x="12.75" y="141.75" width="79.75" height="27.5"/>
   <object id="14" type="collision" x="14" y="202.25" width="11.75" height="21"/>
   <object id="15" type="collision" x="206.25" y="202" width="12.5" height="20.5"/>
-  <object id="17" name="sortie_labo" type="entree" x="103.875" y="213" width="26.25" height="11"/>
+  <object id="17" name="sortie_carte-spawn_sortie_labo" type="entree" x="104.125" y="211.75" width="26.25" height="11"/>
   <object id="18" name="spawn_labo" type="spawn" x="116" y="192.875">
    <point/>
   </object>

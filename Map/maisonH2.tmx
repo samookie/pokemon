@@ -30,8 +30,8 @@
   <object id="15" type="collision" x="120.545" y="60.1818">
    <polygon points="0,0 27.6364,0.181818 27.4545,2.18182 23.4545,1.81818 23.6364,4.36364 19.8182,4.18182 19.8182,5.81818 15.8182,6 15.6364,8 11.4545,7.63636 11.4545,9.45455 7.63636,9.63636 7.27273,11.0909 3.63636,11.2727 3.27273,13.2727 -0.545455,13.0909"/>
   </object>
-  <object id="16" name="descendre_maisonH" type="entree" x="120.5" y="73.5" width="12" height="8"/>
-  <object id="17" name="entree_etage_maisonH" type="spawn" x="159.636" y="72">
+  <object id="16" name="sortie_maisonH-spawn_red_maisonH" type="entree" x="120.5" y="73.5" width="12" height="8"/>
+  <object id="17" name="spawn_etage_maisonH" type="spawn" x="159.636" y="72">
    <point/>
   </object>
  </objectgroup>

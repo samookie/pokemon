@@ -24,7 +24,7 @@
   <object id="8" type="collision" x="11.5" y="150" width="11.25" height="22.5"/>
   <object id="9" type="collision" x="107.75" y="95" width="28.5" height="29"/>
   <object id="10" type="collision" x="204.5" y="150" width="10.75" height="21.75"/>
-  <object id="11" name="sortie_maisonR" type="entree" x="69" y="162" width="25.75" height="11.25"/>
+  <object id="11" name="sortie_carte-spawn_sortie_maisonR" type="entree" x="69" y="161.25" width="25.75" height="11.25"/>
   <object id="12" name="spawn_maisonR" type="spawn" x="44.25" y="151.5">
    <point/>
   </object>
