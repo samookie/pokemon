@@ -50,3 +50,10 @@ class Joueur(Animation):
         self.rect.topleft = self.position  # Définir la position du rectagle par rapport à la position défini en paramètre
         self.pieds.midbottom = self.rect.midbottom #Définis la position des pieds
 
+    '''Méthode pour permettre de modifier la position du joueur'''
+    def modifPosition(self, pos):
+        self.old_position = pos
+        self.position = pos
+        print("POSITION JOUEUR ", self.position)
+        print("POSITION DONNEE", pos)
+

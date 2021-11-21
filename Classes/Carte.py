@@ -27,7 +27,7 @@ class Carte:
         self.get_collisions(nomCarte) # prendre toutes les collisions de la map
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.add(self.joueur)
-        self.joueur.position = self.getCoordonnee(spawn) # changer les coordonnées du joueurs par celui du spown
+        self.joueur.modifPosition(self.getCoordonnee(spawn))# changer les coordonnées du joueurs par celui du spown
 
 
     """ Méthode permettant de récupérer les coordonnées du spawn actuelle (récupéré dans la méthodes getCollision) """
@@ -66,12 +66,11 @@ class Carte:
     def update(self):
         self.group.update()  # Faire les majs du groupe
 
+        print(self.joueur.position)
+
         for entreeObjKey, entreeObjValue in self.entreeDict.items():
             if self.joueur.pieds.colliderect(entreeObjValue):
                 self.chargerCarte(re.sub("(^entree_|^sortie_)|(-\w+)", "", entreeObjKey), re.sub("(\w+)-", "", entreeObjKey))
-                print(re.sub("(^entree_|^sortie_)|(-\w+)", "", entreeObjKey))
-                print(re.sub("(\w+)-", "", entreeObjKey))
-                print(self.getCoordonnee(re.sub("(\w+)-", "", entreeObjKey)))
 
 
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe
