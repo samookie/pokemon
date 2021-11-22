@@ -133,3 +133,7 @@ class PokemonBDD():
     '''Méthode permettant de récupérer le sexe du Héro'''
     def getSexePersonnage(self):
         return self.c.execute("SELECT sexe FROM Hero").fetchone()
+
+    '''Méthode permettant de vérifier si une sauvegarde existe'''
+    def getSavExist(self):
+        return self.c.execute("SELECT COUNT(*) FROM Game").fetchone()
