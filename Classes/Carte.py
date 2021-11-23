@@ -4,6 +4,7 @@ import pygame
 import pyscroll
 import pytmx
 from Classes.Joueur import Joueur
+from Classes.MenuInGame import MenuInGame
 from Model.PokemonBDD import PokemonBDD
 from Classes.Pnj import Pnj
 
@@ -14,6 +15,7 @@ class Carte:
         self.bdd = PokemonBDD()
         self.joueur = joueur
         self.lesPnj = ["pnj_centre","pnj_magasin","pnj_professeur"]
+        self.menuInGame = MenuInGame(self.jeu)
 
         self.nom_carte = "carte"
 
@@ -67,6 +69,7 @@ class Carte:
         self.group.center(self.joueur.rect.center)
         self.group.draw(self.jeu.screen)
         self.getPNJ()
+        self.menuInGame.affichage()
         pygame.display.flip()
 
     '''Méthode permettant de mettre à jour le groupe de calques et si un des sprite (élément du jeu type joueur) est dans un objet de type colission faire revenir le joueur en arrière'''
@@ -85,8 +88,5 @@ class Carte:
     def getPNJ(self):
 
         for pnj in self.objPnj:
-            print("je rentre", len(self.objPnj))
-            lePnj = Pnj(pnj.name, pnj.x, pnj.y)
-            self.jeu.screen.blit(lePnj.imagePNJ(),(pnj.x, pnj.y))
-            print(pnj.x ," , " , pnj.y )
+            Pnj(self.jeu, pnj.name, pnj.x, pnj.y)
 
