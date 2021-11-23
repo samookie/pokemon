@@ -5,7 +5,7 @@ import pyscroll
 import pytmx
 from Classes.Joueur import Joueur
 from Model.PokemonBDD import PokemonBDD
-
+from Classes.Pnj import Pnj
 
 class Carte:
 
@@ -13,6 +13,8 @@ class Carte:
         self.jeu = leJeu
         self.bdd = PokemonBDD()
         self.joueur = joueur
+        self.lesPnj = ["pnj_centre","pnj_magasin","pnj_professeur"]
+
         self.nom_carte = "carte"
 
         self.tableauTp = {}
@@ -30,6 +32,7 @@ class Carte:
         self.joueur.modifPosition(self.getCoordonnee(spawn))# changer les coordonnées du joueurs par celui du spown
 
 
+
     """ Méthode permettant de récupérer les coordonnées du spawn actuelle (récupéré dans la méthodes getCollision) """
     def getCoordonnee(self, spawn):
         result =[0,0]
@@ -44,6 +47,7 @@ class Carte:
         self.entree = []
         self.spawn = []
         self.entreeDict = {}
+        self.objPnj = []
 
         for obj in pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx").objects:
             if obj.type == "collision":
@@ -53,6 +57,8 @@ class Carte:
                 self.entreeDict[obj.name] = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
             elif obj.type == "spawn": # Récupération de tous les spawns de la map actuelle
                 self.spawn.append(obj)
+            elif obj.type == "pnj":
+                self.objPnj.append(obj)
 
     def affichage_carte(self):
         self.joueur.ancienne_position()
@@ -60,6 +66,7 @@ class Carte:
         self.update()
         self.group.center(self.joueur.rect.center)
         self.group.draw(self.jeu.screen)
+        self.getPNJ()
         pygame.display.flip()
 
     '''Méthode permettant de mettre à jour le groupe de calques et si un des sprite (élément du jeu type joueur) est dans un objet de type colission faire revenir le joueur en arrière'''
@@ -74,3 +81,12 @@ class Carte:
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe
             if sprite.pieds.collidelist(self.collision) > -1:  # Si le sprite pied est dans la zone de collision
                 sprite.revenir_en_arriere()  # Faire revenir le sprite (Donc ici l'image du joueur) en arrière
+
+    def getPNJ(self):
+
+        for pnj in self.objPnj:
+            print("je rentre", len(self.objPnj))
+            lePnj = Pnj(pnj.name, pnj.x, pnj.y)
+            self.jeu.screen.blit(lePnj.imagePNJ(),(pnj.x, pnj.y))
+            print(pnj.x ," , " , pnj.y )
+
