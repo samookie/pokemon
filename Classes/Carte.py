@@ -23,6 +23,8 @@ class Carte:
 
     '''Méthode permettant de charger une carte spécifique'''
     def chargerCarte(self, nomCarte, spawn):
+        self.nom_carte = nomCarte
+
         self.tmx_data = pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx")
         self.map_data = pyscroll.data.TiledMapData(self.tmx_data)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.jeu.screen.get_size())
@@ -33,7 +35,19 @@ class Carte:
         self.group.add(self.joueur)
         self.joueur.modifPosition(self.getCoordonnee(spawn))# changer les coordonnées du joueurs par celui du spown
 
+    '''Méthode permettant de charger une carte spécifique'''
 
+    def chargerCarteSansSpawn(self, nomCarte):
+        self.nom_carte = nomCarte
+
+        self.tmx_data = pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx")
+        self.map_data = pyscroll.data.TiledMapData(self.tmx_data)
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.jeu.screen.get_size())
+        self.map_layer.zoom = 3
+
+        self.get_collisions(nomCarte)  # prendre toutes les collisions de la map
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
+        self.group.add(self.joueur)
 
     """ Méthode permettant de récupérer les coordonnées du spawn actuelle (récupéré dans la méthodes getCollision) """
     def getCoordonnee(self, spawn):
@@ -64,7 +78,8 @@ class Carte:
 
     def affichage_carte(self):
         self.joueur.ancienne_position()
-        self.joueur.gestion_touches()
+        if self.jeu.dansMenu:
+            self.joueur.gestion_touches()
         self.update()
         self.group.center(self.joueur.rect.center)
         self.group.draw(self.jeu.screen)

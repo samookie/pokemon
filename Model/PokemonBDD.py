@@ -1,3 +1,4 @@
+import datetime
 import sqlite3
 
 class PokemonBDD():
@@ -126,8 +127,8 @@ class PokemonBDD():
 
     '''Méthode permettant de créer le Héro'''
     def creationPersonnage(self, nomJoueur, sexe):
-        self.c.execute("INSERT INTO Sac VALUES (null, 10)")
-        self.c.execute("INSERT INTO Hero VALUES (null, ?, ?, 0, 0, 0, 1)", [nomJoueur, sexe])
+        self.c.execute("INSERT INTO Sac VALUES (1, 10)")
+        self.c.execute("INSERT INTO Hero VALUES (1, ?, ?, 0, 0, 0, 1)", [nomJoueur, sexe])
         self.conn.commit()
 
     '''Méthode permettant de récupérer le sexe du Héro'''
@@ -137,3 +138,20 @@ class PokemonBDD():
     '''Méthode permettant de vérifier si une sauvegarde existe'''
     def getSavExist(self):
         return self.c.execute("SELECT COUNT(*) FROM Game").fetchone()
+
+    '''Méthode pour sauvegarder la partie'''
+    def savPartie(self, carte, x, y):
+        self.c.execute("DELETE FROM Game")
+        self.c.execute("UPDATE Hero SET pos_x = ?, pos_y = ?", [x, y])
+        self.c.execute("INSERT INTO Game VALUES (1, ?, ?, 1)", [datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), carte])
+        self.conn.commit()
+
+    '''Méthode pour récupérer les infos de sauvegarde de la partie'''
+    def getInfosChargerSav(self):
+        hero = self.c.execute("SELECT sexe, pos_x, pos_y FROM Hero").fetchone()
+        game = self.c.execute("SELECT monde FROM Game").fetchone()
+        return hero[0], hero[1], hero[2], game[0]
+
+    '''Méthode pour récupérer les infos du Héro'''
+    def chargerInfosHero(self):
+        return self.c.execute("SELECT idHero, nom, sexe, argent FROM Hero").fetchone()

@@ -1,5 +1,6 @@
 import pygame
 
+from Classes.Joueur import Joueur
 from Model.PokemonBDD import PokemonBDD
 
 
@@ -48,6 +49,20 @@ class Home_Screen:
         elif pygame.key.get_pressed()[pygame.K_UP] and self.nbrSav != 0:
             self.curseur = "continuer"
             pygame.display.flip()  # MAJ de l'affichagez
+        elif pygame.key.get_pressed()[pygame.K_RETURN] and self.curseur == "continuer":
+            infos = self.bdd.getInfosChargerSav() #Récupérer les infos de la sauvegarde dans la BDD
+
+            if infos[0] == "g": # Si le sexe est garçon
+                joueurTemp = Joueur("joueur_garcon")
+            else:  # Si le joueur est fille
+                joueurTemp = Joueur("joueur_fille")
+            joueurTemp.modifPosition([infos[1], infos[2]]) #Modifier la position du perso pour correspondre à celle de la sauvegarde
+            self.leJeu.carte.joueur = joueurTemp #Changer le joueur sur la carte
+            self.leJeu.carte.chargerCarteSansSpawn(infos[3]) # Charger la carte pour d'arrivée
+            self.leJeu.ecran_affiche = "jeu"
+            self.leJeu.mettre_a_jour = True
+            self.musique.fadeout(2000)
+
         elif pygame.key.get_pressed()[pygame.K_RETURN] and self.curseur == "nouv":
             self.bdd.resetBDD()
             self.leJeu.mettre_a_jour = True

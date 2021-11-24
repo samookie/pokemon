@@ -20,6 +20,7 @@ class Jeu:
         # Variables
         self.ecran_affiche = "home"
         self.mettre_a_jour = True
+        self.dansMenu = False
 
         jeu = True
         self.carte = Carte(self, Joueur("joueur_fille"))
