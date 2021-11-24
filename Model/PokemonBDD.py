@@ -160,7 +160,7 @@ class PokemonBDD():
         return self.c.execute("SELECT idHero, nom, sexe, argent FROM Hero").fetchone()
 
     def createTPokemon(self):
-        self.c.execute("""INSERT INTO Type_Pokemon VALUES ("Normal"),("Fire"),("Water"),("Grass"),("Electric"),
+        self.c.execute("""INSERT INTO Type_Pokemon ("libelle")  VALUES ("Normal"),("Fire"),("Water"),("Grass"),("Electric"),
         ("Ice"),("Fighting"),("Poison"),("Ground"),("Flying"),("Psychic"),("Bug"),("Rock"),
         ("Ghost"),("Dragon"),("Dark"),("Steel")
         """)
