@@ -110,6 +110,8 @@ class PokemonBDD():
         );
         """)
 
+        self.createTPokemon()
+
 
     '''Méthode permettant de reset la BDD'''
     def resetBDD(self):
@@ -124,6 +126,7 @@ class PokemonBDD():
         self.c.execute("DROP TABLE Liste_Pokemon")
         self.c.execute("DROP TABLE Liste_Attaque")
         self.createBDD()
+        self.createTPokemon()
 
     '''Méthode permettant de créer le Héro'''
     def creationPersonnage(self, nomJoueur, sexe):
@@ -155,3 +158,13 @@ class PokemonBDD():
     '''Méthode pour récupérer les infos du Héro'''
     def chargerInfosHero(self):
         return self.c.execute("SELECT idHero, nom, sexe, argent FROM Hero").fetchone()
+
+    def createTPokemon(self):
+        self.c.execute("""INSERT INTO Type_Pokemon VALUES ("Normal"),("Fire"),("Water"),("Grass"),("Electric"),
+        ("Ice"),("Fighting"),("Poison"),("Ground"),("Flying"),("Psychic"),("Bug"),("Rock"),
+        ("Ghost"),("Dragon"),("Dark"),("Steel")
+        """)
+        self.conn.commit()
+
+
+
