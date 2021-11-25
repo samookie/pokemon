@@ -48,9 +48,9 @@ class PokemonBDD():
         self.c.execute("""
         CREATE TABLE Attaque(
           idAtt INTEGER PRIMARY KEY,
-          libelle TEXT
+          libelle TEXT,
           idTPA INTEGER,
-          FOREIGN KEY (idTP) REFERENCES Type_Att(idTPA)
+          FOREIGN KEY (idTPA) REFERENCES Type_Att(idTPA)
         );
         """)
 
@@ -121,7 +121,7 @@ class PokemonBDD():
         self.c.execute("DROP TABLE IF EXISTS Game")
         self.c.execute("DROP TABLE IF EXISTS Sac")
         self.c.execute("DROP TABLE IF EXISTS Objet")
-        self.c.execute("DROP TABLE IF EXISTS Type_Pokemon")
+        self.c.execute("DROP TABLE IF EXISTS Type_Att")
         self.c.execute("DROP TABLE IF EXISTS Attaque")
         self.c.execute("DROP TABLE IF EXISTS Hero")
         self.c.execute("DROP TABLE IF EXISTS Pokemon")
