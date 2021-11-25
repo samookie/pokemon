@@ -39,8 +39,8 @@ class PokemonBDD():
         """)
 
         self.c.execute("""
-        CREATE TABLE Type_Pokemon(
-          idTP INTEGER PRIMARY KEY,
+        CREATE TABLE Type_Att(
+          idTPA INTEGER PRIMARY KEY,
           libelle TEXT
         );
         """)
@@ -49,6 +49,8 @@ class PokemonBDD():
         CREATE TABLE Attaque(
           idAtt INTEGER PRIMARY KEY,
           libelle TEXT
+          idTPA INTEGER,
+          FOREIGN KEY (idTP) REFERENCES Type_Att(idTPA)
         );
         """)
 
@@ -80,14 +82,13 @@ class PokemonBDD():
           idPoke INTEGER PRIMARY KEY,
           nomPoke TEXT,
           nom TEXT,
+          nomEvo TEXT,
           niveau INTEGER,
           hp INTEGER,
           vitesse INTEGER,
           attaque INTEGER,
           defense INTEGER,
           image INTEGER,
-          idTP INTEGER,
-          FOREIGN KEY (idTP) REFERENCES Type_Pokemon(idTP)
         );
         """)
 
@@ -170,6 +171,10 @@ class PokemonBDD():
     '''Méthode permettant de récupérer les objets du héro'''
     def getObjSac(self):
         return self.c.execute("SELECT description, image, nbr FROM Objet")
+
+
+    def createPokemon(self):
+        self.c.execute("""INSERT INTO Pokemon""")
 
 
 
