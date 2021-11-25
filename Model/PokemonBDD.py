@@ -88,7 +88,7 @@ class PokemonBDD():
           vitesse INTEGER,
           attaque INTEGER,
           defense INTEGER,
-          image INTEGER,
+          image INTEGER
         );
         """)
 
@@ -162,7 +162,7 @@ class PokemonBDD():
         return self.c.execute("SELECT idHero, nom, sexe, argent FROM Hero").fetchone()
 
     def createTPokemon(self):
-        self.c.execute("""INSERT INTO Type_Pokemon ("libelle")  VALUES ("Normal"),("Fire"),("Water"),("Grass"),("Electric"),
+        self.c.execute("""INSERT INTO Type_Att ("libelle")  VALUES ("Normal"),("Fire"),("Water"),("Grass"),("Electric"),
         ("Ice"),("Fighting"),("Poison"),("Ground"),("Flying"),("Psychic"),("Bug"),("Rock"),
         ("Ghost"),("Dragon"),("Dark"),("Steel")
         """)
@@ -173,8 +173,6 @@ class PokemonBDD():
         return self.c.execute("SELECT description, image, nbr FROM Objet")
 
 
-    def createPokemon(self):
-        self.c.execute("""INSERT INTO Pokemon""")
 
 
 
