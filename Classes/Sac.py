@@ -17,6 +17,7 @@ class Sac:
 
     def affichage(self):
         if self.leJeu.mettre_a_jour:
+            self.lesObjets = []
             self.recupObjs()
             self.leJeu.mettre_a_jour = False
 

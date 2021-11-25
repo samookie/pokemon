@@ -170,7 +170,10 @@ class PokemonBDD():
 
     '''Méthode permettant de récupérer les objets du héro'''
     def getObjSac(self):
-        return self.c.execute("SELECT description, image, nbr FROM Objet")
+        return self.c.execute("SELECT description, image, nbr FROM Objet").fetchall()
+
+    def getPokemonHero(self):
+        return self.c.execute("SELECT nomPoke, niveau, hp, image FROM Pokemon P JOIN Liste_Pokemon L ON P.idPoke = L.idPoke AND idHero = 1").fetchall()
 
 
     def createPokemon(self):
