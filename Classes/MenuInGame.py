@@ -60,13 +60,13 @@ class MenuInGame():
         self.leJeu.screen.blit(ciChasseur, (0, 0))
 
         self.leJeu.screen.blit(self.text.render(str(donnesHero[0]), True, (0, 0, 0)), (376, 205))
-        self.leJeu.screen.blit(self.text.render(donnesHero[1], True, (0, 0, 0)), (209, 232))
-        self.leJeu.screen.blit(self.text.render(str(donnesHero[3]), True, (0, 0, 0)), (209, 300))
+        self.leJeu.screen.blit(self.text.render("Nom : " + donnesHero[1], True, (0, 0, 0)), (209, 232))
+        self.leJeu.screen.blit(self.text.render("Argent : " + str(donnesHero[3]), True, (0, 0, 0)), (209, 300))
 
         if donnesHero[2] == "g":
-            self.leJeu.screen.blit(self.text.render("Garçon", True, (0, 0, 0)), (209, 275))
+            self.leJeu.screen.blit(self.text.render("Genre : Garçon", True, (0, 0, 0)), (209, 275))
         else:
-            self.leJeu.screen.blit(self.text.render("Fille", True, (0, 0, 0)), (209, 275))
+            self.leJeu.screen.blit(self.text.render("Genre : Fille", True, (0, 0, 0)), (209, 275))
 
     def razAffMenu(self):
         for menu in self.menuAffiche:
@@ -92,7 +92,10 @@ class MenuInGame():
             self.continuer = False
 
         elif pygame.key.get_pressed()[pygame.K_RETURN] and self.continuer:
-            if self.menuSelec == 3:
+            if self.menuSelec == 2:
+                self.leJeu.ecran_affiche = "sac"
+                self.leJeu.mettre_a_jour = True
+            elif self.menuSelec == 3:
                 if self.menuAffiche["ci"]:
                     self.menuAffiche["ci"] = False
                 else:

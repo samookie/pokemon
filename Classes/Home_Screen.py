@@ -10,7 +10,11 @@ class Home_Screen:
         self.leJeu = leJeu #CLasse jeu
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 15) #Initialiser la police pour le texte
         self.bdd = PokemonBDD()
-        self.nbrSav = self.bdd.getSavExist()[0]
+
+        try:
+            self.nbrSav = self.bdd.getSavExist()[0]
+        except:
+            self.nbrSav = 0
 
         if self.nbrSav == 0:
             self.curseur = "nouv"  # Variable pour savoir ou le curseur est situé

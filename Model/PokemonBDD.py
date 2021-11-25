@@ -32,6 +32,7 @@ class PokemonBDD():
           type TEXT,
           image TEXT,
           idSac INTEGER,
+          nbr INTEGER,
           FOREIGN KEY (idSac) REFERENCES Sac(idSac)
         );
 
@@ -115,16 +116,16 @@ class PokemonBDD():
 
     '''Méthode permettant de reset la BDD'''
     def resetBDD(self):
-        self.c.execute("DROP TABLE Dialogue")
-        self.c.execute("DROP TABLE Game")
-        self.c.execute("DROP TABLE Sac")
-        self.c.execute("DROP TABLE Objet")
-        self.c.execute("DROP TABLE Type_Pokemon")
-        self.c.execute("DROP TABLE Attaque")
-        self.c.execute("DROP TABLE Hero")
-        self.c.execute("DROP TABLE Pokemon")
-        self.c.execute("DROP TABLE Liste_Pokemon")
-        self.c.execute("DROP TABLE Liste_Attaque")
+        self.c.execute("DROP TABLE IF EXISTS Dialogue")
+        self.c.execute("DROP TABLE IF EXISTS Game")
+        self.c.execute("DROP TABLE IF EXISTS Sac")
+        self.c.execute("DROP TABLE IF EXISTS Objet")
+        self.c.execute("DROP TABLE IF EXISTS Type_Pokemon")
+        self.c.execute("DROP TABLE IF EXISTS Attaque")
+        self.c.execute("DROP TABLE IF EXISTS Hero")
+        self.c.execute("DROP TABLE IF EXISTS Pokemon")
+        self.c.execute("DROP TABLE IF EXISTS Liste_Pokemon")
+        self.c.execute("DROP TABLE IF EXISTS Liste_Attaque")
         self.createBDD()
         self.createTPokemon()
 
@@ -165,6 +166,10 @@ class PokemonBDD():
         ("Ghost"),("Dragon"),("Dark"),("Steel")
         """)
         self.conn.commit()
+
+    '''Méthode permettant de récupérer les objets du héro'''
+    def getObjSac(self):
+        return self.c.execute("SELECT description, image, nbr FROM Objet")
 
 
 

@@ -4,6 +4,7 @@ from Classes.Carte import Carte
 from Classes.Home_Screen import Home_Screen
 from Classes.Intro import Intro
 from Classes.Joueur import Joueur
+from Classes.Sac import Sac
 
 pygame.init()
 
@@ -29,6 +30,7 @@ class Jeu:
         # VARS ECRANS
         ecran_accueil = Home_Screen(self)
         intro = Intro(self)
+        sac = Sac(self)
 
         # boucle du jeu
         while jeu:
@@ -41,6 +43,9 @@ class Jeu:
                 intro.gestion_touches()
             elif self.ecran_affiche == "jeu":
                 self.carte.affichage_carte()
+            elif self.ecran_affiche == "sac":
+                sac.affichage()
+                sac.gestion_touches()
             else:
                 pass
 

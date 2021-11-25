@@ -18,6 +18,7 @@ class Carte:
         self.menuInGame = MenuInGame(self.jeu)
 
         self.nom_carte = "carte"
+        self.numberSpawnPoint = ""
 
         self.tableauTp = {}
 
@@ -93,7 +94,12 @@ class Carte:
 
         for entreeObjKey, entreeObjValue in self.entreeDict.items():
             if self.joueur.pieds.colliderect(entreeObjValue):
-                self.chargerCarte(re.sub("(^entree_|^sortie_)|(-\w+)", "", entreeObjKey), re.sub("(\w+)-", "", entreeObjKey))
+                self.chargerCarte(re.sub("(^entree_|^sortie_)|(-\w+)|(#\w+)", "", entreeObjKey), (re.sub("(\w+)-|(#\w+)", "", entreeObjKey) + self.numberSpawnPoint))
+
+                if "#" in entreeObjKey:
+                    self.numberSpawnPoint = re.sub(".+#", "", entreeObjKey)
+                else:
+                    self.numberSpawnPoint = ""
 
 
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe
