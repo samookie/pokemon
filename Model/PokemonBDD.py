@@ -131,7 +131,9 @@ class PokemonBDD():
         self.c.execute("DROP TABLE IF EXISTS Liste_Attaque")
         self.createBDD()
         self.createTPA()
+        self.createAtt()
         self.createPokemon()
+        self.initAttPoke()
 
     '''Méthode permettant de créer le Héro'''
     def creationPersonnage(self, nomJoueur, sexe):
@@ -204,15 +206,67 @@ class PokemonBDD():
         self.conn.commit()
 
     def createAtt(self):
-        """
-        libelle TEXT,
-          dmg INTEGER,
-          idTPA INTEGER,
-        :return:
-        """
-        self.c.execute(""" INSERT INTO Attaque ("libelle",
+        self.c.execute(""" INSERT INTO Attaque ("libelle","dmg","idTPA") VALUES 
+            ("Charge",10,1), ("Rugissement",20,1), ("Vampigraine",30,4), ("Fouet Lianes",40,4),
+            ("Griffe",10,1), ("Flammèche",30,2), ("Brouillard",40,4), ("Mimi-Queue",20,3),
+            ("Pistolet à O",30,3), ("Repli",40,3), ("Sécrétion",10,12), ("Piqûre",20,12),
+            ("Armure",0,1), ("Dard-Venin",30,8), ("Jet de Sable",20,9), ("Tornade",30,10),
+            ("Vive-Attaque",40,1), ("Puissance",30,1), ("Grimace",10,1), ("Eclair",40,5),
+            ("Boule Elek",50,5), ("Tonnerre",60,5), ("Boul'Armure",5,1), ("Roulade",30,13),
+            ("Eclate Griffe",20,1), ("Lance-Boue",30,9), ("Poliroche",40,13), ("Etreinte",50,1),("Mini-Queue",30,1)
         """)
 
+        self.conn.commit()
+
+    def initAttPoke(self):
+        self.attPoke(1, 1, 2, 3, 4) #Bulbizarre
+
+        self.attPoke(2, 2, 3, 1, 4) #Herbizarre
+
+        self.attPoke(3, 2, 5, 6, 7) #Salamèche
+
+        self.attPoke(4, 6, 5, 2, 7) #Reptincel
+
+        self.attPoke(5, 1, 8, 9, 10) #Carapuce
+
+        self.attPoke(6, 1, 9, 8, 10) #Carabaffe
+
+        self.attPoke(7, 1, 11, 12, 13) #Chenipan
+
+        self.attPoke(8, 13, 1, 11, 12) #Chrysacier
+
+        self.attPoke(9, 1, 11, 14, 12) #Aspicot
+
+        self.attPoke(10, 13, 14, 12, 11) #Coconfort
+
+        self.attPoke(11, 1, 15, 16, 17) #Roucool
+
+        self.attPoke(12, 15, 16, 1, 17) #Roucoups
+
+        self.attPoke(13, 29, 1, 17, 18) #Rattata
+
+        self.attPoke(14, 19, 18, 17, 29) #Rattatac
+
+        self.attPoke(15, 29, 20, 2, 21) #Pikachu
+
+        self.attPoke(16, 29, 20, 19, 17) #Raichu
+
+        self.attPoke(17, 5, 23, 15, 14) #Sabelette
+
+        self.attPoke(18, 23, 1, 26, 27) #Racaillou
+
+        self.attPoke(19, 13, 15, 28, 1) #Onix
+
+    def attPoke(self, idPoke, att1, att2, att3, att4):
+
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att1 , idPoke])
+        self.conn.commit()
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att2, idPoke])
+        self.conn.commit()
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att3, idPoke])
+        self.conn.commit()
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att4, idPoke])
+        self.conn.commit()
 
 
 
