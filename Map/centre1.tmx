@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="8" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="23">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="8" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="25">
  <tileset firstgid="1" name="centre1" tilewidth="32" tileheight="32" tilecount="60" columns="10">
   <image source="Images/centre1.png" trans="000000" width="335" height="208"/>
  </tileset>
@@ -14,7 +14,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Collision">
-  <object id="1" type="collision" x="31.75" y="28.75" width="224.5" height="32.5"/>
+  <object id="1" type="collision" x="31.75" y="28.75" width="50.75" height="32.5"/>
   <object id="2" type="collision" x="13.5" y="42.25" width="3" height="120.5"/>
   <object id="3" type="collision" x="35.5" y="58.75" width="8.5" height="10.5"/>
   <object id="4" type="collision" x="49.5" y="58.25" width="28.25" height="11"/>
@@ -51,5 +51,9 @@
   <object id="22" type="collision" x="16.6364" y="108.273">
    <polygon points="0,0 16.7273,9.36364 29.9091,10.5455 29.2727,17.4545 -1.18182,6.72727"/>
   </object>
+  <object id="23" name="pnj_centre" type="pnj" x="143.5" y="51">
+   <point/>
+  </object>
+  <object id="24" type="collision" x="185.25" y="28" width="54" height="32.5"/>
  </objectgroup>
 </map>

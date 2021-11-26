@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="6" height="5" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="24">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="6" height="5" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="25">
  <tileset firstgid="1" name="magasin" tilewidth="32" tileheight="32" tilecount="912" columns="24">
   <image source="Images/Game Boy Advance - Pokemon FireRed LeafGreen - Pewter City.png" trans="c023c0" width="768" height="1244"/>
  </tileset>
@@ -22,7 +22,6 @@
   <object id="1" type="collision" x="50.3636" y="40.1818" width="15.8182" height="55.6364"/>
   <object id="2" type="collision" x="2" y="76.5455" width="48.1818" height="19.0909"/>
   <object id="3" type="collision" x="18" y="113.091" width="31.8182" height="14.7273"/>
-  <object id="4" type="collision" x="20.3636" y="38.3636" width="10.5455" height="24.9091"/>
   <object id="5" type="collision" x="113.455" y="31.0909" width="48" height="24.9091"/>
   <object id="6" type="collision" x="124.545" y="74.5455" width="10.7273" height="53.2727"/>
   <object id="7" type="collision" x="114.364" y="77.8182" width="10" height="49.8182"/>
@@ -49,5 +48,8 @@
    <point/>
   </object>
   <object id="23" name="sortie_carte-spawn_sortie_mag" type="entree" x="61.375" y="132.375" width="25.25" height="11.625"/>
+  <object id="24" name="pnj_magasin" type="pnj" x="30.3742" y="57.6331">
+   <point/>
+  </object>
  </objectgroup>
 </map>

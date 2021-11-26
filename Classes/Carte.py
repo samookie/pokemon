@@ -21,7 +21,6 @@ class Carte:
         self.numberSpawnPoint = ""
 
         self.tableauTp = {}
-        self.groupPNJ = pygame.sprite.Group()
 
     '''Méthode permettant de charger une carte spécifique'''
     def chargerCarte(self, nomCarte, spawn):
@@ -87,7 +86,6 @@ class Carte:
         self.update()
         self.group.center(self.joueur.rect.center)
         self.group.draw(self.jeu.screen)
-        self.groupPNJ.draw(self.jeu.screen)
         self.menuInGame.affichage()
         pygame.display.flip()
 
@@ -112,5 +110,7 @@ class Carte:
     def getPNJ(self):
 
         for pnj in self.objPnj:
-            self.groupPNJ.add(Pnj(self.jeu, pnj.name, pnj.x, pnj.y))
+            temp = Pnj(pnj.name)
+            temp.modifPosition([pnj.x, pnj.y])
+            self.group.add(temp)
 

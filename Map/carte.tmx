@@ -130,11 +130,7 @@
 991,991,991,992,991,992,109,110,111,112,113,114,115,116,117,118,119,120,991,991,967,991,991,991
 </data>
  </layer>
- <objectgroup id="4" name="pnj">
-  <object id="220" name="pnj_centre" type="pnj" x="370.545" y="3288.55">
-   <point/>
-  </object>
- </objectgroup>
+ <objectgroup id="4" name="pnj"/>
  <objectgroup id="3" name="collision">
   <object id="1" type="collision" x="418.667" y="3102.67" width="124.667" height="62"/>
   <object id="2" type="collision" x="224" y="3104.67" width="156" height="60.6667"/>

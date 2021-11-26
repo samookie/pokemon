@@ -117,10 +117,6 @@ class PokemonBDD():
         );
         """)
 
-        self.createTPA()
-        self.createPokemon()
-
-
     '''Méthode permettant de reset la BDD'''
     def resetBDD(self):
         self.c.execute("DROP TABLE IF EXISTS Dialogue")
