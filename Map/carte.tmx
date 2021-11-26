@@ -319,9 +319,9 @@
   <object id="198" name="entree_musee1-spawn_musee1" type="entree" x="261.818" y="102" width="36.7273" height="21.6364"/>
   <object id="199" name="entree_areneP-spawn_entree_arene" type="entree" x="239.818" y="256.545" width="16.1818" height="21.4545"/>
   <object id="200" name="entree_centre1-spawn_centre#2" type="entree" x="272.25" y="400.5" width="15.875" height="19.875"/>
-  <object id="201" name="entree_maisonB-spawn_entree_maisonB" type="entree" x="144.273" y="479.182" width="15.5455" height="20.5455"/>
+  <object id="201" name="entree_maisonB-spawn_entree_maisonB#1" type="entree" x="144.273" y="479.182" width="15.5455" height="20.5455"/>
   <object id="202" name="entree_magasin-spawn_entree_mag#2" type="entree" x="448.364" y="288.182" width="15.6364" height="19.8182"/>
-  <object id="203" name="entree_maison" type="entree" x="528.273" y="175.455" width="15.4545" height="20.3636"/>
+  <object id="203" name="entree_maisonB-spawn_entree_maisonB#2" type="entree" x="528.273" y="175.455" width="15.4545" height="20.3636"/>
   <object id="204" name="entree_musee1-spawn_musee2" type="entree" x="399.818" y="63.2727" width="16" height="20.5455"/>
   <object id="205" name="spawn_sortie_labo" type="spawn" x="455.962" y="3370.99">
    <point/>
@@ -344,7 +344,7 @@
   <object id="211" name="spawn_sortie_ecole" type="spawn" x="407.855" y="2088.21">
    <point/>
   </object>
-  <object id="212" name="spawn_sortie_maisonB" type="spawn" x="152.5" y="503.5">
+  <object id="212" name="spawn_sortie_maisonB1" type="spawn" x="152.386" y="505.795">
    <point/>
   </object>
   <object id="213" name="spawn_sortie_centre2" type="spawn" x="279.875" y="427.114">
@@ -356,7 +356,7 @@
   <object id="215" name="spawn_sortie_arene" type="spawn" x="247.758" y="282.333">
    <point/>
   </object>
-  <object id="216" name="spawn_sortie_maison4" type="spawn" x="536.333" y="202">
+  <object id="216" name="spawn_sortie_maisonB2" type="spawn" x="535.083" y="202.25">
    <point/>
   </object>
   <object id="217" name="spawn_sortie_musee2" type="spawn" x="383" y="87.0003">
