@@ -1,9 +1,13 @@
 import pygame
 
-class Pnj():
+class Pnj(pygame.sprite.Sprite):
 
     def __init__(self, leJeu, name, x, y, orientation="bas"):
-        self.leJeu = leJeu
-        self.imgPnj = pygame.image.load(f"Map/Images/{name}.png")
+        super().__init__()
 
-        self.leJeu.screen.blit(self.imgPnj, (x, y))
+        self.leJeu = leJeu
+        self.image = pygame.image.load(f"Map/Images/{name}.png")
+        self.rect = self.image.get_rect()
+
+        self.position = [x, y]
+        self.sprite_sheet = self.image

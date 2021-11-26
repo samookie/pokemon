@@ -92,7 +92,10 @@ class MenuInGame():
             self.continuer = False
 
         elif pygame.key.get_pressed()[pygame.K_RETURN] and self.continuer:
-            if self.menuSelec == 2:
+            if self.menuSelec == 1:
+                self.leJeu.ecran_affiche = "pokemons"
+                self.leJeu.mettre_a_jour = True
+            elif self.menuSelec == 2:
                 self.leJeu.ecran_affiche = "sac"
                 self.leJeu.mettre_a_jour = True
             elif self.menuSelec == 3:

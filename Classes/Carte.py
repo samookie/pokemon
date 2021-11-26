@@ -21,6 +21,7 @@ class Carte:
         self.numberSpawnPoint = ""
 
         self.tableauTp = {}
+        self.groupPNJ = pygame.sprite.Group()
 
     '''Méthode permettant de charger une carte spécifique'''
     def chargerCarte(self, nomCarte, spawn):
@@ -34,6 +35,7 @@ class Carte:
         self.get_collisions(nomCarte) # prendre toutes les collisions de la map
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.add(self.joueur)
+        self.getPNJ()
         self.joueur.modifPosition(self.getCoordonnee(spawn))# changer les coordonnées du joueurs par celui du spown
 
     '''Méthode permettant de charger une carte spécifique'''
@@ -49,6 +51,7 @@ class Carte:
         self.get_collisions(nomCarte)  # prendre toutes les collisions de la map
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.add(self.joueur)
+        self.getPNJ()
 
     """ Méthode permettant de récupérer les coordonnées du spawn actuelle (récupéré dans la méthodes getCollision) """
     def getCoordonnee(self, spawn):
@@ -84,7 +87,7 @@ class Carte:
         self.update()
         self.group.center(self.joueur.rect.center)
         self.group.draw(self.jeu.screen)
-        self.getPNJ()
+        self.groupPNJ.draw(self.jeu.screen)
         self.menuInGame.affichage()
         pygame.display.flip()
 
@@ -109,5 +112,5 @@ class Carte:
     def getPNJ(self):
 
         for pnj in self.objPnj:
-            Pnj(self.jeu, pnj.name, pnj.x, pnj.y)
+            self.groupPNJ.add(Pnj(self.jeu, pnj.name, pnj.x, pnj.y))
 
