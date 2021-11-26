@@ -49,6 +49,7 @@ class PokemonBDD():
         CREATE TABLE Attaque(
           idAtt INTEGER PRIMARY KEY,
           libelle TEXT,
+          dmg INTEGER,
           idTPA INTEGER,
           FOREIGN KEY (idTPA) REFERENCES Type_Att(idTPA)
         );
@@ -87,8 +88,12 @@ class PokemonBDD():
           hp INTEGER,
           vitesse INTEGER,
           attaque INTEGER,
+          spAtt INTEGER,
           defense INTEGER,
-          image INTEGER
+          spDef INTEGER,
+          image TEXT,
+          d_image TEXT,
+          f_image TEXT
         );
         """)
 
@@ -128,7 +133,8 @@ class PokemonBDD():
         self.c.execute("DROP TABLE IF EXISTS Liste_Pokemon")
         self.c.execute("DROP TABLE IF EXISTS Liste_Attaque")
         self.createBDD()
-        self.createTPokemon()
+        self.createTPA()
+        self.createPokemon()
 
     '''Méthode permettant de créer le Héro'''
     def creationPersonnage(self, nomJoueur, sexe):
@@ -161,16 +167,52 @@ class PokemonBDD():
     def chargerInfosHero(self):
         return self.c.execute("SELECT idHero, nom, sexe, argent FROM Hero").fetchone()
 
-    def createTPokemon(self):
-        self.c.execute("""INSERT INTO Type_Att ("libelle")  VALUES ("Normal"),("Fire"),("Water"),("Grass"),("Electric"),
-        ("Ice"),("Fighting"),("Poison"),("Ground"),("Flying"),("Psychic"),("Bug"),("Rock"),
-        ("Ghost"),("Dragon"),("Dark"),("Steel")
+    def createTPA(self):
+        self.c.execute("""INSERT INTO Type_Att ("libelle")  VALUES ("Normal"),("Feu"),("Eau"),("Plante"),("Electrik"),
+        ("Glace"),("Combat"),("Poison"),("Sol"),("Vol"),("Psy"),("Insecte"),("Roche"),
+        ("Spectre"),("Dragon"),("Tenebres"),("Acier")
         """)
         self.conn.commit()
 
     '''Méthode permettant de récupérer les objets du héro'''
     def getObjSac(self):
         return self.c.execute("SELECT description, image, nbr FROM Objet")
+
+
+    def createPokemon(self):
+        self.c.execute(""" INSERT INTO Pokemon ("nomPoke","nomEvo","niveau","hp","vitesse","attaque","speAtt","defense","speDef","image","d_image","f_image") VALUES 
+            ("Bulbizarre","Herbizarre",1,45,45,49,65,49,65,"bulbizarre","d_bulbizarre","f_bulbizarre"),
+            ("Herbizarre","Ivysaure",1,60,60,62,80,63,80,"herbizarre","d_herbizarre","f_herbizarre"),
+            ("Salamèche","Reptincel",1,39,65,52,60,43,50,"salamèche","d_salamèche","f_salamèche"),
+            ("Reptincel","Dracaufeu",1,58,80,64,80,58,65,"reptincel","d_reptincel","f_reptincel"),
+            ("Carapuce","Carabaffe",1,44,43,48,50,65,64,"carapuce","d_carapuce","f_carapuce"),
+            ("Carabaffe","Tortank",1,59,58,63,65,80,80,"carabaffe","d_carabaffe","f_carabaffe"),
+            ("Chenipan","Chrysacier",1,45,45,30,20,35,20,"chenipan","d_chenipan","f_chenipan"),
+            ("Chrysacier","Papilusion",1,50,30,20,25,55,25,"chrysacier","d_chrysacier","f_chrysacier"),
+            ("Aspicot","Coconfort",1,40,50,35,20,30,20,"aspicot","d_aspicot","f_aspicot"),
+            ("Coconfort","Dardargnan",1,45,35,25,25,50,25,"coconfort","d_coconfort","f_coconfort"),
+            ("Roucool","Roucoups",1,40,56,45,35,40,35,"roucool","d_roucool","f_roucool"),
+            ("Roucoups","",1,63,71,60,50,55,50,"roucoups","d_roucoups","f_roucoups"),
+            ("Rattata","Rattatac",1,30,72,56,25,35,35,"rattata","d_rattata","f_rattata"),
+            ("Rattatac","",1,55,97,81,50,60,70,"rattatac","d_rattatac","f_rattatac"),
+            ("Pikachu","Raichu",1,35,90,55,90,40,50,"pikachu","d_pikachu","f_pikachu"),
+            ("Raichu","",1,60,110,90,90,5,50,"raichu","d_raichu","f_raichu"),
+            ("Sabelette","Sablaireau",1,50,40,75,20,85,30,"sabelette","d_sabelette","f_sabelette"),
+            ("Racaillou","Gravalanch",1,40,20,80,30,100,30,"racaillou","d_racaillou","f_racaillou"),
+            ("Onix","",1,35,70,45,30,160,40,"onix","d_onix","f_onix");
+        """)
+        self.conn.commit()
+
+    def createAtt(self):
+        """
+        libelle TEXT,
+          dmg INTEGER,
+          idTPA INTEGER,
+        :return:
+        """
+        self.c.execute(""" INSERT INTO Attaque ("libelle",
+        """)
+
 
 
 
