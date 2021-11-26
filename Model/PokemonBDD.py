@@ -88,9 +88,9 @@ class PokemonBDD():
           hp INTEGER,
           vitesse INTEGER,
           attaque INTEGER,
-          spAtt INTEGER,
+          speAtt INTEGER,
           defense INTEGER,
-          spDef INTEGER,
+          speDef INTEGER,
           image TEXT,
           d_image TEXT,
           f_image TEXT
@@ -117,7 +117,8 @@ class PokemonBDD():
         );
         """)
 
-        self.createTPokemon()
+        self.createTPA()
+        self.createPokemon()
 
 
     '''Méthode permettant de reset la BDD'''
