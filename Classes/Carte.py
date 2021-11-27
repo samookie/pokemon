@@ -3,6 +3,8 @@ import re
 import pygame
 import pyscroll
 import pytmx
+
+from Classes.Cinematiques import Cinematiques
 from Classes.Joueur import Joueur
 from Classes.MenuInGame import MenuInGame
 from Model.PokemonBDD import PokemonBDD
@@ -16,6 +18,7 @@ class Carte:
         self.joueur = joueur
         self.lesPnj = ["pnj_centre","pnj_magasin","pnj_professeur"]
         self.menuInGame = MenuInGame(self.jeu)
+        self.cinematiques = Cinematiques(self)
 
         self.nom_carte = "carte"
         self.numberSpawnPoint = ""
@@ -67,6 +70,7 @@ class Carte:
         self.spawn = []
         self.entreeDict = {}
         self.objPnj = []
+        self.cinematique = []
 
         for obj in pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx").objects:
             if obj.type == "collision":
@@ -78,10 +82,12 @@ class Carte:
                 self.spawn.append(obj)
             elif obj.type == "pnj":
                 self.objPnj.append(obj)
+            elif obj.type == "cine":
+                self.cinematique.append(obj)
 
     def affichage_carte(self):
         self.joueur.ancienne_position()
-        if self.jeu.dansMenu:
+        if self.jeu.dansMenu and not self.cinematiques.enCinematique:
             self.joueur.gestion_touches()
         self.update()
         self.group.center(self.joueur.rect.center)
@@ -91,6 +97,8 @@ class Carte:
 
     '''Méthode permettant de mettre à jour le groupe de calques et si un des sprite (élément du jeu type joueur) est dans un objet de type colission faire revenir le joueur en arrière'''
     def update(self):
+        idCine = self.bdd.getCurrentCinematique()[0]
+
         self.group.update()  # Faire les majs du groupe
 
         for entreeObjKey, entreeObjValue in self.entreeDict.items():
@@ -101,6 +109,12 @@ class Carte:
                     self.numberSpawnPoint = re.sub(".+#", "", entreeObjKey)
                 else:
                     self.numberSpawnPoint = ""
+
+        for obj in self.cinematique:
+            if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
+                if obj.name == "1" and str(idCine) == "1":
+                    self.cinematiques.affichage()
+                    self.jeu
 
 
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe

@@ -63,6 +63,7 @@ class PokemonBDD():
           argent INTEGER,
           pos_x INTEGER,
           pos_y INTEGER,
+          cinematique INTEGER,
           idSac INTEGER,
           FOREIGN KEY (idSac) REFERENCES Sac(idSac)
         );
@@ -138,7 +139,7 @@ class PokemonBDD():
     '''Méthode permettant de créer le Héro'''
     def creationPersonnage(self, nomJoueur, sexe):
         self.c.execute("INSERT INTO Sac VALUES (1, 10)")
-        self.c.execute("INSERT INTO Hero VALUES (1, ?, ?, 0, 0, 0, 1)", [nomJoueur, sexe])
+        self.c.execute("INSERT INTO Hero VALUES (1, ?, ?, 0, 0, 0, 1, 1)", [nomJoueur, sexe])
         self.conn.commit()
 
     '''Méthode permettant de récupérer le sexe du Héro'''
@@ -267,6 +268,9 @@ class PokemonBDD():
         self.conn.commit()
         self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att4, idPoke])
         self.conn.commit()
+
+    def getCurrentCinematique(self):
+        return self.c.execute("SELECT cinematique FROM Hero").fetchone()
 
 
 
