@@ -6,6 +6,7 @@ from Classes.Intro import Intro
 from Classes.Joueur import Joueur
 from Classes.PokemonView import PokemonView
 from Classes.Sac import Sac
+from Classes.FightPokemon import FightPokemon
 
 pygame.init()
 
@@ -33,6 +34,8 @@ class Jeu:
         intro = Intro(self)
         sac = Sac(self)
         pokemon_ecran = PokemonView(self)
+        fightP = FightPokemon(self,"pikachu")
+
 
         # boucle du jeu
         while jeu:
@@ -51,6 +54,9 @@ class Jeu:
             elif self.ecran_affiche == "pokemons":
                 pokemon_ecran.affichage()
                 pokemon_ecran.gestion_touches()
+            elif self.ecran_affiche == "fightP":
+                fightP.affichage()
+                fightP.gestion_touches()
             else:
                 pass
 

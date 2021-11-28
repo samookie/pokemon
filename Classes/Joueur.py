@@ -18,6 +18,8 @@ class Joueur(Animation):
         #Correction de l'image
         self.image.set_colorkey([36, 255, 0]) #Supprimer le fond noir de l'image
 
+        self.liste_pokemon=[] #Liste pokemon
+
     '''Enregistre la dernière position du joueur sur la carte'''
     def ancienne_position(self):
         self.old_position = self.position.copy()
@@ -54,4 +56,10 @@ class Joueur(Animation):
     def modifPosition(self, pos):
         self.old_position = pos
         self.position = pos
+
+    def getPokemon(self):
+        return self.liste_pokemon
+
+    def addPokemon(self, pokemon):
+        self.liste_pokemon.append(pokemon)
 

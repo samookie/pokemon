@@ -3,12 +3,14 @@ import re
 import pygame
 import pyscroll
 import pytmx
+import random
 
 from Classes.Cinematiques import Cinematiques
 from Classes.Joueur import Joueur
 from Classes.MenuInGame import MenuInGame
 from Model.PokemonBDD import PokemonBDD
 from Classes.Pnj import Pnj
+from Classes.FightPokemon import FightPokemon
 
 class Carte:
 
@@ -71,6 +73,7 @@ class Carte:
         self.entreeDict = {}
         self.objPnj = []
         self.cinematique = []
+        self.fight=[]
 
         for obj in pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx").objects:
             if obj.type == "collision":
@@ -84,6 +87,8 @@ class Carte:
                 self.objPnj.append(obj)
             elif obj.type == "cine":
                 self.cinematique.append(obj)
+            elif obj.type == "fight":
+                self.fight.append(obj)
 
     def affichage_carte(self):
         self.joueur.ancienne_position()
@@ -98,6 +103,10 @@ class Carte:
     '''Méthode permettant de mettre à jour le groupe de calques et si un des sprite (élément du jeu type joueur) est dans un objet de type colission faire revenir le joueur en arrière'''
     def update(self):
         idCine = self.bdd.getCurrentCinematique()[0]
+        proba = random.randint(1,100)
+        leNb = random.randint(1,100)
+        position = self.joueur.position
+
 
         self.group.update()  # Faire les majs du groupe
 
@@ -115,6 +124,14 @@ class Carte:
                 if obj.name == "1" and str(idCine) == "1":
                     self.cinematiques.affichage()
                     self.jeu
+
+        for obj in self.fight:
+            if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
+                if proba == leNb:
+                    print("adrien the boss")
+                    self.jeu.ecran_affiche="fightP"
+                    self.jeu.mettre_a_jour = True
+
 
 
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe
