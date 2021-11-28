@@ -21,6 +21,7 @@ class Carte:
         self.lesPnj = ["pnj_centre","pnj_magasin","pnj_professeur"]
         self.menuInGame = MenuInGame(self.jeu)
         self.cinematiques = Cinematiques(self)
+        self.enCinematique = False
 
         self.nom_carte = "carte"
         self.numberSpawnPoint = ""
@@ -92,17 +93,24 @@ class Carte:
 
     def affichage_carte(self):
         self.joueur.ancienne_position()
-        if self.jeu.dansMenu and not self.cinematiques.enCinematique:
+        if self.jeu.dansMenu and not self.enCinematique:
             self.joueur.gestion_touches()
         self.update()
         self.group.center(self.joueur.rect.center)
         self.group.draw(self.jeu.screen)
         self.menuInGame.affichage()
+        if self.enCinematique:
+            if self.cinematiqueObj.name == "1" and str(self.idCine) == "1":
+                self.cinematiques.cine1()
+            else:
+                self.enCinematique = False
+            self.cinematiques.gestion_touches()
         pygame.display.flip()
+
 
     '''Méthode permettant de mettre à jour le groupe de calques et si un des sprite (élément du jeu type joueur) est dans un objet de type colission faire revenir le joueur en arrière'''
     def update(self):
-        idCine = self.bdd.getCurrentCinematique()[0]
+        self.idCine = self.bdd.getCurrentCinematique()[0]
         proba = random.randint(1,100)
         leNb = random.randint(1,100)
         position = self.joueur.position
@@ -121,9 +129,8 @@ class Carte:
 
         for obj in self.cinematique:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
-                if obj.name == "1" and str(idCine) == "1":
-                    self.cinematiques.affichage()
-                    self.jeu
+                self.enCinematique = True
+                self.cinematiqueObj = obj
 
         for obj in self.fight:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):

@@ -285,6 +285,10 @@ class PokemonBDD():
         lePokemon = [pokemon[0], pokemon[1], pokemon[2],pokemon[3],pokemon[4],pokemon[5],pokemon[6],pokemon[7],pokemon[8],pokemon[9],pokemon[10],pokemon[11]]
         return lePokemon
 
+    def setCurrentCinematique(self, number):
+        self.c.execute("UPDATE Hero SET cinematique = ?", [number])
+        self.conn.commit()
+
 
 
 
