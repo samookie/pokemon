@@ -57,9 +57,11 @@ class Joueur(Animation):
         self.old_position = pos
         self.position = pos
 
-    def getPokemon(self):
+    '''Méthode pour permettre d'avoir la liste de pokémon du joueur '''
+    def getLesPokemons(self):
         return self.liste_pokemon
 
+    '''Méthode pour permettre d'ajouter un pokemon dans la liste'''
     def addPokemon(self, pokemon):
         self.liste_pokemon.append(pokemon)
 

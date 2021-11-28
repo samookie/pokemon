@@ -1,5 +1,6 @@
 import datetime
 import sqlite3
+from Classes.Pokemon import Pokemon
 
 class PokemonBDD():
 
@@ -181,7 +182,7 @@ class PokemonBDD():
     def getPokemonHero(self):
         return self.c.execute("SELECT nomPoke, niveau, hp, image FROM Pokemon P JOIN Liste_Pokemon L ON P.idPoke = L.idPoke AND idHero = 1").fetchall()
 
-
+    '''Méthode permettant de rajouter les pokémons dans la base de données'''
     def createPokemon(self):
         self.c.execute(""" INSERT INTO Pokemon ("nomPoke","nomEvo","niveau","hp","vitesse","attaque","speAtt","defense","speDef","image","d_image","f_image") VALUES 
             ("Bulbizarre","Herbizarre",1,45,45,49,65,49,65,"bulbizarre","d_bulbizarre","f_bulbizarre"),
@@ -206,6 +207,7 @@ class PokemonBDD():
         """)
         self.conn.commit()
 
+    '''Méthode permettant de créer les attaques et leurs dégats'''
     def createAtt(self):
         self.c.execute(""" INSERT INTO Attaque ("libelle","dmg","idTPA") VALUES 
             ("Charge",10,1), ("Rugissement",20,1), ("Vampigraine",30,4), ("Fouet Lianes",40,4),
@@ -219,6 +221,7 @@ class PokemonBDD():
 
         self.conn.commit()
 
+    '''Méthode permettant d'associer le pokémon à ces attaques'''
     def initAttPoke(self):
         self.attPoke(1, 1, 2, 3, 4) #Bulbizarre
 
@@ -258,19 +261,29 @@ class PokemonBDD():
 
         self.attPoke(19, 13, 15, 28, 1) #Onix
 
+    '''Méthode permettant de prendre l'i du pokémon et de l'associer à ces 4 attaques'''
     def attPoke(self, idPoke, att1, att2, att3, att4):
 
-        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att1 , idPoke])
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att1, idPoke]) # attaque 1
         self.conn.commit()
-        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att2, idPoke])
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att2, idPoke]) # attaque 2
         self.conn.commit()
-        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att3, idPoke])
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att3, idPoke]) # attaque 3
         self.conn.commit()
-        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att4, idPoke])
+        self.c.execute(" INSERT INTO Liste_Attaque VALUES (?,?);", [att4, idPoke]) # attaque 4
         self.conn.commit()
+
 
     def getCurrentCinematique(self):
         return self.c.execute("SELECT cinematique FROM Hero").fetchone()
+
+    '''Méthode permettant de retourner un pokémon '''
+    def searchPokemon(self, pokemon):
+        pokemon = self.c.execute("""SELECT nomPoke,nomEvo,niveau,hp,vitesse,attaque,speAtt,defense,speDef,image,d_image,f_image
+                            FROM Pokemon
+                            WHERE nomPoke = ? """, [pokemon]).fetchone()
+        lePokemon = [pokemon[0], pokemon[1], pokemon[2],pokemon[3],pokemon[4],pokemon[5],pokemon[6],pokemon[7],pokemon[8],pokemon[9],pokemon[10],pokemon[11]]
+        return lePokemon
 
 
 

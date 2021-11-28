@@ -128,7 +128,6 @@ class Carte:
         for obj in self.fight:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
                 if proba == leNb:
-                    print("adrien the boss")
                     self.jeu.ecran_affiche="fightP"
                     self.jeu.mettre_a_jour = True
 
