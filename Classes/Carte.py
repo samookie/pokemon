@@ -27,6 +27,9 @@ class Carte:
         self.numberSpawnPoint = ""
 
         self.tableauTp = {}
+        self.zones = {
+            "zone1" : ["Rattata","Roucool"]
+        }
 
     '''Méthode permettant de charger une carte spécifique'''
     def chargerCarte(self, nomCarte, spawn):
@@ -114,6 +117,7 @@ class Carte:
         proba = random.randint(1,100)
         leNb = random.randint(1,100)
         position = self.joueur.position
+        listeProbaPokemon = {}
 
 
         self.group.update()  # Faire les majs du groupe
@@ -135,8 +139,12 @@ class Carte:
         for obj in self.fight:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
                 if proba == leNb:
-                    self.jeu.ecran_affiche="fightP"
-                    self.jeu.mettre_a_jour = True
+                    if obj.name == "zone1":
+
+
+                            self.bdd.searchPokemon("rattata")
+                            self.jeu.ecran_affiche="fightP"
+                            self.jeu.mettre_a_jour = True
 
 
 
