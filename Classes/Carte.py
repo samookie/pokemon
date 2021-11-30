@@ -138,13 +138,11 @@ class Carte:
 
         for obj in self.fight:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
+                print(obj.name)
                 if proba == leNb:
                     if obj.name == "zone1":
-
-
-                            self.bdd.searchPokemon("rattata")
-                            self.jeu.ecran_affiche="fightP"
-                            self.jeu.mettre_a_jour = True
+                        self.jeu.ecran_affiche="fightP"
+                        self.jeu.mettre_a_jour = True
 
 
 
