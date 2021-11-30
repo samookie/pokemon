@@ -137,7 +137,6 @@ class Carte:
 
         for obj in self.fight:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
-                print(obj.name)
                 if proba == leNb:
                     if obj.name == "zone1":
                         self.choixPokemon("zone1", leNb) #fonction de choix du pokemon et tp dans le fight pokemon
@@ -169,19 +168,27 @@ class Carte:
 
             if leNb < 50:
                 niveau = random.randint(2, 5)
+                print(niveau)
                 infoPokemon = self.bdd.searchPokemon(rattata.get("nom"))
+                print(infoPokemon)
                 lePokemon = Pokemon(self.jeu, infoPokemon[0],"RATTATA",infoPokemon[1],infoPokemon[2],infoPokemon[3],infoPokemon[4],infoPokemon[5],infoPokemon[6],infoPokemon[7],infoPokemon[8],infoPokemon[9],infoPokemon[10],infoPokemon[11])
+                print(lePokemon)
                 lePokemon.setLevelPokemon(niveau) # Mettre le pokemon à niveau adaptée
+                print(lePokemon)
                 self.jeu.fightP.changerPokemon(lePokemon.getPokemon(),self.joueur.getLesPokemons()) # passer les informations à FightPokemon
                 self.jeu.ecran_affiche="fightP" # Change l'écran d'affichage au fightPokemon
                 self.jeu.mettre_a_jour = True
             else:
                 niveau = random.randint(3, 5)
+                print(niveau)
                 infoPokemon = self.bdd.searchPokemon(roucool.get("nom"))
+                print(infoPokemon)
                 lePokemon = Pokemon(self.jeu, infoPokemon[0],"ROUCOOL", infoPokemon[1], infoPokemon[2], infoPokemon[3],
                                     infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7], infoPokemon[8],
                                     infoPokemon[9], infoPokemon[10], infoPokemon[11])
+                print(lePokemon)
                 lePokemon.setLevelPokemon(niveau)
+                print(lePokemon)
                 self.jeu.fightP.changerPokemon(lePokemon.getPokemon(), self.joueur.getLesPokemons())  # passer les informations à FightPokemon
                 self.jeu.ecran_affiche = "fightP"
                 self.jeu.mettre_a_jour = True

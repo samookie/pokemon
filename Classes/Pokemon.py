@@ -43,12 +43,13 @@ class Pokemon():
         return listeCaractPokemon
 
     def setLevelPokemon (self, level):
-        self.niveau = level
-        self.hp += level*3
-        self.attaque += level*3
-        self.speAtt += level*3
-        self.defense += level*3
-        self.speDef += level*3
+        if level != self.niveau:
+            self.niveau = level
+            self.hp += level*3
+            self.attaque += level*3
+            self.speAtt += level*3
+            self.defense += level*3
+            self.speDef += level*3
 
 
 

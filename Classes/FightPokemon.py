@@ -21,14 +21,11 @@ class FightPokemon:
         fight_img = pygame.image.load("Map/Images/fight.png")
         self.leJeu.screen.blit(fight_img, (0, 0)) #Dessiner l'image de fond
 
-        self.afficher_Pokemon_bas("pikachu")
         self.afficher_Pokemon_haut(self.lePokemon)
+        self.afficher_Pokemon_bas("pikachu")
 
-        statPH = pygame.image.load("Map/Images/statPokemonEnnemy.png")
-        self.leJeu.screen.blit(statPH, (0, 0))  # Dessiner l'image des stats du pokémon du haut
-
-        statPB = pygame.image.load("Map/Images/statPokemonAlly.png")
-        self.leJeu.screen.blit(statPB, (0, 0))  # Dessiner l'image des stats du pokémon du bas
+        self.afficher_stat_haut()
+        self.afficher_stat_bas()
 
         dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
         self.leJeu.screen.blit(dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
@@ -54,4 +51,20 @@ class FightPokemon:
     def changerPokemon(self, pokemon, liste_pokemon):
         self.lePokemon = pokemon
         self.liste_pokemon = liste_pokemon
+
+    def afficher_stat_bas(self):
+        statPB = pygame.image.load("Map/Images/statPokemonAlly.png")
+        self.leJeu.screen.blit(statPB, (0, 0))  # Dessiner l'image des stats du pokémon du bas
+        self.leJeu.screen.blit(self.text.render("PIKATCHOUM", 1, (0, 0, 0)), (445, 374))
+        self.leJeu.screen.blit(self.text.render("5", 1, (0, 0, 0)), (642, 374))
+
+    def afficher_stat_haut(self):
+        statPH = pygame.image.load("Map/Images/statPokemonEnnemy.png")
+        self.leJeu.screen.blit(statPH, (0, 0))  # Dessiner l'image des stats du pokémon du haut
+        self.leJeu.screen.blit(self.text.render(str(self.lePokemon[1]), 1, (0, 0, 0)), (58 , 218))
+        self.leJeu.screen.blit(self.text.render(str(self.lePokemon[3]), 1, (0, 0, 0)), (246 ,218))
+
+
+
+
 
