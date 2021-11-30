@@ -6,7 +6,7 @@ from Model.PokemonBDD import PokemonBDD
 
 class FightPokemon:
 
-    def __init__(self, leJeu, nomPokemon = "", liste_pokemon = ""):
+    def __init__(self, leJeu, nomPokemon = "", liste_pokemon = []):
         self.leJeu = leJeu #cLasse jeu
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 15) #Initialiser la police pour le texte
         self.bdd = PokemonBDD()
@@ -21,13 +21,8 @@ class FightPokemon:
         fight_img = pygame.image.load("Map/Images/fight.png")
         self.leJeu.screen.blit(fight_img, (0, 0)) #Dessiner l'image de fond
 
-        pokemonBas = pygame.image.load("Map/Images/d_pikachu.png")
-        pokemonBasScale = pygame.transform.scale(pokemonBas, (200, 200))  # Redimensionner l'image du professeur
-        self.leJeu.screen.blit(pokemonBasScale, (100, 287))  # Dessiner l'image du pokémon d'en bas
-
-        pokemonHaut = pygame.image.load("Map/Images/f_rattata.png") # Dessiner l'image du pokémon d'en haut
-        pokemonHautScale = pygame.transform.scale(pokemonHaut, (200, 200))  # Redimensionner l'image du professeur
-        self.leJeu.screen.blit(pokemonHautScale, (409, 190))
+        self.afficher_Pokemon_bas("pikachu")
+        self.afficher_Pokemon_haut(self.lePokemon)
 
         statPH = pygame.image.load("Map/Images/statPokemonEnnemy.png")
         self.leJeu.screen.blit(statPH, (0, 0))  # Dessiner l'image des stats du pokémon du haut
@@ -47,12 +42,16 @@ class FightPokemon:
         pass
 
     def afficher_Pokemon_bas(self, pokemon):
-        lePokemonB = pygame.image.load("Map/Images/fight.png")
-
-        self.leJeu.screen.blit(lePokemonB, (0, 0))  # Dessiner l'image de fond
+        pokemonBas = pygame.image.load(f'Map/Images/d_{pokemon}.png')
+        pokemonBasScale = pygame.transform.scale(pokemonBas, (200, 200))  # Redimensionner l'image du professeur
+        self.leJeu.screen.blit(pokemonBasScale, (100, 287))  # Dessiner l'image du pokémon d'en bas
 
     def afficher_Pokemon_haut(self, pokemon):
-        lePokemonH = pygame.image.load("Map/Images/fight.png")
+        pokemonHaut = pygame.image.load(f'Map/Images/{pokemon[12]}.png')  # Dessiner l'image du pokémon d'en haut
+        pokemonHautScale = pygame.transform.scale(pokemonHaut, (200, 200))  # Redimensionner l'image du professeur
+        self.leJeu.screen.blit(pokemonHautScale, (409, 190))
 
-        self.leJeu.screen.blit(lePokemonH, (0, 0))  # Dessiner l'image de fond
+    def changerPokemon(self, pokemon, liste_pokemon):
+        self.lePokemon = pokemon
+        self.liste_pokemon = liste_pokemon
 

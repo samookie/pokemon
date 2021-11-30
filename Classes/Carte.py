@@ -11,6 +11,7 @@ from Classes.MenuInGame import MenuInGame
 from Model.PokemonBDD import PokemonBDD
 from Classes.Pnj import Pnj
 from Classes.FightPokemon import FightPokemon
+from Classes.Pokemon import Pokemon
 
 class Carte:
 
@@ -27,9 +28,6 @@ class Carte:
         self.numberSpawnPoint = ""
 
         self.tableauTp = {}
-        self.zones = {
-            "zone1" : ["Rattata","Roucool"]
-        }
 
     '''Méthode permettant de charger une carte spécifique'''
     def chargerCarte(self, nomCarte, spawn):
@@ -117,7 +115,6 @@ class Carte:
         proba = random.randint(1,100)
         leNb = random.randint(1,100)
         position = self.joueur.position
-        listeProbaPokemon = {}
 
 
         self.group.update()  # Faire les majs du groupe
@@ -141,8 +138,7 @@ class Carte:
                 print(obj.name)
                 if proba == leNb:
                     if obj.name == "zone1":
-                        self.jeu.ecran_affiche="fightP"
-                        self.jeu.mettre_a_jour = True
+                        self.choixPokemon("zone1", leNb) #fonction de choix du pokemon et tp dans le fight pokemon
 
 
 
@@ -157,3 +153,33 @@ class Carte:
             temp.modifPosition([pnj.x, pnj.y])
             self.group.add(temp)
 
+    def choixPokemon(self, zone , leNb):
+        if zone == "zone1":
+            rattata = {"nom": "Rattata",
+                       "level": [2, 3, 4],
+                       "pourcentage": 45
+                       }
+
+            roucool = {"nom": "Roucool",
+                       "level": [2, 3, 4, 5],
+                       "pourcentage": 50
+                       }
+
+            if leNb < 50:
+                niveau = random.randint(2, 5)
+                infoPokemon = self.bdd.searchPokemon(rattata.get("nom"))
+                lePokemon = Pokemon(self.jeu, infoPokemon[0],"RATTATA",infoPokemon[1],infoPokemon[2],infoPokemon[3],infoPokemon[4],infoPokemon[5],infoPokemon[6],infoPokemon[7],infoPokemon[8],infoPokemon[9],infoPokemon[10],infoPokemon[11])
+                lePokemon.setLevelPokemon(niveau) # Mettre le pokemon à niveau adaptée
+                self.jeu.fightP.changerPokemon(lePokemon.getPokemon(),self.joueur.getLesPokemons()) # passer les informations à FightPokemon
+                self.jeu.ecran_affiche="fightP" # Change l'écran d'affichage au fightPokemon
+                self.jeu.mettre_a_jour = True
+            else:
+                niveau = random.randint(3, 5)
+                infoPokemon = self.bdd.searchPokemon(roucool.get("nom"))
+                lePokemon = Pokemon(self.jeu, infoPokemon[0],"ROUCOOL", infoPokemon[1], infoPokemon[2], infoPokemon[3],
+                                    infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7], infoPokemon[8],
+                                    infoPokemon[9], infoPokemon[10], infoPokemon[11])
+                lePokemon.setLevelPokemon(niveau)
+                self.jeu.fightP.changerPokemon(lePokemon.getPokemon(), self.joueur.getLesPokemons())  # passer les informations à FightPokemon
+                self.jeu.ecran_affiche = "fightP"
+                self.jeu.mettre_a_jour = True

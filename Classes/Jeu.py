@@ -34,7 +34,7 @@ class Jeu:
         intro = Intro(self)
         sac = Sac(self)
         pokemon_ecran = PokemonView(self)
-        fightP = FightPokemon(self,"pikachu")
+        self.fightP = FightPokemon(self)
 
 
         # boucle du jeu
@@ -55,8 +55,8 @@ class Jeu:
                 pokemon_ecran.affichage()
                 pokemon_ecran.gestion_touches()
             elif self.ecran_affiche == "fightP":
-                fightP.affichage()
-                fightP.gestion_touches()
+                self.fightP.affichage()
+                self.fightP.gestion_touches()
             else:
                 pass
 
