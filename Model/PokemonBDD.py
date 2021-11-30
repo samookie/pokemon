@@ -180,7 +180,7 @@ class PokemonBDD():
         return self.c.execute("SELECT description, image, nbr FROM Objet").fetchall()
 
     def getPokemonHero(self):
-        return self.c.execute("SELECT nomPoke, niveau, hp, image FROM Pokemon P JOIN Liste_Pokemon L ON P.idPoke = L.idPoke AND idHero = 1").fetchall()
+        return self.c.execute("SELECT nomPoke, nom, nomEvo, niveau, hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image FROM Liste_Pokemon L JOIN Pokemon P ON L.idPoke = P.idPoke").fetchall()
 
     '''Méthode permettant de rajouter les pokémons dans la base de données'''
     def createPokemon(self):

@@ -103,6 +103,8 @@ class Carte:
         if self.enCinematique:
             if self.cinematiqueObj.name == "1" and str(self.idCine) == "1":
                 self.cinematiques.cine1()
+            elif self.cinematiqueObj.name == "2" and str(self.idCine) == "2":
+                self.cinematiques.cine2()
             else:
                 self.enCinematique = False
             self.cinematiques.gestion_touches()

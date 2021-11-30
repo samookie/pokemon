@@ -32,7 +32,7 @@
   <object id="14" type="collision" x="14" y="202.25" width="11.75" height="21"/>
   <object id="15" type="collision" x="206.25" y="202" width="12.5" height="20.5"/>
   <object id="17" name="sortie_carte-spawn_sortie_labo" type="entree" x="104.125" y="211.75" width="26.25" height="11"/>
-  <object id="18" name="spawn_labo" type="spawn" x="116" y="192.875">
+  <object id="18" name="spawn_labo" type="spawn" x="116.782" y="176.964">
    <point/>
   </object>
   <object id="19" name="pnj_professeur" type="pnj" x="85.1544" y="76.9357">
