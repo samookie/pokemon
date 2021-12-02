@@ -12,6 +12,8 @@ class FightPokemon:
         self.bdd = PokemonBDD()
         self.lePokemon = nomPokemon
         self.liste_pokemon = liste_pokemon
+        self.txtNum = 0
+        self.passer = True
 
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
@@ -30,13 +32,19 @@ class FightPokemon:
         dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
         self.leJeu.screen.blit(dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
 
+        if self.txtNum == 0 :
+            self.leJeu.screen.blit(self.text.render(f"Un {self.lePokemon[1]} sauvage apparaît!", True, (255,255,255)), (27, 495))
+        else:
+            self.leJeu.screen.blit(self.text.render('PIKACHOUM! GO!', True, (255, 255, 255)), (27, 495))
 
 
         pygame.display.flip()  # MAJ de l'affichage
 
     '''Méthode permettant de vérifier la frappe des touches sur cette classe'''
     def gestion_touches(self):
-        pass
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: #Si la touche est espace, que l'on peut encore naviguer dans le dialogue et que la variable passer est à True
+            self.txtNum = self.txtNum + 1
+            self.passer = False
 
     def afficher_Pokemon_bas(self, pokemon):
         pokemonBas = pygame.image.load(f'Map/Images/d_{pokemon}.png')
