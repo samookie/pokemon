@@ -1,15 +1,19 @@
 import pygame.image
 
+from Model.PokemonBDD import PokemonBDD
+
 
 class Cinematiques:
 
     def __init__(self, carte):
         self.carte = carte
+        self.laBdd = PokemonBDD()
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 10)  # Initialiser la police pour le texte
         self.continuer = True
         self.numDialogue = 0
         self.numMaxDialogue = 0
         self.numCine = 1
+        self.tournerProf = 0
 
         self.dialogueMaman = ["Bon...",
                               "Tous les garçons quittent un jour la maison.. C'est la vie !",
@@ -19,6 +23,15 @@ class Cinematiques:
                                     "C'est très dangereux ! Des pokémons sauvages infestent les hautes herbes !",
                                     "Il te faut un pokémon pour te protéger.. Je sais !",
                                     "Suis-moi !"]
+
+        self.dialogueProfesseur3 = [f"{str(self.laBdd.chargerInfosHero()[1])} ? Heu...",
+                                   "Ah, c'est vrai ! Je t'ai dit de venir...",
+                                   "Tiens, NT ",
+                                   "Il y a trois pokémon ici !",
+                                   "Ils sont dans ces poké balls",
+                                   "Plus jeune, j'étais sacré DRESSEUR DE POKEMON ! Eh oui",
+                                   "Mais à cause de mon âge, je n'en ai gardé que trois!",
+                                   "Il y en a un pour toi. Allez ! Choisis-en un !"]
 
     def affichage(self):
         imgDialogue = pygame.image.load("Map/Images/dialogBox.png")
@@ -40,7 +53,19 @@ class Cinematiques:
         self.carte.jeu.screen.blit(self.text.render(self.dialogueProfesseur2[self.numDialogue], 1, (0, 0, 0)), (45, 500))
 
         if self.numDialogue >= 1:
-            self.carte.jeu.screen.blit(self.imgProfesseur, (100, 500))
+            cropped = pygame.Surface((48, 60))
+            image = pygame.transform.scale(self.imgProfesseur, (48, 240))
+            image.set_colorkey([36, 255, 0])
+            cropped.blit(image, (0, 0), (0, 60, 48, 120))
+            self.carte.jeu.screen.blit(pygame.transform.rotate(cropped, self.tournerProf), (239, 356))
+            self.tournerProf += 5
+
+    def cine3(self):
+        self.numCine = 3
+        self.numMaxDialogue = len(self.dialogueProfesseur3)
+        self.affichage()
+
+        self.carte.jeu.screen.blit(self.text.render(self.dialogueProfesseur3[self.numDialogue], 1, (0, 0, 0)), (45, 500))
 
     def gestion_touches(self):
 
