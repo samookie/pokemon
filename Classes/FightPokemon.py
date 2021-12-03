@@ -32,11 +32,12 @@ class FightPokemon:
         dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
         self.leJeu.screen.blit(dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
 
-        if self.txtNum == 0 :
+        if self.txtNum == 0:
             self.leJeu.screen.blit(self.text.render(f"Un {self.lePokemon[1]} sauvage apparaît!", True, (255,255,255)), (27, 495))
-        else:
+        elif self.txtNum == 1:
             self.leJeu.screen.blit(self.text.render('PIKACHOUM! GO!', True, (255, 255, 255)), (27, 495))
-
+        elif self.txtNum == 2:
+            self.afficher_choix_menu()
 
         pygame.display.flip()  # MAJ de l'affichage
 
@@ -45,6 +46,8 @@ class FightPokemon:
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: #Si la touche est espace, que l'on peut encore naviguer dans le dialogue et que la variable passer est à True
             self.txtNum = self.txtNum + 1
             self.passer = False
+        elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
+            self.passer = True
 
     def afficher_Pokemon_bas(self, pokemon):
         pokemonBas = pygame.image.load(f'Map/Images/d_{pokemon}.png')
@@ -71,6 +74,15 @@ class FightPokemon:
         self.leJeu.screen.blit(statPH, (0, 0))  # Dessiner l'image des stats du pokémon du haut
         self.leJeu.screen.blit(self.text.render(str(self.lePokemon[1]), 1, (0, 0, 0)), (58 , 218))
         self.leJeu.screen.blit(self.text.render(str(self.lePokemon[3]), 1, (0, 0, 0)), (246 ,218))
+
+    def afficher_choix_menu(self):
+        self.menu_choix()
+        self.leJeu.screen.blit(self.text.render("Que dois faire ", True,(255, 255, 255)), (29, 495))
+        self.leJeu.screen.blit(self.text.render("PIKACHOUM ?", True, (255, 255, 255)), (29, 520))
+
+    def menu_choix(self):
+        menuChoix = pygame.image.load("Map/Images/choixFight.png")
+        self.leJeu.screen.blit(menuChoix, (0, 0))
 
 
 
