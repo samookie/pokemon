@@ -83,6 +83,11 @@ class FightPokemon:
     def menu_choix(self):
         menuChoix = pygame.image.load("Map/Images/choixFight.png")
         self.leJeu.screen.blit(menuChoix, (0, 0))
+        self.leJeu.screen.blit(self.text.render("Attaque ", True, (0, 0, 0)), (420,494))
+        self.leJeu.screen.blit(self.text.render("Sac", True, (0, 0, 0)), (610,494))
+        self.leJeu.screen.blit(self.text.render("Pokémon", True, (0, 0, 0)), (420,545))
+        self.leJeu.screen.blit(self.text.render("Fuite", True, (0, 0, 0)), (610,545))
+
 
 
 
