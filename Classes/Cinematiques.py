@@ -67,6 +67,19 @@ class Cinematiques:
 
         self.carte.jeu.screen.blit(self.text.render(self.dialogueProfesseur3[self.numDialogue], 1, (0, 0, 0)), (45, 500))
 
+    def cine4(self):
+        if pygame.key.get_pressed()[pygame.K_SPACE]:
+            if self.carte.joueur.position > [144, 94] and self.carte.joueur.position < [145, 94]:
+                print("poke1")
+            elif self.carte.joueur.position > [156, 94] and self.carte.joueur.position < [157, 94]:
+                print("poke2")
+            elif self.carte.joueur.position > [172, 94] and self.carte.joueur.position < [173, 94]:
+                print("poke3")
+            else:
+                self.carte.enCinematique = False
+        else:
+            self.carte.enCinematique = False
+
     def gestion_touches(self):
 
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.numDialogue < self.numMaxDialogue - 1 and self.continuer:
