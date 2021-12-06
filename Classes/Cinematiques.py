@@ -14,6 +14,8 @@ class Cinematiques:
         self.numMaxDialogue = 0
         self.numCine = 1
         self.tournerProf = 0
+        self.dansChoixPokemon = False
+        self.validationChoixPokemon = False
 
         self.dialogueMaman = ["Bon...",
                               "Tous les garçons quittent un jour la maison.. C'est la vie !",
@@ -68,13 +70,52 @@ class Cinematiques:
         self.carte.jeu.screen.blit(self.text.render(self.dialogueProfesseur3[self.numDialogue], 1, (0, 0, 0)), (45, 500))
 
     def cine4(self):
-        if pygame.key.get_pressed()[pygame.K_SPACE]:
+        self.numCine = 4
+
+        if self.dansChoixPokemon:
+            if self.carte.joueur.position > [144, 94] and self.carte.joueur.position < [156, 94]:
+
+                pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
+                pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
+                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon 1 ?", True, (0, 0, 0)), (60, 425))
+                if self.validationChoixPokemon:
+                    self.carte.jeu.screen.blit(self.text.render("> Oui", True, (0, 0, 0)), (60, 450))
+                    self.carte.jeu.screen.blit(self.text.render("Non", True, (0, 0, 0)), (60, 475))
+                else:
+                    self.carte.jeu.screen.blit(self.text.render("Oui", True, (0, 0, 0)), (60, 450))
+                    self.carte.jeu.screen.blit(self.text.render("> Non", True, (0, 0, 0)), (60, 475))
+
+            elif self.carte.joueur.position > [156, 94] and self.carte.joueur.position < [172, 94]:
+
+                pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
+                pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
+                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon 2 ?", True, (0, 0, 0)), (60, 425))
+                if self.validationChoixPokemon:
+                    self.carte.jeu.screen.blit(self.text.render("> Oui", True, (0, 0, 0)), (60, 450))
+                    self.carte.jeu.screen.blit(self.text.render("Non", True, (0, 0, 0)), (60, 475))
+                else:
+                    self.carte.jeu.screen.blit(self.text.render("Oui", True, (0, 0, 0)), (60, 450))
+                    self.carte.jeu.screen.blit(self.text.render("> Non", True, (0, 0, 0)), (60, 475))
+
+            elif self.carte.joueur.position > [172, 94] and self.carte.joueur.position < [184, 94]:
+
+                pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
+                pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
+                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon 3 ?", True, (0, 0, 0)), (60, 425))
+                if self.validationChoixPokemon:
+                    self.carte.jeu.screen.blit(self.text.render("> Oui", True, (0, 0, 0)), (60, 450))
+                    self.carte.jeu.screen.blit(self.text.render("Non", True, (0, 0, 0)), (60, 475))
+                else:
+                    self.carte.jeu.screen.blit(self.text.render("Oui", True, (0, 0, 0)), (60, 450))
+                    self.carte.jeu.screen.blit(self.text.render("> Non", True, (0, 0, 0)), (60, 475))
+
+        elif pygame.key.get_pressed()[pygame.K_SPACE]:
             if self.carte.joueur.position > [144, 94] and self.carte.joueur.position < [145, 94]:
-                print("poke1")
+                self.dansChoixPokemon = True
             elif self.carte.joueur.position > [156, 94] and self.carte.joueur.position < [157, 94]:
-                print("poke2")
+                self.dansChoixPokemon = True
             elif self.carte.joueur.position > [172, 94] and self.carte.joueur.position < [173, 94]:
-                print("poke3")
+                self.dansChoixPokemon = True
             else:
                 self.carte.enCinematique = False
         else:
@@ -98,5 +139,15 @@ class Cinematiques:
             self.numMaxDialogue = 0
             self.numDialogue = 0
             self.continuer = True
+        elif pygame.key.get_pressed()[pygame.K_UP] and self.numCine == 4:
+            self.validationChoixPokemon = True
+        elif pygame.key.get_pressed()[pygame.K_DOWN] and self.numCine == 4:
+            self.validationChoixPokemon = False
+        elif pygame.key.get_pressed()[pygame.K_RETURN] and self.numCine == 4:
+            if self.validationChoixPokemon:
+                print("Validation")
+                self.dansChoixPokemon = False
+            else:
+                self.dansChoixPokemon = False
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.continuer:
             self.continuer = True
