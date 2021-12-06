@@ -77,7 +77,8 @@ class Cinematiques:
 
                 pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
                 pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
-                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon 1 ?", True, (0, 0, 0)), (60, 425))
+                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon Bulbizarre ?", True, (0, 0, 0)), (60, 425))
+                self.carte.jeu.screen.blit(pygame.image.load("Map/Images/bulbizarre.png"), (500, 350))
                 if self.validationChoixPokemon:
                     self.carte.jeu.screen.blit(self.text.render("> Oui", True, (0, 0, 0)), (60, 450))
                     self.carte.jeu.screen.blit(self.text.render("Non", True, (0, 0, 0)), (60, 475))
@@ -89,7 +90,8 @@ class Cinematiques:
 
                 pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
                 pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
-                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon 2 ?", True, (0, 0, 0)), (60, 425))
+                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon Salamèche ?", True, (0, 0, 0)), (60, 425))
+                self.carte.jeu.screen.blit(pygame.image.load("Map/Images/salamèche.png"), (500, 350))
                 if self.validationChoixPokemon:
                     self.carte.jeu.screen.blit(self.text.render("> Oui", True, (0, 0, 0)), (60, 450))
                     self.carte.jeu.screen.blit(self.text.render("Non", True, (0, 0, 0)), (60, 475))
@@ -101,7 +103,8 @@ class Cinematiques:
 
                 pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
                 pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
-                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon 3 ?", True, (0, 0, 0)), (60, 425))
+                self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon Carapuce ?", True, (0, 0, 0)), (60, 425))
+                self.carte.jeu.screen.blit(pygame.image.load("Map/Images/carapuce.png"), (500, 350))
                 if self.validationChoixPokemon:
                     self.carte.jeu.screen.blit(self.text.render("> Oui", True, (0, 0, 0)), (60, 450))
                     self.carte.jeu.screen.blit(self.text.render("Non", True, (0, 0, 0)), (60, 475))
