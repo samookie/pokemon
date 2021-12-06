@@ -53,6 +53,11 @@ class FightPokemon:
             self.passer = True
 
         self.algorithm_choix()
+        if self.choix =="Fuite" and pygame.key.get_pressed()[pygame.K_SPACE]:
+            self.leJeu.ecran_affiche = "jeu"
+            self.leJeu.mettre_a_jour = True
+            self.txtNum = 0
+
 
 
 
