@@ -12,7 +12,7 @@ class FightPokemon:
         self.bdd = PokemonBDD()
         self.lePokemon = nomPokemon
         self.liste_pokemon = liste_pokemon
-        self.txtNum = 0
+        self.txtNum = 0 # le numéro d'orde des dialogues
         self.passer = True
         self.suivant = True
         self.choix = "Attaque" #gestion des choix
@@ -53,6 +53,7 @@ class FightPokemon:
             self.passer = True
 
         self.algorithm_choix()
+
         if self.choix =="Fuite" and pygame.key.get_pressed()[pygame.K_SPACE]:
             self.leJeu.ecran_affiche = "jeu"
             self.leJeu.mettre_a_jour = True
