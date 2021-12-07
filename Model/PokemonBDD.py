@@ -289,7 +289,18 @@ class PokemonBDD():
         self.c.execute("UPDATE Hero SET cinematique = ?", [number])
         self.conn.commit()
 
+    def liste_attaque_pokemon(self, pokemon):
+        lesAttaques = []
+        req = self.c.execute("""SELECT A.libelle, dmg, TA.libelle
+                            FROM Pokemon P, Attaque A, Type_Att TA, Liste_Attaque LA
+                            WHERE LA.idAtt = A.idAtt
+                            AND LA.idPoke = P.idPoke
+                            AND A.idTPA = TA.idTPA
+                            AND nomPoke = ? """, [pokemon]).fetchall()
+        for attaques in req :
+            lesAttaques.append(attaques)
 
+        return lesAttaques
 
 
 

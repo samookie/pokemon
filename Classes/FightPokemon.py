@@ -226,27 +226,28 @@ class FightPokemon:
 
 
     def choix_attaque(self):
+        attaques = self.bdd.liste_attaque_pokemon("Pikachu")
         menuChoixAtt = pygame.image.load("Map/Images/boxCombat.png")
         self.leJeu.screen.blit(menuChoixAtt, (0, 0))
         if self.choixAtt == "att1":
-            self.leJeu.screen.blit(self.text.render(">ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE2", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE3", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE4", True, (0, 0, 0)), (262, 541))
+            self.leJeu.screen.blit(self.text.render(f">{attaques[0][0]}", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[1][0]}", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[2][0]}", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[3][0]}", True, (0, 0, 0)), (262, 541))
         elif self.choixAtt == "att2":
-            self.leJeu.screen.blit(self.text.render("ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
-            self.leJeu.screen.blit(self.text.render(">ATTAQUE2", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE3", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE4", True, (0, 0, 0)), (262, 541))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[0][0]}", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render(f">{attaques[1][0]}", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[2][0]}", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[3][0]}", True, (0, 0, 0)), (262, 541))
         elif self.choixAtt == "att3":
-            self.leJeu.screen.blit(self.text.render("ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE2", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render(">ATTAQUE3", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE4", True, (0, 0, 0)), (262, 541))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[0][0]}", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[1][0]}", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render(f">{attaques[2][0]}", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[3][0]}", True, (0, 0, 0)), (262, 541))
         elif self.choixAtt == "att4":
-            self.leJeu.screen.blit(self.text.render("ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE2", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render("ATTAQUE3", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render(">ATTAQUE4", True, (0, 0, 0)), (262, 541))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[0][0]}", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[1][0]}", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render(f"{attaques[2][0]}", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render(f">{attaques[3][0]}", True, (0, 0, 0)), (262, 541))
 
 
