@@ -113,3 +113,6 @@ class MenuInGame():
 
         elif not pygame.key.get_pressed()[pygame.K_ESCAPE] and not pygame.key.get_pressed()[pygame.K_DOWN] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_RETURN] and not self.continuer:
             self.continuer = True
+
+        self.leJeu.sac.carte ="jeu"
+        self.leJeu.pokemon_ecran.carte = "jeu"

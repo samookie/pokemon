@@ -11,6 +11,7 @@ class PokemonView:
 
         self.lesPokemons = []
         self.premierPoke = True
+        self.carte = "jeu"
 
     def affichage(self):
         if self.leJeu.mettre_a_jour:
@@ -39,5 +40,12 @@ class PokemonView:
     def gestion_touches(self):
 
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
-            self.leJeu.ecran_affiche = "jeu"
-            self.leJeu.mettre_a_jour = True
+            if self.carte == "jeu":
+                self.leJeu.ecran_affiche = "jeu"
+                self.leJeu.mettre_a_jour = True
+            elif self.carte == "fight":
+                self.leJeu.ecran_affiche = "fightP"
+                self.leJeu.mettre_a_jour = True
+
+    def update_map(self, map):
+        self.carte = map

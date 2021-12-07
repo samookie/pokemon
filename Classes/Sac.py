@@ -14,6 +14,7 @@ class Sac:
         self.selecObj = 0
         self.yTxt = 96
         self.continuer = True
+        self.carte ="jeu"
 
     def affichage(self):
         if self.leJeu.mettre_a_jour:
@@ -44,8 +45,12 @@ class Sac:
 
     def gestion_touches(self):
         if pygame.key.get_pressed()[pygame.K_ESCAPE] and self.continuer:
-            self.leJeu.ecran_affiche = "jeu"
-            self.leJeu.mettre_a_jour = True
+            if self.carte == "jeu":
+                self.leJeu.ecran_affiche = "jeu"
+                self.leJeu.mettre_a_jour = True
+            elif self.carte == "fight":
+                self.leJeu.ecran_affiche = "fightP"
+                self.leJeu.mettre_a_jour = True
         elif pygame.key.get_pressed()[pygame.K_DOWN] and self.continuer:
             if self.selecObj < len(self.lesObjets) - 1:
                 self.selecObj += 1
@@ -56,4 +61,8 @@ class Sac:
             self.continuer = False
         elif not pygame.key.get_pressed()[pygame.K_ESCAPE] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_DOWN] and not self.continuer:
             self.continuer = True
+
+    def update_map(self, map):
+        self.carte = map
+
 

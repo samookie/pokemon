@@ -32,8 +32,8 @@ class Jeu:
         # VARS ECRANS
         ecran_accueil = Home_Screen(self)
         intro = Intro(self)
-        sac = Sac(self)
-        pokemon_ecran = PokemonView(self)
+        self.sac = Sac(self)
+        self.pokemon_ecran = PokemonView(self)
         self.fightP = FightPokemon(self)
 
 
@@ -49,11 +49,11 @@ class Jeu:
             elif self.ecran_affiche == "jeu":
                 self.carte.affichage_carte()
             elif self.ecran_affiche == "sac":
-                sac.affichage()
-                sac.gestion_touches()
+                self.sac.affichage()
+                self.sac.gestion_touches()
             elif self.ecran_affiche == "pokemons":
-                pokemon_ecran.affichage()
-                pokemon_ecran.gestion_touches()
+                self.pokemon_ecran.affichage()
+                self.pokemon_ecran.gestion_touches()
             elif self.ecran_affiche == "fightP":
                 self.fightP.affichage()
                 self.fightP.gestion_touches()

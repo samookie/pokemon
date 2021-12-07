@@ -17,6 +17,7 @@ class FightPokemon:
         self.suivant = True
         self.choix = "Attaque" #gestion des choix
         self.a = [[1, 0], [0, 0]] #tableau pour la gestion des choix du combat
+        self.choixAtt = "att1"
 
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
@@ -41,7 +42,13 @@ class FightPokemon:
             self.leJeu.screen.blit(self.text.render('PIKACHOUM! GO!', True, (255, 255, 255)), (27, 495))
         elif self.txtNum == 2:
             self.afficher_choix_menu()
+        elif self.choix == "Attaque" and self.txtNum == 3:
+            self.choix_attaque()
 
+        if self.leJeu.mettre_a_jour :
+            self.choix = "Attaque"
+            self.choixAtt = "att1"
+            self.leJeu.mettre_a_jour = False
         pygame.display.flip()  # MAJ de l'affichage
 
     '''Méthode permettant de vérifier la frappe des touches sur cette classe'''
@@ -54,11 +61,28 @@ class FightPokemon:
 
         self.algorithm_choix()
 
-        if self.choix =="Fuite" and pygame.key.get_pressed()[pygame.K_SPACE]:
+
+
+        if self.choix == "Attaque" and pygame.key.get_pressed()[pygame.K_SPACE]:
+            self.choix_attaque()
+            self.algorithm_attaque()
+
+        if self.choix == "Sac" and pygame.key.get_pressed()[pygame.K_SPACE]:
+            self.leJeu.ecran_affiche = "sac"
+            self.leJeu.mettre_a_jour = True
+            self.txtNum = 2
+            self.leJeu.sac.carte = "fight"
+
+        elif self.choix == "Pokemon" and pygame.key.get_pressed()[pygame.K_SPACE]:
+            self.leJeu.ecran_affiche = "pokemons"
+            self.leJeu.mettre_a_jour = True
+            self.txtNum = 2
+            self.leJeu.pokemon_ecran.carte = "fight"
+
+        if self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE]:
             self.leJeu.ecran_affiche = "jeu"
             self.leJeu.mettre_a_jour = True
             self.txtNum = 0
-
 
 
 
@@ -123,34 +147,106 @@ class FightPokemon:
             self.a[0][0] = 0
             self.a[0][1] = 1
             self.choix ="Sac"
+
         elif self.a[0][0] == 1 and pygame.key.get_pressed()[pygame.K_DOWN]:  # attaque pour passer à pokemon
             self.a[0][0] = 0
             self.a[1][0] = 1
             self.choix = "Pokemon"
+
         elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_DOWN]:  # sac pour passer à fuite
             self.a[0][1] = 0
             self.a[1][1] = 1
             self.choix = "Fuite"
+
         elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_LEFT]:  # sac pour passer à attaque
             self.a[0][1] = 0
             self.a[0][0] = 1
             self.choix = "Attaque"
+
         elif self.a[1][1] == 1 and pygame.key.get_pressed()[pygame.K_UP]:  # fuite pour passer à sac
             self.a[1][1] = 0
             self.a[0][1] = 1
             self.choix = "Sac"
+
         elif self.a[1][1] == 1 and pygame.key.get_pressed()[pygame.K_LEFT]:  # fuite pour passer à pokemon
             self.a[1][1] = 0
             self.a[1][0] = 1
             self.choix = "Pokemon"
+
         elif self.a[1][0] == 1 and pygame.key.get_pressed()[pygame.K_UP]:  # pokemon pour passer à attaque
             self.a[1][0] = 0
             self.a[0][0] = 1
             self.choix = "Attaque"
+
         elif self.a[1][0] == 1 and pygame.key.get_pressed()[pygame.K_RIGHT]:  # pokemon pour passer à fuite
             self.a[1][0] = 0
             self.a[1][1] = 1
             self.choix = "Fuite"
 
+    def algorithm_attaque(self):
+        if self.a[0][0] == 1 and pygame.key.get_pressed()[pygame.K_RIGHT]:  # attaque 1 pour passer à l'attaque 2
+            self.a[0][0] = 0
+            self.a[0][1] = 1
+            self.choixAtt ="att2"
+
+        elif self.a[0][0] == 1 and pygame.key.get_pressed()[pygame.K_DOWN]:  # attaque1 pour passer à l'attaque3
+            self.a[0][0] = 0
+            self.a[1][0] = 1
+            self.choixAtt = "att3"
+
+        elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_DOWN]:  # l'attaque2 pour passer à l'attaque4
+            self.a[0][1] = 0
+            self.a[1][1] = 1
+            self.choixAtt = "att4"
+
+        elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_LEFT]:  # l'attaque2 pour passer à l'attaque1
+            self.a[0][1] = 0
+            self.a[0][0] = 1
+            self.choixAtt = "att1"
+
+        elif self.a[1][1] == 1 and pygame.key.get_pressed()[pygame.K_UP]:  # l'attaque4 pour passer à l'attaque2
+            self.a[1][1] = 0
+            self.a[0][1] = 1
+            self.choixAtt = "att2"
+
+        elif self.a[1][1] == 1 and pygame.key.get_pressed()[pygame.K_LEFT]:  # l'attaque4 pour passer à l'attaque3
+            self.a[1][1] = 0
+            self.a[1][0] = 1
+            self.choixAtt = "att3"
+
+        elif self.a[1][0] == 1 and pygame.key.get_pressed()[pygame.K_UP]:  # attaque3 pour passer à l'attaque1
+            self.a[1][0] = 0
+            self.a[0][0] = 1
+            self.choixAtt = "att1"
+
+        elif self.a[1][0] == 1 and pygame.key.get_pressed()[pygame.K_RIGHT]:  # attaque3 pour passer à l'attaque4
+            self.a[1][0] = 0
+            self.a[1][1] = 1
+            self.choixAtt = "att4"
+
+
+    def choix_attaque(self):
+        menuChoixAtt = pygame.image.load("Map/Images/boxCombat.png")
+        self.leJeu.screen.blit(menuChoixAtt, (0, 0))
+        if self.choixAtt == "att1":
+            self.leJeu.screen.blit(self.text.render(">ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE2", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE3", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE4", True, (0, 0, 0)), (262, 541))
+        elif self.choixAtt == "att2":
+            self.leJeu.screen.blit(self.text.render("ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render(">ATTAQUE2", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE3", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE4", True, (0, 0, 0)), (262, 541))
+        elif self.choixAtt == "att3":
+            self.leJeu.screen.blit(self.text.render("ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE2", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render(">ATTAQUE3", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE4", True, (0, 0, 0)), (262, 541))
+        elif self.choixAtt == "att4":
+            self.leJeu.screen.blit(self.text.render("ATTAQUE1 ", True, (0, 0, 0)), (32, 490))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE2", True, (0, 0, 0)), (262, 490))
+            self.leJeu.screen.blit(self.text.render("ATTAQUE3", True, (0, 0, 0)), (32, 541))
+            self.leJeu.screen.blit(self.text.render(">ATTAQUE4", True, (0, 0, 0)), (262, 541))
 
 

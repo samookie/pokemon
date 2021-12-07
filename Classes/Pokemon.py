@@ -66,11 +66,11 @@ class Pokemon():
             self.defense += level*3
             self.speDef += level*3
 
-            xpNiv = self.level
+            xpNiv = level
             if xpNiv == 1:
                 xpNiv = 0
             else:
-                xpNiv = self.level - 1
+                xpNiv = level - 1
 
             self.xp_max = self.lvlExp[xpNiv][1]
 

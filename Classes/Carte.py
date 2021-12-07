@@ -120,7 +120,7 @@ class Carte:
         self.idCine = self.bdd.getCurrentCinematique()[0]
         proba = random.randint(1,100)
         leNb = random.randint(1,100)
-        position = self.joueur.position
+        position = [0,0]
 
 
         self.group.update()  # Faire les majs du groupe
@@ -140,7 +140,7 @@ class Carte:
                 self.cinematiqueObj = obj
 
         for obj in self.fight:
-            if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
+            if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)) :
                 if proba == leNb:
                     if obj.name == "zone1":
                         self.choixPokemon("zone1", leNb) #fonction de choix du pokemon et tp dans le fight pokemon
