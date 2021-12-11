@@ -103,6 +103,8 @@ class PokemonBDD():
         CREATE TABLE Liste_Pokemon(
          idHero INTEGER,
           idPoke INTEGER,
+          xp INTEGER,
+          xpMax INTEGER,
           PRIMARY KEY (idHero, idPoke),
           FOREIGN KEY (idHero) REFERENCES Hero(idHero),
           FOREIGN KEY (idPoke) REFERENCES Pokemon(idPoke)
@@ -301,6 +303,11 @@ class PokemonBDD():
             lesAttaques.append(attaques)
 
         return lesAttaques
+
+    def ajouterPokemonJoueur(self, pokemon):
+        idPoke = self.c.execute("SELECT idPoke FROM Pokemon WHERE nomPoke = ?", [pokemon.nomPokemon]).fetchone()
+        self.c.execute("INSERT INTO Liste_Pokemon VALUES (1, ?, ?, ?)", [idPoke[0], pokemon.xp, pokemon.xp_max])
+        self.conn.commit()
 
 
 

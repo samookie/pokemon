@@ -1,5 +1,6 @@
 import pygame.image
 
+from Classes.Pokemon import Pokemon
 from Model.PokemonBDD import PokemonBDD
 
 
@@ -16,6 +17,7 @@ class Cinematiques:
         self.tournerProf = 0
         self.dansChoixPokemon = False
         self.validationChoixPokemon = False
+        self.pokemonChoisis = ""
 
         self.dialogueMaman = ["Bon...",
                               "Tous les garçons quittent un jour la maison.. C'est la vie !",
@@ -73,8 +75,9 @@ class Cinematiques:
         self.numCine = 4
 
         if self.dansChoixPokemon:
-            if self.carte.joueur.position > [144, 94] and self.carte.joueur.position < [156, 94]:
 
+            if self.carte.joueur.position > [144, 94] and self.carte.joueur.position < [156, 94]:
+                self.pokemonChoisis = "bulbizarre"
                 pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
                 pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
                 self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon Bulbizarre ?", True, (0, 0, 0)), (60, 425))
@@ -87,7 +90,7 @@ class Cinematiques:
                     self.carte.jeu.screen.blit(self.text.render("> Non", True, (0, 0, 0)), (60, 475))
 
             elif self.carte.joueur.position > [156, 94] and self.carte.joueur.position < [172, 94]:
-
+                self.pokemonChoisis = "salameche"
                 pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
                 pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
                 self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon Salamèche ?", True, (0, 0, 0)), (60, 425))
@@ -100,7 +103,7 @@ class Cinematiques:
                     self.carte.jeu.screen.blit(self.text.render("> Non", True, (0, 0, 0)), (60, 475))
 
             elif self.carte.joueur.position > [172, 94] and self.carte.joueur.position < [184, 94]:
-
+                self.pokemonChoisis = "carapuce"
                 pygame.draw.rect(self.carte.jeu.screen, (255, 255, 255, 100), pygame.Rect(50, 400, 600, 150))
                 pygame.draw.rect(self.carte.jeu.screen, (0, 0, 0), pygame.Rect(50, 400, 600, 150), 2)
                 self.carte.jeu.screen.blit(self.text.render("Voulez vous choisir pokémon Carapuce ?", True, (0, 0, 0)), (60, 425))
@@ -111,6 +114,44 @@ class Cinematiques:
                 else:
                     self.carte.jeu.screen.blit(self.text.render("Oui", True, (0, 0, 0)), (60, 450))
                     self.carte.jeu.screen.blit(self.text.render("> Non", True, (0, 0, 0)), (60, 475))
+
+            if pygame.key.get_pressed()[pygame.K_RETURN]:
+                if self.pokemonChoisis == "bulbizarre":
+
+                    infoPokemon = self.laBdd.searchPokemon("Bulbizarre")  # chercher dans la base de donnée le pokémon
+                    lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Bulbizarre", infoPokemon[1], infoPokemon[2],
+                                        infoPokemon[3], infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7],
+                                        infoPokemon[8], infoPokemon[9], infoPokemon[10],
+                                        infoPokemon[11])  # initialisation du pokémon
+                    lePokemon.setLevelPokemon(5)
+                    self.carte.joueur.addPokemon(lePokemon)
+                    self.laBdd.ajouterPokemonJoueur(lePokemon)
+                    self.laBdd.setCurrentCinematique(5)
+
+                elif self.pokemonChoisis == "salameche":
+
+                    infoPokemon = self.laBdd.searchPokemon("Salamèche")  # chercher dans la base de donnée le pokémon
+                    lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Salamèche", infoPokemon[1], infoPokemon[2],
+                                        infoPokemon[3], infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7],
+                                        infoPokemon[8], infoPokemon[9], infoPokemon[10],
+                                        infoPokemon[11])  # initialisation du pokémon
+                    lePokemon.setLevelPokemon(5)
+                    self.carte.joueur.addPokemon(lePokemon)
+                    self.laBdd.setCurrentCinematique(5)
+
+                elif self.pokemonChoisis == "carapuce":
+
+                    infoPokemon = self.laBdd.searchPokemon("Salamèche")  # chercher dans la base de donnée le pokémon
+                    lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Salamèche", infoPokemon[1], infoPokemon[2],
+                                        infoPokemon[3], infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7],
+                                        infoPokemon[8], infoPokemon[9], infoPokemon[10],
+                                        infoPokemon[11])  # initialisation du pokémon
+                    lePokemon.setLevelPokemon(5)
+                    self.carte.joueur.addPokemon(lePokemon)
+                    self.laBdd.setCurrentCinematique(5)
+
+                #self.carte.jeu.ecran_affiche = "fightP"
+                #self.carte.jeu.mettre_a_jour = True
 
         elif pygame.key.get_pressed()[pygame.K_SPACE]:
             if self.carte.joueur.position > [144, 94] and self.carte.joueur.position < [145, 94]:
