@@ -137,6 +137,7 @@ class Cinematiques:
                                         infoPokemon[11])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon)
+                    self.laBdd.ajouterPokemonJoueur(lePokemon)
                     self.laBdd.setCurrentCinematique(5)
 
                 elif self.pokemonChoisis == "carapuce":
@@ -148,6 +149,7 @@ class Cinematiques:
                                         infoPokemon[11])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon)
+                    self.laBdd.ajouterPokemonJoueur(lePokemon)
                     self.laBdd.setCurrentCinematique(5)
 
                 #self.carte.jeu.ecran_affiche = "fightP"
