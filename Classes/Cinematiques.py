@@ -115,7 +115,7 @@ class Cinematiques:
                     self.carte.jeu.screen.blit(self.text.render("Oui", True, (0, 0, 0)), (60, 450))
                     self.carte.jeu.screen.blit(self.text.render("> Non", True, (0, 0, 0)), (60, 475))
 
-            if pygame.key.get_pressed()[pygame.K_RETURN]:
+            if pygame.key.get_pressed()[pygame.K_RETURN] and self.validationChoixPokemon:
                 if self.pokemonChoisis == "bulbizarre":
 
                     infoPokemon = self.laBdd.searchPokemon("Bulbizarre")  # chercher dans la base de donnée le pokémon
