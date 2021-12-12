@@ -140,9 +140,9 @@ class Carte:
                 self.cinematiqueObj = obj
 
         for obj in self.fight:
-            if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)) :
-                if proba == leNb:
-                    if obj.name == "zone1":
+            if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)): # si le joueur tombe dans une zone de combat
+                if proba == leNb: # si le nombre de proba aléatoire et le nombre sont égales
+                    if obj.name == "zone1": # cela correspond à la zone 1
                         self.choixPokemon("zone1", leNb) #fonction de choix du pokemon et tp dans le fight pokemon
 
 
@@ -159,6 +159,12 @@ class Carte:
             self.group.add(temp)
 
     def choixPokemon(self, zone , leNb):
+        '''
+        Fonction permettant d'avoir l'apparition des pokemons dans une zones et les pourcentages d'apparition, avec le noombre dans une zone
+        :param zone: zone d'apparition des pokemons (zone1 , 2 , 3, ...)
+        :param leNb: le nombre aléatoire tombé (pour faire le choix du pokémon
+        '''
+        
         if zone == "zone1":
             rattata = {"nom": "Rattata",
                        "level": [2, 3, 4],
@@ -170,29 +176,21 @@ class Carte:
                        "pourcentage": 50
                        }
 
-            if leNb < 50:
-                niveau = random.randint(2, 5)
-                print(niveau)
-                infoPokemon = self.bdd.searchPokemon(rattata.get("nom"))
-                print(infoPokemon)
-                lePokemon = Pokemon(self.jeu, infoPokemon[0],"RATTATA",infoPokemon[1],infoPokemon[2],infoPokemon[3],infoPokemon[4],infoPokemon[5],infoPokemon[6],infoPokemon[7],infoPokemon[8],infoPokemon[9],infoPokemon[10],infoPokemon[11])
-                print(lePokemon)
-                lePokemon.setLevelPokemon(niveau) # Mettre le pokemon à niveau adaptée
-                print(lePokemon)
+            if leNb < 50: # si nombre en dessous de 50 alors apparition de rattata
+                niveau = random.randint(2, 5) # niveau du pokemon aléatoirement
+                infoPokemon = self.bdd.searchPokemon(rattata.get("nom")) # chercher dans la base de donnée le pokémon
+                lePokemon = Pokemon(self.jeu, infoPokemon[0],"RATTATA",infoPokemon[1],infoPokemon[2],infoPokemon[3],infoPokemon[4],infoPokemon[5],infoPokemon[6],infoPokemon[7],infoPokemon[8],infoPokemon[9],infoPokemon[10],infoPokemon[11]) # initialisation du pokémon
+                lePokemon.setLevelPokemon(niveau) # Mettre le pokemon au niveau adaptée
                 self.jeu.fightP.changerPokemon(lePokemon.getPokemon(),self.joueur.getLesPokemons()) # passer les informations à FightPokemon
                 self.jeu.ecran_affiche="fightP" # Change l'écran d'affichage au fightPokemon
                 self.jeu.mettre_a_jour = True
             else:
                 niveau = random.randint(3, 5)
-                print(niveau)
                 infoPokemon = self.bdd.searchPokemon(roucool.get("nom"))
-                print(infoPokemon)
                 lePokemon = Pokemon(self.jeu, infoPokemon[0],"ROUCOOL", infoPokemon[1], infoPokemon[2], infoPokemon[3],
                                     infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7], infoPokemon[8],
                                     infoPokemon[9], infoPokemon[10], infoPokemon[11])
-                print(lePokemon)
                 lePokemon.setLevelPokemon(niveau)
-                print(lePokemon)
                 self.jeu.fightP.changerPokemon(lePokemon.getPokemon(), self.joueur.getLesPokemons())  # passer les informations à FightPokemon
                 self.jeu.ecran_affiche = "fightP"
                 self.jeu.mettre_a_jour = True

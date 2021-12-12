@@ -9,6 +9,7 @@ class Pokemon():
         self.nomEvo = nomEvo
         self.niveau = niveau
         self.hp = hp
+        self.hpActu = self.hp
         self.vitesse = vitesse
         self.attaque = attaque
         self.speAtt = speAtt
@@ -53,8 +54,10 @@ class Pokemon():
                                self.speDef,
                                self.image,
                                self.d_image,
-                               self.f_image]
-
+                               self.f_image,
+                               self.hpActu,
+                               self.xp,
+                               self.xp_max]
         return listeCaractPokemon
 
     def setLevelPokemon (self, level):
@@ -65,6 +68,7 @@ class Pokemon():
             self.speAtt += level*3
             self.defense += level*3
             self.speDef += level*3
+            self.hpActu += level*3
 
             xpNiv = level
             if xpNiv == 1:
@@ -73,8 +77,6 @@ class Pokemon():
                 xpNiv = level - 1
 
             self.xp_max = self.lvlExp[xpNiv][1]
-
-
 
     def xp_up(self, xp):
         self.xp += xp

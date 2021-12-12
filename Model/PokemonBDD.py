@@ -253,9 +253,9 @@ class PokemonBDD():
 
         self.attPoke(14, 19, 18, 17, 29) #Rattatac
 
-        self.attPoke(15, 29, 20, 2, 21) #Pikachu
+        self.attPoke(15, 2, 20, 29, 21) #Pikachu
 
-        self.attPoke(16, 29, 20, 19, 17) #Raichu
+        self.attPoke(16, 29, 20, 18, 17) #Raichu
 
         self.attPoke(17, 5, 23, 15, 14) #Sabelette
 
