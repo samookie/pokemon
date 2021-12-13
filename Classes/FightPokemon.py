@@ -18,8 +18,10 @@ class FightPokemon:
         self.choix = "Attaque" #gestion des choix
         self.a = [[1, 0], [0, 0]] #tableau pour la gestion des choix du combat
         self.choixAtt = "att1"
+        self.actuellement = "txtIntro"
         self.att_allier = self.bdd.liste_attaque_pokemon("Pikachu") # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon) # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
+        self.dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
 
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
@@ -37,20 +39,27 @@ class FightPokemon:
         self.afficher_bar_vie_haut(20)
         self.afficher_bar_vie_bas(120)
 
-        dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
-        self.leJeu.screen.blit(dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
+        if self.actuellement == "txtIntro":
+            self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
 
-        if self.txtNum == 0:
-            self.leJeu.screen.blit(self.text.render(f"Un {self.lePokemon[1]} sauvage apparaît!", True, (255,255,255)), (27, 495))
-        elif self.txtNum == 1:
-            self.leJeu.screen.blit(self.text.render('PIKACHOUM! GO!', True, (255, 255, 255)), (27, 495))
-        elif self.txtNum == 2:
+            if self.txtNum == 0:
+                self.leJeu.screen.blit(self.text.render(f"Un {self.lePokemon[1]} sauvage apparaît!", True, (255,255,255)), (27, 495))
+            elif self.txtNum == 1:
+                self.leJeu.screen.blit(self.text.render('PIKACHOUM! GO!', True, (255, 255, 255)), (27, 495))
+            elif self.txtNum == 2:
+                self.actuellement = "choixMenu"
+        elif self.actuellement == "choixMenu":
             self.afficher_choix_menu()
-        elif self.choix == "Attaque":
+        elif self.actuellement == "choixAttaque":
             self.choix_attaque()
+        elif self.actuellement == "attaqueEnCours":
+            self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
+            self.attaque()
+
 
 
         if self.leJeu.mettre_a_jour:
+            self.actuellement = "txtIntro"
             self.choix = "Attaque"
             self.choixAtt = "att1"
             self.leJeu.mettre_a_jour = False
@@ -58,55 +67,54 @@ class FightPokemon:
 
     '''Méthode permettant de vérifier la frappe des touches sur cette classe'''
     def gestion_touches(self):
-        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.suivant: #Si la touche est espace, que l'on peut encore naviguer dans le dialogue et que la variable passer est à True
-            self.txtNum = self.txtNum + 1
-            self.passer = False
-        elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
-            self.passer = True
-        if self.txtNum == 2:
+
+        if self.actuellement == "txtIntro":
+            if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.suivant: #Si la touche est espace, que l'on peut encore naviguer dans le dialogue et que la variable passer est à True
+                self.txtNum = self.txtNum + 1
+                self.passer = False
+            elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
+                self.passer = True
+        elif self.actuellement == "choixMenu":
             self.algorithm_choix()
-        else:
+            self.gestion_touches_choix()
+        elif self.actuellement == "choixAttaque":
             self.algorithm_attaque()
+            self.gestion_touches_choix_attaque()
 
+    def gestion_touches_choix(self):
+        if self.choix == "Attaque" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
+            self.actuellement = "choixAttaque"
+            self.passer = False
 
-
-        if self.choix == "Attaque" and pygame.key.get_pressed()[pygame.K_SPACE]:
-            self.choix_attaque()
-            self.algorithm_attaque()
-
-        if self.choix == "Sac" and pygame.key.get_pressed()[pygame.K_SPACE]:
+        elif self.choix == "Sac" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
             self.leJeu.ecran_affiche = "sac"
             self.leJeu.mettre_a_jour = True
             self.txtNum = 2
             self.leJeu.sac.carte = "fight"
+            self.passer = False
 
-        elif self.choix == "Pokemon" and pygame.key.get_pressed()[pygame.K_SPACE]:
+        elif self.choix == "Pokemon" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
             self.leJeu.ecran_affiche = "pokemons"
             self.leJeu.mettre_a_jour = True
             self.txtNum = 2
             self.leJeu.pokemon_ecran.carte = "fight"
+            self.passer = False
 
-        if self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE]:
+        elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
             self.leJeu.ecran_affiche = "jeu"
             self.leJeu.mettre_a_jour = True
             self.txtNum = 0
+            self.passer = False
 
+        elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
+            self.passer = True
 
-
-        if self.choix == "att1" and pygame.key.get_pressed()[pygame.K_SPACE]:
-            self.attaque()
-            self.leJeu.mettre_a_jour = True
-        if self.choix == "att2" and pygame.key.get_pressed()[pygame.K_SPACE]:
-            self.attaque()
-            self.leJeu.mettre_a_jour = True
-
-        elif self.choix == "att3" and pygame.key.get_pressed()[pygame.K_SPACE]:
-            self.attaque()
-            self.leJeu.mettre_a_jour = True
-
-        if self.choix == "att4" and pygame.key.get_pressed()[pygame.K_SPACE]:
-            self.attaque()
-            self.leJeu.mettre_a_jour = True
+    def gestion_touches_choix_attaque(self):
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
+            self.actuellement = "attaqueEnCours"
+            self.passer = False
+        elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
+            self.passer = True
 
 ################################## Affichage ###################################
 
