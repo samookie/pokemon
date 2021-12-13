@@ -22,6 +22,7 @@ class FightPokemon:
         self.att_allier = self.bdd.liste_attaque_pokemon("Pikachu") # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon) # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         self.dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
+        self.attaqueOne = True # passer à true quand on attaque
 
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
@@ -36,12 +37,9 @@ class FightPokemon:
 
         self.afficher_stat_haut()
         self.afficher_stat_bas()
-        self.afficher_bar_vie_haut(20)
-        self.afficher_bar_vie_bas(120)
 
         if self.actuellement == "txtIntro":
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
-
             if self.txtNum == 0:
                 self.leJeu.screen.blit(self.text.render(f"Un {self.lePokemon[1]} sauvage apparaît!", True, (255,255,255)), (27, 495))
             elif self.txtNum == 1:
@@ -55,6 +53,10 @@ class FightPokemon:
         elif self.actuellement == "attaqueEnCours":
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
             self.attaque()
+
+        if self.actuellement!= "attaqueEnCours":
+            self.afficher_bar_vie_haut(0)
+            self.afficher_bar_vie_bas(120, 0)
 
 
 
@@ -80,6 +82,15 @@ class FightPokemon:
         elif self.actuellement == "choixAttaque":
             self.algorithm_attaque()
             self.gestion_touches_choix_attaque()
+        elif self.actuellement == "attaqueEnCours":
+            if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
+                self.actuellement = "choixMenu"
+                self.passer = False
+            elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
+                self.passer = True
+
+
+
 
     def gestion_touches_choix(self):
         if self.choix == "Attaque" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
@@ -136,15 +147,21 @@ class FightPokemon:
         self.lePokemon = pokemon
         self.liste_pokemon = liste_pokemon
 
-    def afficher_bar_vie_bas(self, vie):
-        calcule = (vie * 100) / self.lePokemon[4]
+    def afficher_bar_vie_bas(self, vie, attaque):
+        calcule = ((vie - attaque) * 100) / self.lePokemon[4]
         total = calcule * 118 / 100
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((526,407),(total,8)))
 
-    def afficher_bar_vie_haut(self, vie):
-        calcule = (vie * 100) / self.lePokemon[4]
+    def afficher_bar_vie_haut(self,attaque):
+        hpActu = self.lePokemon[13] - attaque
+        if self.attaqueOne:
+            self.lePokemon[13] = hpActu
+            self.attaqueOne = False
+        calcule = (hpActu * 100) / self.lePokemon[4]
         total = calcule * 120 / 100
+
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((135 ,251),(total,8)))
+
 
     def afficher_stat_bas(self):
         statPB = pygame.image.load("Map/Images/statPokemonAlly.png")
@@ -307,13 +324,28 @@ class FightPokemon:
 
     def attaque(self):
         if self.choixAtt == "att1":
+
+            self.attaqueOne = True
             self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[0][0]}", True, (255, 255, 255)), (29, 495))
+            self.afficher_bar_vie_haut(self.att_allier[0][1])
+
         if self.choixAtt == "att2":
-            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[0][1]}", True, (255, 255, 255)), (29, 495))
+
+            self.attaqueOne = True
+            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[1][0]}", True, (255, 255, 255)), (29, 495))
+            self.afficher_bar_vie_haut(self.att_allier[1][1])
+
         if self.choixAtt == "att3":
-            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[0][2]}", True, (255, 255, 255)), (29, 495))
+
+            self.attaqueOne = True
+            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[2][0]}", True, (255, 255, 255)), (29, 495))
+            self.afficher_bar_vie_haut(self.att_allier[2][1])
+
         if self.choixAtt == "att4":
-            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[0][3]}", True, (255, 255, 255)), (29, 495))
+
+            self.attaqueOne = True
+            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[3][0]}", True, (255, 255, 255)), (29, 495))
+            self.afficher_bar_vie_haut(self.att_allier[3][1])
 
 
 
