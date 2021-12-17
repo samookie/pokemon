@@ -38,6 +38,9 @@ class FightPokemon:
         self.afficher_stat_haut()
         self.afficher_stat_bas()
 
+        self.afficher_bar_vie_haut()
+        self.afficher_bar_vie_bas()
+
         if self.actuellement == "txtIntro":
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
             if self.txtNum == 0:
@@ -53,10 +56,6 @@ class FightPokemon:
         elif self.actuellement == "attaqueEnCours":
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
             self.attaque()
-
-        if self.actuellement!= "attaqueEnCours":
-            self.afficher_bar_vie_haut(0)
-            self.afficher_bar_vie_bas(120, 0)
 
 
 
@@ -124,6 +123,7 @@ class FightPokemon:
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
             self.actuellement = "attaqueEnCours"
             self.passer = False
+            self.attaqueOne = True
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
 
@@ -147,21 +147,22 @@ class FightPokemon:
         self.lePokemon = pokemon
         self.liste_pokemon = liste_pokemon
 
-    def afficher_bar_vie_bas(self, vie, attaque):
-        calcule = ((vie - attaque) * 100) / self.lePokemon[4]
+    def afficher_bar_vie_bas(self):
+        calcule = (self.lePokemon[13] * 100) / self.lePokemon[4]
         total = calcule * 118 / 100
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((526,407),(total,8)))
 
-    def afficher_bar_vie_haut(self,attaque):
-        hpActu = self.lePokemon[13] - attaque
-        if self.attaqueOne:
-            self.lePokemon[13] = hpActu
-            self.attaqueOne = False
-        calcule = (hpActu * 100) / self.lePokemon[4]
+    def afficher_bar_vie_haut(self):
+        calcule = (self.lePokemon[13] * 100) / self.lePokemon[4]
         total = calcule * 120 / 100
-
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((135 ,251),(total,8)))
 
+
+    def calculeVie(self, attaque):
+        if self.attaqueOne:
+            self.lePokemon[13] = self.lePokemon[13] - attaque
+            print(self.lePokemon[13])
+            self.attaqueOne = False
 
     def afficher_stat_bas(self):
         statPB = pygame.image.load("Map/Images/statPokemonAlly.png")
@@ -323,29 +324,26 @@ class FightPokemon:
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][2]}", True, (0, 0, 0)), (573, 543))
 
     def attaque(self):
-        if self.choixAtt == "att1":
+        if self.choixAtt == "att1" :
 
-            self.attaqueOne = True
             self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[0][0]}", True, (255, 255, 255)), (29, 495))
-            self.afficher_bar_vie_haut(self.att_allier[0][1])
+            self.calculeVie(self.att_allier[0][1])
 
-        if self.choixAtt == "att2":
+        elif self.choixAtt == "att2":
 
-            self.attaqueOne = True
             self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[1][0]}", True, (255, 255, 255)), (29, 495))
-            self.afficher_bar_vie_haut(self.att_allier[1][1])
+            self.calculeVie(self.att_allier[1][1])
 
-        if self.choixAtt == "att3":
+        elif self.choixAtt == "att3":
 
-            self.attaqueOne = True
             self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[2][0]}", True, (255, 255, 255)), (29, 495))
-            self.afficher_bar_vie_haut(self.att_allier[2][1])
+            self.calculeVie(self.att_allier[2][1])
 
-        if self.choixAtt == "att4":
+        elif self.choixAtt == "att4":
 
-            self.attaqueOne = True
             self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[3][0]}", True, (255, 255, 255)), (29, 495))
-            self.afficher_bar_vie_haut(self.att_allier[3][1])
+            self.calculeVie(self.att_allier[3][1])
 
 
-
+    def attaquePremier(self):
+        pass
