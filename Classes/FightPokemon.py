@@ -347,4 +347,45 @@ class FightPokemon:
 
 
     def attaquePremier(self):
+
         pass
+
+    def attaqueEnnemi(lepokemon):
+        attaque = random.randint(0, 3)
+        if attaque == 0:
+            listeAllie[lePokemon].hpActu -= attEnnemi[0][1]
+            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
+                  listeAllie[lePokemon].hp)
+        elif attaque == 1:
+            print(roucool.nom, " vous frappe avec l'attaque 2 donc vous perdez ", attEnnemi[1][1])
+            listeAllie[lePokemon].hpActu -= attEnnemi[1][1]
+            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
+                  listeAllie[lePokemon].hp)
+        elif attaque == 2:
+            print(roucool.nom, " vous frappe avec l'attaque 3 donc vous perdez ", attEnnemi[2][1])
+            listeAllie[lePokemon].hpActu -= attEnnemi[2][1]
+            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
+                  listeAllie[lePokemon].hp)
+        elif attaque == 3:
+            print(roucool.nom, " vous frappe avec l'attaque 4 donc vous perdez ", attEnnemi[3][1])
+            listeAllie[lePokemon].hpActu -= attEnnemi[3][1]
+            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
+                  listeAllie[lePokemon].hp)
+
+    def attaque(att, defence, puissance, niv):
+        calcule = (((niv + att + puissance) * 0.2) / defence * 50)
+        calcule = round(calcule)
+        return calcule
+
+    def double(att, defence, puissance, niv):
+
+        calcule = (((niv + att + puissance) * 0.2) / defence * 50)
+        total = calcule * 2
+        total = round(total)
+        return total
+
+    def faiblesse(att, defence, puissance, niv):
+        calcule = (((niv + att + puissance) * 0.2) / defence * 50)
+        total = calcule / 2
+        total = round(total)
+        return total

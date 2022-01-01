@@ -142,8 +142,8 @@ class Cinematiques:
 
                 elif self.pokemonChoisis == "carapuce":
 
-                    infoPokemon = self.laBdd.searchPokemon("Salamèche")  # chercher dans la base de donnée le pokémon
-                    lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Salamèche", infoPokemon[1], infoPokemon[2],
+                    infoPokemon = self.laBdd.searchPokemon("Carapuce")  # chercher dans la base de donnée le pokémon
+                    lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Carapuce", infoPokemon[1], infoPokemon[2],
                                         infoPokemon[3], infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7],
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
                                         infoPokemon[11])  # initialisation du pokémon
