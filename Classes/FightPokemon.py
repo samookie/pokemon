@@ -2,6 +2,7 @@ import pygame
 
 from Classes.Joueur import Joueur
 from Model.PokemonBDD import PokemonBDD
+from Classes.TypePokemon import TypePokemon
 
 
 class FightPokemon:
