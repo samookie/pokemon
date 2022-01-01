@@ -13,6 +13,7 @@ class FightPokemon:
         self.bdd = PokemonBDD()
         self.lePokemon = nomPokemon
         self.liste_pokemon = liste_pokemon
+        self.alliePokemon = 0
         self.txtNum = 0 # le numéro d'orde des dialogues
         self.passer = True
         self.suivant = True

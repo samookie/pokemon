@@ -23,6 +23,8 @@ class Carte:
         self.menuInGame = MenuInGame(self.jeu)
         self.cinematiques = Cinematiques(self)
         self.enCinematique = False
+        self.listePokemon = joueur.getLesPokemons()
+        print(self.listePokemon)
 
         self.nom_carte = "carte"
         self.numberSpawnPoint = ""
