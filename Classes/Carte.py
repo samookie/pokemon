@@ -24,8 +24,14 @@ class Carte:
         self.cinematiques = Cinematiques(self)
         self.enCinematique = False
         self.listePokemon = joueur.getLesPokemons()
-        print(self.listePokemon)
-
+        self.laListePokemon = []
+        print("Liste carte",self.listePokemon)
+        self.cptPoke = 0
+        for poke in self.listePokemon:
+            unPokemon = Pokemon(self.jeu, poke[0],poke[1],poke[2],1,poke[4],poke[5],poke[6],poke[7],poke[8],poke[9],poke[10],poke[11],poke[12])
+            self.laListePokemon.append(unPokemon)
+            self.laListePokemon[self.cptPoke].setLevelPokemon(poke[3])
+            self.cptPoke += 1
         self.nom_carte = "carte"
         self.numberSpawnPoint = ""
 
@@ -166,7 +172,7 @@ class Carte:
         :param zone: zone d'apparition des pokemons (zone1 , 2 , 3, ...)
         :param leNb: le nombre aléatoire tombé (pour faire le choix du pokémon
         '''
-        
+
         if zone == "zone1":
             rattata = {"nom": "Rattata",
                        "level": [2, 3, 4],
@@ -183,7 +189,7 @@ class Carte:
                 infoPokemon = self.bdd.searchPokemon(rattata.get("nom")) # chercher dans la base de donnée le pokémon
                 lePokemon = Pokemon(self.jeu, infoPokemon[0],"RATTATA",infoPokemon[1],infoPokemon[2],infoPokemon[3],infoPokemon[4],infoPokemon[5],infoPokemon[6],infoPokemon[7],infoPokemon[8],infoPokemon[9],infoPokemon[10],infoPokemon[11]) # initialisation du pokémon
                 lePokemon.setLevelPokemon(niveau) # Mettre le pokemon au niveau adaptée
-                self.jeu.fightP.changerPokemon(lePokemon.getPokemon(),self.joueur.getLesPokemons()) # passer les informations à FightPokemon
+                self.jeu.fightP.changerPokemon(lePokemon.getPokemon(),self.laListePokemon) # passer les informations à FightPokemon
                 self.jeu.ecran_affiche="fightP" # Change l'écran d'affichage au fightPokemon
                 self.jeu.mettre_a_jour = True
             else:
@@ -193,6 +199,6 @@ class Carte:
                                     infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7], infoPokemon[8],
                                     infoPokemon[9], infoPokemon[10], infoPokemon[11])
                 lePokemon.setLevelPokemon(niveau)
-                self.jeu.fightP.changerPokemon(lePokemon.getPokemon(), self.joueur.getLesPokemons())  # passer les informations à FightPokemon
+                self.jeu.fightP.changerPokemon(lePokemon.getPokemon(), self.laListePokemon)  # passer les informations à FightPokemon
                 self.jeu.ecran_affiche = "fightP"
                 self.jeu.mettre_a_jour = True

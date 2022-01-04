@@ -124,8 +124,7 @@ class Cinematiques:
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
                                         infoPokemon[11])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
-                    self.carte.joueur.addPokemon(lePokemon)
-                    self.laBdd.ajouterPokemonJoueur(lePokemon)
+                    self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
 
                 elif self.pokemonChoisis == "salameche":
@@ -136,8 +135,7 @@ class Cinematiques:
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
                                         infoPokemon[11])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
-                    self.carte.joueur.addPokemon(lePokemon)
-                    self.laBdd.ajouterPokemonJoueur(lePokemon)
+                    self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
 
                 elif self.pokemonChoisis == "carapuce":
@@ -148,8 +146,7 @@ class Cinematiques:
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
                                         infoPokemon[11])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
-                    self.carte.joueur.addPokemon(lePokemon)
-                    self.laBdd.ajouterPokemonJoueur(lePokemon)
+                    self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
 
                 #self.carte.jeu.ecran_affiche = "fightP"

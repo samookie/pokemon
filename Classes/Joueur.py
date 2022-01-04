@@ -2,6 +2,8 @@ import pygame
 
 from Classes.Animation import Animation
 
+from Model.PokemonBDD import PokemonBDD
+
 
 class Joueur(Animation):
 
@@ -14,6 +16,7 @@ class Joueur(Animation):
         self.pieds = pygame.Rect(0, 0, self.rect.width * 0.5, 6)
         self.position = [0, 0]  # Définir la position de l'image
         self.old_position = self.position.copy()
+        self.bdd = PokemonBDD()
 
         #Correction de l'image
         self.image.set_colorkey([36, 255, 0]) #Supprimer le fond noir de l'image
@@ -59,9 +62,11 @@ class Joueur(Animation):
 
     '''Méthode pour permettre d'avoir la liste de pokémon du joueur '''
     def getLesPokemons(self):
+        for poke in self.bdd.getPokemonHero():
+            self.liste_pokemon.append(poke)
         return self.liste_pokemon
 
     '''Méthode pour permettre d'ajouter un pokemon dans la liste'''
-    def addPokemon(self, pokemon):
-        self.liste_pokemon.append(pokemon)
+    def addPokemon(self, pokemon, niv):
+        self.bdd.ajouterPokemonJoueur(pokemon, niv)
 

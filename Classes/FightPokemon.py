@@ -21,7 +21,6 @@ class FightPokemon:
         self.a = [[1, 0], [0, 0]] #tableau pour la gestion des choix du combat
         self.choixAtt = "att1"
         self.actuellement = "txtIntro"
-        self.att_allier = self.bdd.liste_attaque_pokemon("Pikachu") # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon) # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         self.dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
         self.attaqueOne = True # passer à true quand on attaque
@@ -29,26 +28,27 @@ class FightPokemon:
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
     def affichage(self):
+        self.att_allier = self.bdd.liste_attaque_pokemon(self.liste_pokemon[self.alliePokemon].nomPokemon)  # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         pygame.draw.rect(self.leJeu.screen, (0, 0, 0),pygame.Rect(0, 0, 700, 600))  # Créer un fond noir sur tout l'écran
 
         self.fight_img = pygame.image.load("Map/Images/fight.png")
         self.leJeu.screen.blit(self.fight_img, (0, 0)) #Dessiner l'image de fond
 
         self.afficher_Pokemon_haut(self.lePokemon)
-        self.afficher_Pokemon_bas("pikachu")
+        self.afficher_Pokemon_bas(self.liste_pokemon[self.alliePokemon].nomPokemon)
 
         self.afficher_stat_haut()
         self.afficher_stat_bas()
 
         self.afficher_bar_vie_haut()
         self.afficher_bar_vie_bas()
-
+        self.bdd.getPokemonHero()
         if self.actuellement == "txtIntro":
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
             if self.txtNum == 0:
                 self.leJeu.screen.blit(self.text.render(f"Un {self.lePokemon[1]} sauvage apparaît!", True, (255,255,255)), (27, 495))
             elif self.txtNum == 1:
-                self.leJeu.screen.blit(self.text.render('PIKACHOUM! GO!', True, (255, 255, 255)), (27, 495))
+                self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon}! GO!", True, (255, 255, 255)), (27, 495))
             elif self.txtNum == 2:
                 self.actuellement = "choixMenu"
         elif self.actuellement == "choixMenu":
@@ -150,7 +150,7 @@ class FightPokemon:
         self.liste_pokemon = liste_pokemon
 
     def afficher_bar_vie_bas(self):
-        calcule = (self.lePokemon[13] * 100) / self.lePokemon[4]
+        calcule = (self.liste_pokemon[self.alliePokemon].hpActu * 100) / self.liste_pokemon[self.alliePokemon].hp
         total = calcule * 118 / 100
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((526,407),(total,8)))
 
@@ -169,8 +169,8 @@ class FightPokemon:
     def afficher_stat_bas(self):
         statPB = pygame.image.load("Map/Images/statPokemonAlly.png")
         self.leJeu.screen.blit(statPB, (0, 0))  # Dessiner l'image des stats du pokémon du bas
-        self.leJeu.screen.blit(self.text.render("Pikachoum", 1, (0, 0, 0)), (445, 374))
-        self.leJeu.screen.blit(self.text.render("5", 1, (0, 0, 0)), (642, 374))
+        self.leJeu.screen.blit(self.text.render(self.liste_pokemon[self.alliePokemon].nomPokemon, 1, (0, 0, 0)), (445, 374))
+        self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].niveau}", 1, (0, 0, 0)), (642, 374))
 
     def afficher_stat_haut(self):
         statPH = pygame.image.load("Map/Images/statPokemonEnnemy.png")
@@ -181,7 +181,7 @@ class FightPokemon:
     def afficher_choix_menu(self):
         self.menu_choix()
         self.leJeu.screen.blit(self.text.render("Que dois faire ", True,(255, 255, 255)), (29, 495))
-        self.leJeu.screen.blit(self.text.render("Pikachoum ?", True, (255, 255, 255)), (29, 520))
+        self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} ?", True, (255, 255, 255)), (29, 520))
 
     def menu_choix(self):
         menuChoix = pygame.image.load("Map/Images/choixFight.png")
@@ -257,12 +257,14 @@ class FightPokemon:
         elif self.a[0][0] == 1 and pygame.key.get_pressed()[pygame.K_DOWN]:  # attaque1 pour passer à l'attaque3
             self.a[0][0] = 0
             self.a[1][0] = 1
-            self.choixAtt = "att3"
+            if self.liste_pokemon[self.alliePokemon].niveau >= 7:
+                self.choixAtt = "att3"
 
         elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_DOWN]:  # l'attaque2 pour passer à l'attaque4
             self.a[0][1] = 0
             self.a[1][1] = 1
-            self.choixAtt = "att4"
+            if self.liste_pokemon[self.alliePokemon].niveau >= 14:
+                self.choixAtt = "att4"
 
         elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_LEFT]:  # l'attaque2 pour passer à l'attaque1
             self.a[0][1] = 0
@@ -277,7 +279,8 @@ class FightPokemon:
         elif self.a[1][1] == 1 and pygame.key.get_pressed()[pygame.K_LEFT]:  # l'attaque4 pour passer à l'attaque3
             self.a[1][1] = 0
             self.a[1][0] = 1
-            self.choixAtt = "att3"
+            if self.liste_pokemon[self.alliePokemon].niveau >= 7:
+                self.choixAtt = "att3"
 
         elif self.a[1][0] == 1 and pygame.key.get_pressed()[pygame.K_UP]:  # attaque3 pour passer à l'attaque1
             self.a[1][0] = 0
@@ -287,7 +290,8 @@ class FightPokemon:
         elif self.a[1][0] == 1 and pygame.key.get_pressed()[pygame.K_RIGHT]:  # attaque3 pour passer à l'attaque4
             self.a[1][0] = 0
             self.a[1][1] = 1
-            self.choixAtt = "att4"
+            if self.liste_pokemon[self.alliePokemon].niveau >= 14:
+                self.choixAtt = "att4"
 
         elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
             self.txtNum = 2
@@ -299,51 +303,80 @@ class FightPokemon:
         if self.choixAtt == "att1":
             self.leJeu.screen.blit(self.text.render(f">{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+            if self.liste_pokemon[self.alliePokemon].niveau >= 7:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+            else:
+                self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (32, 541))
+            if self.liste_pokemon[self.alliePokemon].niveau >= 14:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+            else:
+                self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (262, 541))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][1]}", True, (0, 0, 0)), (562, 496))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][2]}", True, (0, 0, 0)), (573, 543))
         elif self.choixAtt == "att2":
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f">{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+            if self.liste_pokemon[self.alliePokemon].niveau >= 7:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+            else:
+                self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (32, 541))
+            if self.liste_pokemon[self.alliePokemon].niveau >= 14:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+            else:
+                self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (262, 541))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][1]}", True, (0, 0, 0)), (562, 496))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][2]}", True, (0, 0, 0)), (573, 543))
         elif self.choixAtt == "att3":
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render(f">{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][1]}", True, (0, 0, 0)), (562, 496))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][2]}", True, (0, 0, 0)), (573, 543))
+            if self.liste_pokemon[self.alliePokemon].niveau >= 7:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][1]}", True, (0, 0, 0)), (562, 496))
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][2]}", True, (0, 0, 0)), (573, 543))
+            else:
+                self.leJeu.screen.blit(self.text.render(f"> ---", True, (0, 0, 0)), (32, 541))
+                self.leJeu.screen.blit(self.text.render(f" ?", True, (0, 0, 0)), (562, 496))
+                self.leJeu.screen.blit(self.text.render(f" inconnu", True, (0, 0, 0)), (573, 543))
+
+            if self.liste_pokemon[self.alliePokemon].niveau >= 14:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+            else:
+                self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (262, 541))
         elif self.choixAtt == "att4":
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
-            self.leJeu.screen.blit(self.text.render(f">{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][1]}", True, (0, 0, 0)), (562, 496))
-            self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][2]}", True, (0, 0, 0)), (573, 543))
+            if self.liste_pokemon[self.alliePokemon].niveau >= 7:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+            else:
+                self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (32, 541))
+            if self.liste_pokemon[self.alliePokemon].niveau >= 14:
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][1]}", True, (0, 0, 0)), (562, 496))
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][2]}", True, (0, 0, 0)), (573, 543))
+            else:
+                self.leJeu.screen.blit(self.text.render(f"> ---", True, (0, 0, 0)), (262, 541))
+                self.leJeu.screen.blit(self.text.render(f" ?", True, (0, 0, 0)), (562, 496))
+                self.leJeu.screen.blit(self.text.render(f" inconnu", True, (0, 0, 0)), (573, 543))
 
     def attaque(self):
         if self.choixAtt == "att1" :
 
-            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[0][0]}", True, (255, 255, 255)), (29, 495))
+            self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[0][0]}", True, (255, 255, 255)), (29, 495))
             self.calculeVie(self.att_allier[0][1])
 
         elif self.choixAtt == "att2":
 
-            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[1][0]}", True, (255, 255, 255)), (29, 495))
+            self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[1][0]}", True, (255, 255, 255)), (29, 495))
             self.calculeVie(self.att_allier[1][1])
 
         elif self.choixAtt == "att3":
 
-            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[2][0]}", True, (255, 255, 255)), (29, 495))
+            self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[2][0]}", True, (255, 255, 255)), (29, 495))
             self.calculeVie(self.att_allier[2][1])
 
         elif self.choixAtt == "att4":
 
-            self.leJeu.screen.blit(self.text.render(f"PIKACHOUM utilise {self.att_allier[3][0]}", True, (255, 255, 255)), (29, 495))
+            self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[3][0]}", True, (255, 255, 255)), (29, 495))
             self.calculeVie(self.att_allier[3][1])
 
 
@@ -351,8 +384,8 @@ class FightPokemon:
 
         pass
 
-    def attaqueEnnemi(lepokemon):
-        attaque = random.randint(0, 3)
+    def attaqueEnnemi(self,lepokemon):
+        '''attaque = random.randint(0, 3)
         if attaque == 0:
             listeAllie[lePokemon].hpActu -= attEnnemi[0][1]
             print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
@@ -371,7 +404,8 @@ class FightPokemon:
             print(roucool.nom, " vous frappe avec l'attaque 4 donc vous perdez ", attEnnemi[3][1])
             listeAllie[lePokemon].hpActu -= attEnnemi[3][1]
             print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
-                  listeAllie[lePokemon].hp)
+                  listeAllie[lePokemon].hp)'''
+        pass
 
     def attaque(att, defence, puissance, niv):
         calcule = (((niv + att + puissance) * 0.2) / defence * 50)

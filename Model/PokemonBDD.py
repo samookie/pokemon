@@ -101,10 +101,10 @@ class PokemonBDD():
 
         self.c.execute("""
         CREATE TABLE Liste_Pokemon(
-         idHero INTEGER,
+          idHero INTEGER,
           idPoke INTEGER,
           xp INTEGER,
-          xpMax INTEGER,
+          niveau INTEGER,
           PRIMARY KEY (idHero, idPoke),
           FOREIGN KEY (idHero) REFERENCES Hero(idHero),
           FOREIGN KEY (idPoke) REFERENCES Pokemon(idPoke)
@@ -182,8 +182,8 @@ class PokemonBDD():
         return self.c.execute("SELECT description, image, nbr FROM Objet").fetchall()
 
     def getPokemonHero(self):
-        print(self.c.execute("SELECT nomPoke, nom, nomEvo, niveau, hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image FROM Liste_Pokemon L JOIN Pokemon P ON L.idPoke = P.idPoke").fetchall())
-        return self.c.execute("SELECT nomPoke, nom, nomEvo, niveau, hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image FROM Liste_Pokemon L JOIN Pokemon P ON L.idPoke = P.idPoke").fetchall()
+        lesPoke = self.c.execute("SELECT nomPoke, nom, nomEvo, L.niveau , hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image, xp FROM Liste_Pokemon L JOIN Pokemon P ON L.idPoke = P.idPoke").fetchall()
+        return lesPoke
 
     '''Méthode permettant de rajouter les pokémons dans la base de données'''
     def createPokemon(self):
@@ -305,9 +305,9 @@ class PokemonBDD():
 
         return lesAttaques
 
-    def ajouterPokemonJoueur(self, pokemon):
+    def ajouterPokemonJoueur(self, pokemon, niv):
         idPoke = self.c.execute("SELECT idPoke FROM Pokemon WHERE nomPoke = ?", [pokemon.nomPokemon]).fetchone()
-        self.c.execute("INSERT INTO Liste_Pokemon VALUES (1, ?, ?, ?)", [idPoke[0], pokemon.xp, pokemon.xp_max])
+        self.c.execute("INSERT INTO Liste_Pokemon VALUES (1, ?, ?, ?)", [idPoke[0], pokemon.xp, niv])
         self.conn.commit()
 
 
