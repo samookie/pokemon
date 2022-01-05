@@ -18,6 +18,7 @@ class Cinematiques:
         self.dansChoixPokemon = False
         self.validationChoixPokemon = False
         self.pokemonChoisis = ""
+        self.infoHero = ""
 
         self.dialogueMaman = ["Bon...",
                               "Tous les garçons quittent un jour la maison.. C'est la vie !",
@@ -28,7 +29,7 @@ class Cinematiques:
                                     "Il te faut un pokémon pour te protéger.. Je sais !",
                                     "Suis-moi !"]
 
-        self.dialogueProfesseur3 = [f"{str(self.laBdd.chargerInfosHero()[1])} ? Heu...",
+        self.dialogueProfesseur3 = [f"{self.infoHero} ? Heu...",
                                    "Ah, c'est vrai ! Je t'ai dit de venir...",
                                    "Tiens, NT ",
                                    "Il y a trois pokémon ici !",
@@ -65,6 +66,7 @@ class Cinematiques:
             self.tournerProf += 5
 
     def cine3(self):
+        self.infoHero = str(self.laBdd.chargerInfosHero()[1])
         self.numCine = 3
         self.numMaxDialogue = len(self.dialogueProfesseur3)
         self.affichage()

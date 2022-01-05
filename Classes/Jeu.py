@@ -7,6 +7,7 @@ from Classes.Joueur import Joueur
 from Classes.PokemonView import PokemonView
 from Classes.Sac import Sac
 from Classes.FightPokemon import FightPokemon
+from Model.PokemonBDD import PokemonBDD
 
 pygame.init()
 
@@ -17,6 +18,13 @@ class Jeu:
 
         self.screen = pygame.display.set_mode((700, 600))
         pygame.display.set_caption("Powebmon")
+
+        bdd = PokemonBDD()
+
+        try:
+            bdd.testBDDFonctionnelle()
+        except:
+            bdd.resetBDD()
 
     def lancement(self):
 

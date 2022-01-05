@@ -203,7 +203,7 @@ class PokemonBDD():
             ("Roucoups","",1,63,71,60,50,55,50,"roucoups","d_roucoups","f_roucoups","Vol"),
             ("Rattata","Rattatac",1,30,72,56,25,35,35,"rattata","d_rattata","f_rattata","Normal"),
             ("Rattatac","",1,55,97,81,50,60,70,"rattatac","d_rattatac","f_rattatac","Normal"),
-            ("Pikachu","Raichu",1,35,90,55,90,40,50,"pikachu","d_pikachu","f_pikachu","Electrik),
+            ("Pikachu","Raichu",1,35,90,55,90,40,50,"pikachu","d_pikachu","f_pikachu","Electrik"),
             ("Raichu","",1,60,110,90,90,5,50,"raichu","d_raichu","f_raichu","Electrik"),
             ("Sabelette","Sablaireau",1,50,40,75,20,85,30,"sabelette","d_sabelette","f_sabelette","Sol"),
             ("Racaillou","Gravalanch",1,40,20,80,30,100,30,"racaillou","d_racaillou","f_racaillou","Roche"),
@@ -310,6 +310,9 @@ class PokemonBDD():
         idPoke = self.c.execute("SELECT idPoke FROM Pokemon WHERE nomPoke = ?", [pokemon.nomPokemon]).fetchone()
         self.c.execute("INSERT INTO Liste_Pokemon VALUES (1, ?, ?, ?)", [idPoke[0], pokemon.xp, niv])
         self.conn.commit()
+
+    def testBDDFonctionnelle(self):
+        self.c.execute("SELECT * FROM Hero")
 
 
 
