@@ -1,6 +1,6 @@
 import datetime
 import sqlite3
-from Classes.Pokemon import Pokemon
+
 
 class PokemonBDD():
 
@@ -95,7 +95,8 @@ class PokemonBDD():
           speDef INTEGER,
           image TEXT,
           d_image TEXT,
-          f_image TEXT
+          f_image TEXT,
+          typeP TEXT
         );
         """)
 
@@ -182,31 +183,31 @@ class PokemonBDD():
         return self.c.execute("SELECT description, image, nbr FROM Objet").fetchall()
 
     def getPokemonHero(self):
-        lesPoke = self.c.execute("SELECT nomPoke, nom, nomEvo, L.niveau , hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image, xp FROM Liste_Pokemon L JOIN Pokemon P ON L.idPoke = P.idPoke").fetchall()
+        lesPoke = self.c.execute("SELECT nomPoke, nom, nomEvo, L.niveau , hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image, xp, typeP FROM Liste_Pokemon L JOIN Pokemon P ON L.idPoke = P.idPoke").fetchall()
         return lesPoke
 
     '''Méthode permettant de rajouter les pokémons dans la base de données'''
     def createPokemon(self):
-        self.c.execute(""" INSERT INTO Pokemon ("nomPoke","nomEvo","niveau","hp","vitesse","attaque","speAtt","defense","speDef","image","d_image","f_image") VALUES 
-            ("Bulbizarre","Herbizarre",1,45,45,49,65,49,65,"bulbizarre","d_bulbizarre","f_bulbizarre"),
-            ("Herbizarre","Ivysaure",1,60,60,62,80,63,80,"herbizarre","d_herbizarre","f_herbizarre"),
-            ("Salamèche","Reptincel",1,39,65,52,60,43,50,"salamèche","d_salamèche","f_salamèche"),
-            ("Reptincel","Dracaufeu",1,58,80,64,80,58,65,"reptincel","d_reptincel","f_reptincel"),
-            ("Carapuce","Carabaffe",1,44,43,48,50,65,64,"carapuce","d_carapuce","f_carapuce"),
-            ("Carabaffe","Tortank",1,59,58,63,65,80,80,"carabaffe","d_carabaffe","f_carabaffe"),
-            ("Chenipan","Chrysacier",1,45,45,30,20,35,20,"chenipan","d_chenipan","f_chenipan"),
-            ("Chrysacier","Papilusion",1,50,30,20,25,55,25,"chrysacier","d_chrysacier","f_chrysacier"),
-            ("Aspicot","Coconfort",1,40,50,35,20,30,20,"aspicot","d_aspicot","f_aspicot"),
-            ("Coconfort","Dardargnan",1,45,35,25,25,50,25,"coconfort","d_coconfort","f_coconfort"),
-            ("Roucool","Roucoups",1,40,56,45,35,40,35,"roucool","d_roucool","f_roucool"),
-            ("Roucoups","",1,63,71,60,50,55,50,"roucoups","d_roucoups","f_roucoups"),
-            ("Rattata","Rattatac",1,30,72,56,25,35,35,"rattata","d_rattata","f_rattata"),
-            ("Rattatac","",1,55,97,81,50,60,70,"rattatac","d_rattatac","f_rattatac"),
-            ("Pikachu","Raichu",1,35,90,55,90,40,50,"pikachu","d_pikachu","f_pikachu"),
-            ("Raichu","",1,60,110,90,90,5,50,"raichu","d_raichu","f_raichu"),
-            ("Sabelette","Sablaireau",1,50,40,75,20,85,30,"sabelette","d_sabelette","f_sabelette"),
-            ("Racaillou","Gravalanch",1,40,20,80,30,100,30,"racaillou","d_racaillou","f_racaillou"),
-            ("Onix","",1,35,70,45,30,160,40,"onix","d_onix","f_onix");
+        self.c.execute(""" INSERT INTO Pokemon ("nomPoke","nomEvo","niveau","hp","vitesse","attaque","speAtt","defense","speDef","image","d_image","f_image","typeP") VALUES 
+            ("Bulbizarre","Herbizarre",1,45,45,49,65,49,65,"bulbizarre","d_bulbizarre","f_bulbizarre","Plante"),
+            ("Herbizarre","Ivysaure",1,60,60,62,80,63,80,"herbizarre","d_herbizarre","f_herbizarre","Plante"),
+            ("Salamèche","Reptincel",1,39,65,52,60,43,50,"salamèche","d_salamèche","f_salamèche","Feu"),
+            ("Reptincel","Dracaufeu",1,58,80,64,80,58,65,"reptincel","d_reptincel","f_reptincel","Feu"),
+            ("Carapuce","Carabaffe",1,44,43,48,50,65,64,"carapuce","d_carapuce","f_carapuce","Eau"),
+            ("Carabaffe","Tortank",1,59,58,63,65,80,80,"carabaffe","d_carabaffe","f_carabaffe","Eau"),
+            ("Chenipan","Chrysacier",1,45,45,30,20,35,20,"chenipan","d_chenipan","f_chenipan","Insecte"),
+            ("Chrysacier","Papilusion",1,50,30,20,25,55,25,"chrysacier","d_chrysacier","f_chrysacier","Insecte"),
+            ("Aspicot","Coconfort",1,40,50,35,20,30,20,"aspicot","d_aspicot","f_aspicot","Insecte"),
+            ("Coconfort","Dardargnan",1,45,35,25,25,50,25,"coconfort","d_coconfort","f_coconfort","Insecte"),
+            ("Roucool","Roucoups",1,40,56,45,35,40,35,"roucool","d_roucool","f_roucool","Vol"),
+            ("Roucoups","",1,63,71,60,50,55,50,"roucoups","d_roucoups","f_roucoups","Vol"),
+            ("Rattata","Rattatac",1,30,72,56,25,35,35,"rattata","d_rattata","f_rattata","Normal"),
+            ("Rattatac","",1,55,97,81,50,60,70,"rattatac","d_rattatac","f_rattatac","Normal"),
+            ("Pikachu","Raichu",1,35,90,55,90,40,50,"pikachu","d_pikachu","f_pikachu","Electrik),
+            ("Raichu","",1,60,110,90,90,5,50,"raichu","d_raichu","f_raichu","Electrik"),
+            ("Sabelette","Sablaireau",1,50,40,75,20,85,30,"sabelette","d_sabelette","f_sabelette","Sol"),
+            ("Racaillou","Gravalanch",1,40,20,80,30,100,30,"racaillou","d_racaillou","f_racaillou","Roche"),
+            ("Onix","",1,35,70,45,30,160,40,"onix","d_onix","f_onix","Roche");
         """)
         self.conn.commit()
 
@@ -282,10 +283,10 @@ class PokemonBDD():
 
     '''Méthode permettant de retourner un pokémon '''
     def searchPokemon(self, pokemon):
-        pokemon = self.c.execute("""SELECT nomPoke,nomEvo,niveau,hp,vitesse,attaque,speAtt,defense,speDef,image,d_image,f_image
+        pokemon = self.c.execute("""SELECT nomPoke,nomEvo,niveau,hp,vitesse,attaque,speAtt,defense,speDef,image,d_image,f_image, typeP
                             FROM Pokemon
                             WHERE nomPoke = ? """, [pokemon]).fetchone()
-        lePokemon = [pokemon[0], pokemon[1], pokemon[2],pokemon[3],pokemon[4],pokemon[5],pokemon[6],pokemon[7],pokemon[8],pokemon[9],pokemon[10],pokemon[11]]
+        lePokemon = [pokemon[0], pokemon[1], pokemon[2],pokemon[3],pokemon[4],pokemon[5],pokemon[6],pokemon[7],pokemon[8],pokemon[9],pokemon[10],pokemon[11],pokemon[12]]
         return lePokemon
 
     def setCurrentCinematique(self, number):

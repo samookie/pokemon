@@ -122,7 +122,7 @@ class Cinematiques:
                     lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Bulbizarre", infoPokemon[1], infoPokemon[2],
                                         infoPokemon[3], infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7],
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
-                                        infoPokemon[11])  # initialisation du pokémon
+                                        infoPokemon[11],infoPokemon[12])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
@@ -133,7 +133,7 @@ class Cinematiques:
                     lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Salamèche", infoPokemon[1], infoPokemon[2],
                                         infoPokemon[3], infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7],
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
-                                        infoPokemon[11])  # initialisation du pokémon
+                                        infoPokemon[11],infoPokemon[12])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
@@ -144,7 +144,7 @@ class Cinematiques:
                     lePokemon = Pokemon(self.carte.jeu, infoPokemon[0], "Carapuce", infoPokemon[1], infoPokemon[2],
                                         infoPokemon[3], infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7],
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
-                                        infoPokemon[11])  # initialisation du pokémon
+                                        infoPokemon[11],infoPokemon[12])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)

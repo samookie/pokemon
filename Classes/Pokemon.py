@@ -2,7 +2,7 @@ import pygame
 
 class Pokemon():
 
-    def __init__(self, leJeu, nomPoke, nom, nomEvo, niveau, hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image ):
+    def __init__(self, leJeu, nomPoke, nom, nomEvo, niveau, hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image,typePoke ):
         self.jeu = leJeu
         self.nomPokemon = nomPoke #nom personnalisé du pokémon
         self.nom = nom #nom de base du pokémon
@@ -20,6 +20,7 @@ class Pokemon():
         self.f_image = f_image # image de face du pokémon
         self.xp = 0
         self.xp_max = 15
+        self.typeP = typePoke
         self.lvlExp = [[1,15,4],[2,37,9],[3,70,19],[4,115,33],[5,169,47],
                        [6,231,66],[7,305,98],[8,384,117],[9,474,147],[10,569,205],
                        [11,672,222],[12,781,263],[13,897,361],[14,1.018,366],[15,1.144,500],
@@ -57,7 +58,8 @@ class Pokemon():
                                self.f_image,
                                self.hpActu,
                                self.xp,
-                               self.xp_max]
+                               self.xp_max,
+                               self.typeP]
         return listeCaractPokemon
 
     def setLevelPokemon (self, level):

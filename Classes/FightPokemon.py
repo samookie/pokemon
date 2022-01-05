@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from Classes.Joueur import Joueur
 from Model.PokemonBDD import PokemonBDD
@@ -381,46 +382,128 @@ class FightPokemon:
 
 
     def attaquePremier(self):
+        '''if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
 
-        pass
+        else:
 
-    def attaqueEnnemi(self,lepokemon):
-        '''attaque = random.randint(0, 3)
-        if attaque == 0:
-            listeAllie[lePokemon].hpActu -= attEnnemi[0][1]
-            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
-                  listeAllie[lePokemon].hp)
-        elif attaque == 1:
-            print(roucool.nom, " vous frappe avec l'attaque 2 donc vous perdez ", attEnnemi[1][1])
-            listeAllie[lePokemon].hpActu -= attEnnemi[1][1]
-            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
-                  listeAllie[lePokemon].hp)
-        elif attaque == 2:
-            print(roucool.nom, " vous frappe avec l'attaque 3 donc vous perdez ", attEnnemi[2][1])
-            listeAllie[lePokemon].hpActu -= attEnnemi[2][1]
-            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
-                  listeAllie[lePokemon].hp)
-        elif attaque == 3:
-            print(roucool.nom, " vous frappe avec l'attaque 4 donc vous perdez ", attEnnemi[3][1])
-            listeAllie[lePokemon].hpActu -= attEnnemi[3][1]
-            print("Votre pokémon ", listeAllie[lePokemon].nom, " a ", listeAllie[lePokemon].hpActu, "hp sur ",
-                  listeAllie[lePokemon].hp)'''
-        pass
+        pass'''
 
-    def attaque(att, defence, puissance, niv):
+    def attaqueEnnemi(self):
+        att = random.randint(0, 3)
+        liste_Att = []
+        if att == 0:
+            self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[0][1]
+            print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
+            liste_Att = [self.att_ennemy[0][1],self.att_ennemy[0][1],self.att_ennemy[0][2]]
+        elif att == 1:
+            print(self.lePokemon[0], " vous frappe avec l'attaque 2 donc vous perdez ", self.att_ennemy[1][1])
+            self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[1][1]
+            print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
+            liste_Att = [self.att_ennemy[1][1], self.att_ennemy[1][1], self.att_ennemy[1][2]]
+        elif att == 2:
+            print(self.lePokemon[0], " vous frappe avec l'attaque 3 donc vous perdez ", self.att_ennemy[2][1])
+            self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[2][1]
+            print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
+            liste_Att = [self.att_ennemy[2][1], self.att_ennemy[2][1], self.att_ennemy[2][2]]
+        elif att == 3:
+            print(self.lePokemon[0], " vous frappe avec l'attaque 4 donc vous perdez ", self.att_ennemy[3][1])
+            self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[3][1]
+            print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
+            liste_Att = [self.att_ennemy[3][1], self.att_ennemy[3][1], self.att_ennemy[3][2]]
+
+        return liste_Att
+
+    def attaqueNormal(self,att, defence, puissance, niv):
         calcule = (((niv + att + puissance) * 0.2) / defence * 50)
         calcule = round(calcule)
         return calcule
 
-    def double(att, defence, puissance, niv):
+    def double(self,att, defence, puissance, niv):
 
         calcule = (((niv + att + puissance) * 0.2) / defence * 50)
         total = calcule * 2
         total = round(total)
         return total
 
-    def faiblesse(att, defence, puissance, niv):
+    def faiblesse(self,att, defence, puissance, niv):
         calcule = (((niv + att + puissance) * 0.2) / defence * 50)
         total = calcule / 2
         total = round(total)
         return total
+
+    def information(self,typeAllie, typeEnnemie):
+        listeDouble = [["Feu", "Plante", "Glace", "Insect", "Acier"],
+                       ["Eau", "Feu", "Sol", "Roche"],
+                       ["Plante", "Eau", "Sol", "Roche"],
+                       ["Electrik", "Eau", "Vol"],
+                       ["Glace", "Plante", "Sol", "Vol", "Dragon"],
+                       ["Combat", "Normal", "Glace", "Roche", "Tenebres", "Acier"],
+                       ["Poison", "Plante"],
+                       ["Sol", "Feu", "Electrik", "Poison", "Roche", "Acier"],
+                       ["Vol", "Plante", "Combat", "Insecte"],
+                       ["Psy", "Combat", "Poison"],
+                       ["Insecte", "Plante", "Psy", "Tenebres"],
+                       ["Roche", "Feu", "Glace", "Vol", "Insecte"],
+                       ["Spectre", "Psy", "Spectre"],
+                       ["Dragon", "Dragon"],
+                       ["Tenebres", "Psy", "Spectre"],
+                       ["Acier", "Glace", "Roche"]
+                       ]
+        listeFaiblesse = [["Normal", "Roche", "Acier"],
+                          ["Feu", "Feu", "Eau", "Roche", "Dragon"],
+                          ["Eau", "Eau", "Plante", "Dragon"],
+                          ["Plante", "Feu", "Plante", "Poison", "Vol", "Insecte", "Dragon", "Acier"],
+                          ["Electrik", "Plante", "Electrik"],
+                          ["Glace", "Feu", "Eau", "Glace", "Acier"],
+                          ["Combat", "Poison", "Vol", "Psy", "Insecte"],
+                          ["Poison", "Poison", "Sol", "Roche", "Spectre"],
+                          ["Sol", "Plante", "Insecte"],
+                          ["Vol", "Electrik", "Roche"],
+                          ["Psy", "Psy", "Acier"],
+                          ["Insecte", "Feu", "Combat", "Poison", "Vol", "Spectre", "Acier"],
+                          ["Roche", "Combat", "Sol", "Acier"],
+                          ["Spectre", "Tenebres"],
+                          ["Dragon", "Dragon"],
+                          ["Tenebres", "Combat", "Tenebres"],
+                          ["Acier", "Feu", "Eau", "Electrik", "Acier"]
+                          ]
+        listeAucun = [["Normal", "Spectre"],
+                      ["Electrik", "Sol"],
+                      ["Combat", "Spectre"],
+                      ["Poison", "Acier"],
+                      ["Sol", "Vol"],
+                      ["Psy", "Tenebres"],
+                      ["Spectre", "Normal"]
+                      ]
+        listeRep = []
+        count = 0
+        for double in range(len(listeDouble)):
+            if listeDouble[double][0] == typeAllie:
+                count = double
+                for j in range(len(listeDouble[count])):
+                    if listeDouble[count][j] == typeEnnemie:
+                        listeRep = [1, 0, 0]
+        count = 0
+        for double in range(len(listeFaiblesse)):
+            if listeFaiblesse[double][0] == typeAllie:
+                count = double
+                for j in range(len(listeFaiblesse[count])):
+                    if listeFaiblesse[count][j] == typeEnnemie:
+                        listeRep = [0, 1, 0]
+
+        count = 0
+        for double in range(len(listeAucun)):
+            if listeAucun[double][0] == typeAllie:
+                count = double
+                for j in range(len(listeAucun[count])):
+                    if listeAucun[count][j] == typeEnnemie:
+                        listeRep = [0, 0, 1]
+
+        if listeRep == []:
+            print("aucun effet")
+        elif listeRep == [1, 0, 0]:
+            print(typeAllie, " est la faiblesse de :", typeEnnemie)
+        elif listeRep == [0, 1, 0]:
+            print(typeAllie, " est faible contre les :", typeEnnemie)
+        elif listeRep == [0, 0, 1]:
+            print(typeAllie, " font zero dégats contre les :", typeEnnemie)
