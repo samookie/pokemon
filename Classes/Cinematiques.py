@@ -128,6 +128,8 @@ class Cinematiques:
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
+                    self.laBdd.addObjSac( 5, "pokeball", "image", "pokeball")
+                    self.laBdd.addObjSac(2, "potion", "image", "potion")
 
                 elif self.pokemonChoisis == "salameche":
 
@@ -139,6 +141,8 @@ class Cinematiques:
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
+                    self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
+                    self.laBdd.addObjSac(2, "potion", "image", "potion")
 
                 elif self.pokemonChoisis == "carapuce":
 
@@ -150,6 +154,8 @@ class Cinematiques:
                     lePokemon.setLevelPokemon(5)
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.laBdd.setCurrentCinematique(5)
+                    self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
+                    self.laBdd.addObjSac(2, "potion", "image", "potion")
 
                 #self.carte.jeu.ecran_affiche = "fightP"
                 #self.carte.jeu.mettre_a_jour = True

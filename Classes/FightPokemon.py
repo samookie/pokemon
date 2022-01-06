@@ -63,7 +63,9 @@ class FightPokemon:
         elif self.actuellement == "ennemieMort":
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))
             self.ennemieMort()
-
+        elif self.actuellement == "allieMort":
+            self.leJeu.screen.blit(self.dialogueBleu, (0, 0))
+            self.allieMort()
 
         if self.leJeu.mettre_a_jour:
             self.actuellement = "txtIntro"
@@ -166,7 +168,6 @@ class FightPokemon:
     def calculeVie(self, attaque, pokemon):
         if self.attaqueOne:
             if pokemon == self.lePokemon[0]:
-                print("mechant attaque")
                 self.liste_pokemon[self.alliePokemon].hpActu = self.liste_pokemon[self.alliePokemon].hpActu - attaque
                 self.attaqueOne = False
             else:
@@ -369,6 +370,10 @@ class FightPokemon:
     def attaque(self):
         if self.lePokemon[13] <= 0 :
             self.actuellement = "ennemieMort"
+        elif self.liste_pokemon[self.alliePokemon].hpActu <= 0:
+            self.actuellement = "allieMort"
+            print("vous avez perdu")
+
 
         if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
             self.attaqueAllie()
@@ -559,3 +564,6 @@ class FightPokemon:
 
     def ennemieMort(self):
         self.leJeu.screen.blit(self.text.render(f"Vous avez battu {self.lePokemon[0]}!", True, (255, 255, 255)),(27, 495))
+
+    def allieMort(self):
+        self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} à été battu !", True, (255, 255, 255)),(27, 495))

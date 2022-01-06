@@ -180,7 +180,18 @@ class PokemonBDD():
 
     '''Méthode permettant de récupérer les objets du héro'''
     def getObjSac(self):
+        print(self.c.execute("SELECT description, image, nbr FROM Objet").fetchall())
         return self.c.execute("SELECT description, image, nbr FROM Objet").fetchall()
+
+    def addObjSac(self,qte, desc, image, typeObj):
+        verif = self.c.execute(""" SELECT idObj,description, type FROM Objet WHERE description = ? AND type = ? """, [desc,typeObj]).fetchall()
+        if len(verif) == 0:
+            self.c.execute(""" INSERT INTO Objet("description","type","image","idSac","nbr") VALUES (?,?,?,?,?);""", [desc, typeObj,image,1,qte])  # attaque 1
+        else:
+            print(verif[0])
+            print(qte)
+            self.c.execute("""UPDATE Objet SET nbr = nbr + ? WHERE idObj = ?; """,[qte, verif[0][0]])
+        self.conn.commit()
 
     def getPokemonHero(self):
         lesPoke = self.c.execute("SELECT nomPoke, nom, nomEvo, L.niveau , hp, vitesse, attaque, speAtt, defense, speDef, image, d_image, f_image, xp, typeP FROM Liste_Pokemon L JOIN Pokemon P ON L.idPoke = P.idPoke").fetchall()

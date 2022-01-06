@@ -43,6 +43,9 @@ class Sac:
         for obj in tempObj:
             self.lesObjets.append(obj)
 
+    def addObj(self,qte,desc,image,typeObj):
+        self.laBdd.addObjSac(qte, desc, image, typeObj)
+
     def gestion_touches(self):
         if pygame.key.get_pressed()[pygame.K_ESCAPE] and self.continuer:
             if self.carte == "jeu":
