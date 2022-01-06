@@ -29,6 +29,7 @@ class FightPokemon:
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
     def affichage(self):
+        self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon[0])
         self.att_allier = self.bdd.liste_attaque_pokemon(self.liste_pokemon[self.alliePokemon].nomPokemon)  # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         pygame.draw.rect(self.leJeu.screen, (0, 0, 0),pygame.Rect(0, 0, 700, 600))  # Créer un fond noir sur tout l'écran
 
@@ -59,7 +60,9 @@ class FightPokemon:
         elif self.actuellement == "attaqueEnCours":
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
             self.attaque()
-
+        elif self.actuellement == "ennemieMort":
+            self.leJeu.screen.blit(self.dialogueBleu, (0, 0))
+            self.ennemieMort()
 
 
         if self.leJeu.mettre_a_jour:
@@ -90,8 +93,6 @@ class FightPokemon:
                 self.passer = False
             elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
                 self.passer = True
-
-
 
 
     def gestion_touches_choix(self):
@@ -130,6 +131,7 @@ class FightPokemon:
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
 
+
 ################################## Affichage ###################################
 
     def afficher_Pokemon_bas(self, pokemon):
@@ -161,11 +163,16 @@ class FightPokemon:
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((135 ,251),(total,8)))
 
 
-    def calculeVie(self, attaque):
+    def calculeVie(self, attaque, pokemon):
+
         if self.attaqueOne:
-            self.lePokemon[13] = self.lePokemon[13] - attaque
-            print(self.lePokemon[13])
-            self.attaqueOne = False
+            if pokemon == self.lePokemon[0]:
+                self.liste_pokemon[self.alliePokemon].hpActu = self.liste_pokemon[self.alliePokemon].hpActu - attaque
+                self.attaqueOne = False
+            else:
+                self.lePokemon[13] = self.lePokemon[13] - attaque
+                print(self.lePokemon[13])
+                self.attaqueOne = False
 
     def afficher_stat_bas(self):
         statPB = pygame.image.load("Map/Images/statPokemonAlly.png")
@@ -360,56 +367,92 @@ class FightPokemon:
                 self.leJeu.screen.blit(self.text.render(f" inconnu", True, (0, 0, 0)), (573, 543))
 
     def attaque(self):
+        if self.lePokemon[13] <= 0 :
+            self.actuellement = "ennemieMort"
+
+        if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
+            self.attaqueAllie()
+        else:
+            self.attaqueAllie()
+
+    def attaqueAllie(self):
         if self.choixAtt == "att1" :
 
             self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[0][0]}", True, (255, 255, 255)), (29, 495))
-            self.calculeVie(self.att_allier[0][1])
+
+            if self.information(self.att_allier[0][2],self.lePokemon[16]) == []:
+                self.calculeVie(self.attaqueNormal(self.att_allier[0][1], self.lePokemon[8], self.liste_pokemon[self.alliePokemon].speAtt, self.liste_pokemon[self.alliePokemon].niveau), self.liste_pokemon[self.alliePokemon].nomPokemon)
+            elif self.information(self.att_allier[0][2],self.lePokemon[16]) == [1, 0, 0]:
+                print(f"{self.att_allier[0][2]} est la faiblesse de : {self.lePokemon[16]}")
+                self.calculeVie(self.double(self.att_allier[0][1], self.lePokemon[8],
+                                                   self.liste_pokemon[self.alliePokemon].speAtt,
+                                                   self.liste_pokemon[self.alliePokemon].niveau),
+                                self.liste_pokemon[self.alliePokemon].nomPokemon)
+            elif self.information(self.att_allier[0][2],self.lePokemon[16]) == [0, 1, 0]:
+                print(f"{self.att_allier[0][2]} est faible contre les :{self.lePokemon[16]}")
+                self.calculeVie(self.faiblesse(self.att_allier[0][1], self.lePokemon[8],
+                                                   self.liste_pokemon[self.alliePokemon].speAtt,
+                                                   self.liste_pokemon[self.alliePokemon].niveau),
+                                self.liste_pokemon[self.alliePokemon].nomPokemon)
+            elif self.information(self.att_allier[0][2],self.lePokemon[16]) == [0, 0, 1]:
+                print(f"{self.att_allier[0][2]} font zero dégats contre les {self.lePokemon[16]}")
+
 
         elif self.choixAtt == "att2":
 
             self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[1][0]}", True, (255, 255, 255)), (29, 495))
-            self.calculeVie(self.att_allier[1][1])
+            print(self.information(self.att_allier[1][2], self.lePokemon[16]))
+            self.calculeVie(self.att_allier[1][1], self.liste_pokemon[self.alliePokemon].nomPokemon)
 
+            if self.information(self.att_allier[1][2],self.lePokemon[16]) == []:
+                print("aucun effet")
+            elif self.information(self.att_allier[1][2],self.lePokemon[16]) == [1, 0, 0]:
+                print(f"{self.att_allier[1][2]} est la faiblesse de : {self.lePokemon[16]}")
+            elif self.information(self.att_allier[1][2],self.lePokemon[16]) == [0, 1, 0]:
+                print(f"{self.att_allier[1][2]} est faible contre les :{self.lePokemon[16]}")
+            elif self.information(self.att_allier[1][2],self.lePokemon[16]) == [0, 0, 1]:
+                print(f"{self.att_allier[1][2]} font zero dégats contre les {self.lePokemon[16]}")
+            self.calculeVie(self.att_allier[1][1], self.liste_pokemon[self.alliePokemon].nomPokemon)
         elif self.choixAtt == "att3":
 
             self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[2][0]}", True, (255, 255, 255)), (29, 495))
-            self.calculeVie(self.att_allier[2][1])
+            print(self.information(self.att_allier[2][2], self.lePokemon[16]))
+            self.calculeVie(self.att_allier[2][1], self.liste_pokemon[self.alliePokemon].nomPokemon)
 
         elif self.choixAtt == "att4":
 
             self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} utilise {self.att_allier[3][0]}", True, (255, 255, 255)), (29, 495))
-            self.calculeVie(self.att_allier[3][1])
-
-
-    def attaquePremier(self):
-        '''if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
-
-        else:
-
-        pass'''
+            print(self.information(self.att_allier[3][2], self.lePokemon[16]))
+            self.calculeVie(self.att_allier[3][1], self.liste_pokemon[self.alliePokemon].nomPokemon)
 
     def attaqueEnnemi(self):
         att = random.randint(0, 3)
         liste_Att = []
         if att == 0:
-            self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[0][1]
+            self.calculeVie(self.att_ennemy[0][1], self.lePokemon[0])
             print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
-            liste_Att = [self.att_ennemy[0][1],self.att_ennemy[0][1],self.att_ennemy[0][2]]
+            liste_Att = [self.att_ennemy[0][0],self.att_ennemy[0][1],self.att_ennemy[0][2]]
+            #self.leJeu.screen.blit(self.text.render(f"{self.lePokemon[0]} ennemi utilise {self.att_allier[0][0]}",True, (255, 255, 255)), (29, 495))
         elif att == 1:
             print(self.lePokemon[0], " vous frappe avec l'attaque 2 donc vous perdez ", self.att_ennemy[1][1])
-            self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[1][1]
+            self.calculeVie(self.att_ennemy[1][1], self.lePokemon[0])
             print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
-            liste_Att = [self.att_ennemy[1][1], self.att_ennemy[1][1], self.att_ennemy[1][2]]
+            liste_Att = [self.att_ennemy[1][0], self.att_ennemy[1][1], self.att_ennemy[1][2]]
+            #self.leJeu.screen.blit(self.text.render(f"{self.lePokemon[0]} ennemi utilise {self.att_allier[1][0]}",True, (255, 255, 255)), (29, 495))
+
         elif att == 2:
             print(self.lePokemon[0], " vous frappe avec l'attaque 3 donc vous perdez ", self.att_ennemy[2][1])
+            self.calculeVie(self.att_ennemy[2][1], self.lePokemon[0])
             self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[2][1]
             print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
-            liste_Att = [self.att_ennemy[2][1], self.att_ennemy[2][1], self.att_ennemy[2][2]]
+            liste_Att = [self.att_ennemy[2][0], self.att_ennemy[2][1], self.att_ennemy[2][2]]
+            #self.leJeu.screen.blit(self.text.render(f"{self.lePokemon[0]} ennemi utilise {self.att_allier[2][0]}", True, (255, 255, 255)),(29, 495))
         elif att == 3:
             print(self.lePokemon[0], " vous frappe avec l'attaque 4 donc vous perdez ", self.att_ennemy[3][1])
-            self.liste_pokemon[self.alliePokemon].hpActu -= self.att_ennemy[3][1]
+            self.calculeVie(self.att_ennemy[3][1], self.lePokemon[0])
             print(f"Votre pokémon {self.liste_pokemon[self.alliePokemon].nomPokemon} a {self.liste_pokemon[self.alliePokemon].hpActu} hp sur {self.liste_pokemon[self.alliePokemon].hp}")
-            liste_Att = [self.att_ennemy[3][1], self.att_ennemy[3][1], self.att_ennemy[3][2]]
+            liste_Att = [self.att_ennemy[3][0], self.att_ennemy[3][1], self.att_ennemy[3][2]]
+            #self.leJeu.screen.blit(self.text.render(f"{self.lePokemon[0]} ennemi utilise {self.att_allier[3][0]}", True, (255, 255, 255)),(29, 495))
 
         return liste_Att
 
@@ -499,11 +542,7 @@ class FightPokemon:
                     if listeAucun[count][j] == typeEnnemie:
                         listeRep = [0, 0, 1]
 
-        if listeRep == []:
-            print("aucun effet")
-        elif listeRep == [1, 0, 0]:
-            print(typeAllie, " est la faiblesse de :", typeEnnemie)
-        elif listeRep == [0, 1, 0]:
-            print(typeAllie, " est faible contre les :", typeEnnemie)
-        elif listeRep == [0, 0, 1]:
-            print(typeAllie, " font zero dégats contre les :", typeEnnemie)
+        return listeRep
+
+    def ennemieMort(self):
+        self.leJeu.screen.blit(self.text.render(f"Vous avez battu {self.lePokemon[0]}!", True, (255, 255, 255)),(27, 495))
