@@ -25,6 +25,9 @@ class FightPokemon:
         self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon) # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         self.dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
         self.attaqueOne = True # passer à true quand on attaque
+        self.attaqueUneFois = True
+        self.attaque1 = True
+        self.attaque2 = True
 
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
@@ -90,11 +93,7 @@ class FightPokemon:
             self.algorithm_attaque()
             self.gestion_touches_choix_attaque()
         elif self.actuellement == "attaqueEnCours":
-            if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
-                self.actuellement = "choixMenu"
-                self.passer = False
-            elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
-                self.passer = True
+            self.gestion_touches_en_attaque()
 
 
     def gestion_touches_choix(self):
@@ -130,6 +129,24 @@ class FightPokemon:
             self.actuellement = "attaqueEnCours"
             self.passer = False
             self.attaqueOne = True
+        elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
+            self.passer = True
+
+    def gestion_touches_en_attaque(self):
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.attaque1:
+            self.passer = False
+            self.attaque1 = False
+            self.attaqueUneFois = True
+        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and self.attaque2:
+            self.passer = False
+            self.attaque2 = False
+            self.attaqueUneFois = True
+        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and not self.attaque2 and not self.attaqueUneFois:
+            self.actuellement = "choixMenu"
+            self.passer = False
+            self.attaque1 = True
+            self.attaque2 = True
+            self.attaqueUneFois = True
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
 
@@ -374,13 +391,28 @@ class FightPokemon:
             self.actuellement = "allieMort"
             print("vous avez perdu")
 
-
         if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
-            self.attaqueAllie()
-            self.attaqueEnnemi()
+            if self.attaque1:
+                if self.attaqueUneFois:
+                    self.attaqueAllie()
+                    self.attaqueUneFois = False
+                print("Texte à afficher")
+            else:
+                if self.attaqueUneFois:
+                    self.attaqueEnnemi()
+                    self.attaqueUneFois = False
+                print("texte à afficher")
         else:
-            self.attaqueEnnemi()
-            self.attaqueAllie()
+            if self.attaque1:
+                if self.attaqueUneFois:
+                    self.attaqueEnnemi()
+                    self.attaqueUneFois = False
+                print("Texte à afficher")
+            else:
+                if self.attaqueUneFois:
+                    self.attaqueAllie()
+                    self.attaqueUneFois = False
+                print("texte à afficher")
 
     def attaqueAllie(self):
         if self.choixAtt == "att1":
