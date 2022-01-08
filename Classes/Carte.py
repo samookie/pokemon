@@ -27,11 +27,14 @@ class Carte:
         self.laListePokemon = []
         print("Liste carte",self.listePokemon)
         self.cptPoke = 0
+        self.bulbizarre  = Pokemon(self.jeu,"Bulbizarre","None","Herbizarre",1,45,45,49,65,49,65,"bulbizarre","d_bulbizarre","f_bulbizarre","Plante")
         for poke in self.listePokemon:
             unPokemon = Pokemon(self.jeu, poke[0],poke[1],poke[2],1,poke[4],poke[5],poke[6],poke[7],poke[8],poke[9],poke[10],poke[11],poke[12],poke[13])
             self.laListePokemon.append(unPokemon)
             self.laListePokemon[self.cptPoke].setLevelPokemon(poke[3])
             self.cptPoke += 1
+
+
         self.nom_carte = "carte"
         self.numberSpawnPoint = ""
 
@@ -199,6 +202,7 @@ class Carte:
                                     infoPokemon[4], infoPokemon[5], infoPokemon[6], infoPokemon[7], infoPokemon[8],
                                     infoPokemon[9], infoPokemon[10], infoPokemon[11],infoPokemon[12])
                 lePokemon.setLevelPokemon(niveau)
+
                 self.jeu.fightP.changerPokemon(lePokemon.getPokemon(), self.laListePokemon)  # passer les informations à FightPokemon
                 self.jeu.ecran_affiche = "fightP"
                 self.jeu.mettre_a_jour = True

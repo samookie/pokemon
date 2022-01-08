@@ -126,9 +126,16 @@ class Cinematiques:
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
                                         infoPokemon[11],infoPokemon[12])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
+                    autre = self.laBdd.searchPokemon("Pikachu")
+                    lautre = Pokemon(self.carte.jeu, autre[0], "Pikachu", autre[1], autre[2],
+                                        autre[3], autre[4], autre[5], autre[6], autre[7],
+                                        autre[8], autre[9], autre[10],
+                                        autre[11], autre[12])  # initialisation du pokémon
+                    lautre.setLevelPokemon(2)
                     self.carte.joueur.addPokemon(lePokemon,5)
+                    self.carte.joueur.addPokemon(lautre,2)
                     self.laBdd.setCurrentCinematique(5)
-                    self.laBdd.addObjSac( 5, "pokeball", "image", "pokeball")
+                    self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
                     self.laBdd.addObjSac(2, "potion", "image", "potion")
 
                 elif self.pokemonChoisis == "salameche":
@@ -139,7 +146,15 @@ class Cinematiques:
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
                                         infoPokemon[11],infoPokemon[12])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
+
+                    autre = self.laBdd.searchPokemon("Pikachu")
+                    lautre = Pokemon(self.carte.jeu, autre[0], "Pikachu", autre[1], autre[2],
+                                     autre[3], autre[4], autre[5], autre[6], autre[7],
+                                     autre[8], autre[9], autre[10],
+                                     autre[11], autre[12])  # initialisation du pokémon
+                    lautre.setLevelPokemon(2)
                     self.carte.joueur.addPokemon(lePokemon,5)
+                    self.carte.joueur.addPokemon(lautre, 2)
                     self.laBdd.setCurrentCinematique(5)
                     self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
                     self.laBdd.addObjSac(2, "potion", "image", "potion")
@@ -152,7 +167,15 @@ class Cinematiques:
                                         infoPokemon[8], infoPokemon[9], infoPokemon[10],
                                         infoPokemon[11],infoPokemon[12])  # initialisation du pokémon
                     lePokemon.setLevelPokemon(5)
+
+                    autre = self.laBdd.searchPokemon("Pikachu")
+                    lautre = Pokemon(self.carte.jeu, autre[0], "Pikachu", autre[1], autre[2],
+                                     autre[3], autre[4], autre[5], autre[6], autre[7],
+                                     autre[8], autre[9], autre[10],
+                                     autre[11], autre[12])  # initialisation du pokémon
+                    lautre.setLevelPokemon(2)
                     self.carte.joueur.addPokemon(lePokemon,5)
+                    self.carte.joueur.addPokemon(lautre, 2)
                     self.laBdd.setCurrentCinematique(5)
                     self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
                     self.laBdd.addObjSac(2, "potion", "image", "potion")
