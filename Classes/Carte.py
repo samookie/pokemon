@@ -111,7 +111,7 @@ class Carte:
 
     def affichage_carte(self):
         self.joueur.ancienne_position()
-        if self.jeu.dansMenu and not self.enCinematique:
+        if self.jeu.dansMenu and not self.enCinematique and not self.auCentre:
             self.joueur.gestion_touches()
         self.update()
         self.group.center(self.joueur.rect.center)
@@ -131,9 +131,9 @@ class Carte:
             self.cinematiques.gestion_touches()
 
         if self.auCentre:
-            self.actionEndroit.dialogue()
+            self.actionEndroit.affichage()
             self.actionEndroit.gestion_touches()
-            self.actionEndroit.choixCentre = True
+
         pygame.display.flip()
 
 
@@ -173,11 +173,9 @@ class Carte:
 
         for obj in self.action:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)): # si le joueur tombe dans une zone de combat
-                if proba == leNb: # si le nombre de proba aléatoire et le nombre sont égales
-                    if obj.name == "centre": # cela correspond à la zone 1
-                        if pygame.key.get_pressed()[pygame.K_SPACE]:
-                            self.auCentre = True
-                            print("je suis dans la zone")
+                if obj.name == "centre": # cela correspond à la zone 1
+                    if pygame.key.get_pressed()[pygame.K_SPACE] and not self.auCentre:
+                        self.auCentre = True
 
 
 
