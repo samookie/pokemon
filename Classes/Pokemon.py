@@ -82,8 +82,11 @@ class Pokemon():
 
     def xp_up(self, xp):
         self.xp += xp
-        if self.xp >= self.xp_max :
+        if self.xp >= self.xp_max:
            self.levelUp()
+
+    def soignerPokemon(self):
+        self.hpActu = self.hp
 
 
 

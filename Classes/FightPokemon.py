@@ -27,7 +27,7 @@ class FightPokemon:
         self.attaqueOne = True # passer à true quand on attaque
         self.attaqueUneFois = True
         self.attaque1 = True
-        self.attaque2 = True
+        self.attaque2 = False
         self.attA = 0
         self.attE = 0
 
@@ -138,6 +138,7 @@ class FightPokemon:
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.attaque1:
             self.passer = False
             self.attaque1 = False
+            self.attaque2 = True
             self.attaqueUneFois = True
             self.attaqueOne = True
         elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and self.attaque2:
@@ -154,7 +155,6 @@ class FightPokemon:
             self.attaqueOne = True
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
-
 
 ################################## Affichage ###################################
 
@@ -402,40 +402,38 @@ class FightPokemon:
 
         if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
             if self.attaque1:
-                print("attaque1")
+                print("attaque1", self.attaque1 , self.attaque2)
                 if self.attaqueUneFois:
                     print("allié attaque")
-                    self.attaqueAllie()
                     self.attaqueUneFois = False
+                    self.attaqueAllie()
                     self.affAllieAtt(self.attA)
             else:
-                print("attaque2")
+                print("attaque2", self.attaque2 , self.attaque1)
                 if self.attaqueUneFois:
                     print("ennemie attaque")
-                    self.attaqueEnnemi()
                     self.attaqueUneFois = False
+                    self.attaqueEnnemi()
                     self.affEnnemyAtt(self.attE)
         else:
             if self.attaque1:
-                print("attaque 1")
+                print("attaque 1", self.attaque1 , self.attaque2)
                 if self.attaqueUneFois:
                     print("ennemie attaque")
-                    self.attaqueEnnemi()
                     self.attaqueUneFois = False
+                    self.attaqueEnnemi()
                     self.affEnnemyAtt(self.attE)
             else:
-                print("attaque2")
+                print("attaque2", self.attaque2 , self.attaque1)
                 if self.attaqueUneFois:
                     print("allié attaque")
-                    self.attaqueAllie()
                     self.attaqueUneFois = False
+                    self.attaqueAllie()
                     self.affAllieAtt(self.attA)
 
     def attaqueAllie(self):
-        print("ATTAQUE ALLIE")
         if self.choixAtt == "att1":
             self.attE = 0
-            print("ATTAQUE 1")
 
             if self.information(self.att_allier[0][2],self.lePokemon[16]) == []:
                 self.calculeVie(self.attaqueNormal(self.att_allier[0][1], self.lePokemon[8], self.liste_pokemon[self.alliePokemon].speAtt, self.liste_pokemon[self.alliePokemon].niveau), self.liste_pokemon[self.alliePokemon].nomPokemon)
@@ -451,7 +449,6 @@ class FightPokemon:
 
         elif self.choixAtt == "att2":
             self.attA = 1
-            print("ATTAQUE 2")
 
             if self.information(self.att_allier[1][2],self.lePokemon[16]) == []:
                 print("aucun effet")
@@ -468,7 +465,6 @@ class FightPokemon:
 
         elif self.choixAtt == "att3":
             self.attA = 2
-            print("ATTAQUE 3")
 
             if self.information(self.att_allier[2][2],self.lePokemon[16]) == []:
                 print("aucun effet")
@@ -484,7 +480,6 @@ class FightPokemon:
                 print(f"{self.att_allier[2][2]} font zero dégats contre les {self.lePokemon[16]}")
 
         elif self.choixAtt == "att4":
-            print("ATTAQUE 4")
             self.attA = 3
             if self.information(self.att_allier[3][2], self.lePokemon[16]) == []:
                 print("aucun effet")
@@ -508,12 +503,10 @@ class FightPokemon:
                 print(f"{self.att_allier[3][2]} font zero dégats contre les {self.lePokemon[16]}")
 
     def attaqueEnnemi(self):
-        print("ATTAQUE ENNEMIE")
         att = random.randint(0, 3)
 
         if att == 0:
             self.attE = 0
-            print("ATTAQUE 1")
 
             if self.information(self.att_ennemy[0][2],self.liste_pokemon[self.alliePokemon].typeP) == []:
 
@@ -536,7 +529,6 @@ class FightPokemon:
                 print(f"{self.att_ennemy[0][2]} font zero dégats contre les {self.liste_pokemon[self.alliePokemon].typeP}")
         elif att == 1:
             self.attE = 1
-            print("ATTAQUE 2")
 
             if self.information(self.att_ennemy[1][2],self.liste_pokemon[self.alliePokemon].typeP) == []:
 
@@ -559,7 +551,6 @@ class FightPokemon:
                 print(f"{self.att_ennemy[1][2]} font zero dégats contre les {self.liste_pokemon[self.alliePokemon].typeP}")
 
         elif att == 2:
-            print("ATTAQUE 3")
             self.attE = 2
             if self.information(self.att_ennemy[2][2], self.liste_pokemon[self.alliePokemon].typeP) == []:
 
@@ -584,7 +575,6 @@ class FightPokemon:
             elif self.information(self.att_ennemy[2][2], self.liste_pokemon[self.alliePokemon].typeP) == [0, 0, 1]:
                 print(f"{self.att_ennemy[2][2]} font zero dégats contre les {self.liste_pokemon[self.alliePokemon].typeP}")
         elif att == 3:
-            print("ATTAQUE 4")
             self.attE = 3
             if self.information(self.att_ennemy[3][2], self.liste_pokemon[self.alliePokemon].typeP) == []:
 
