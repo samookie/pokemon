@@ -5,7 +5,7 @@ from Classes.Joueur import Joueur
 from Classes.Keyboard import KeyboardUser
 from Model.PokemonBDD import PokemonBDD
 
-
+'''Classe Intro permettant de réaliser l"intro du jeu'''
 class Intro:
 
     '''Classe Intro permettant de réaliser l"intro du jeu'''

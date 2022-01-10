@@ -11,21 +11,24 @@ from Model.PokemonBDD import PokemonBDD
 
 pygame.init()
 
+'''Classe jeu gérant le jeu complet'''
 class Jeu:
     def __init__(self):
 
         # créer la fenêtre du jeu
 
-        self.screen = pygame.display.set_mode((700, 600))
-        pygame.display.set_caption("Powebmon")
+        self.screen = pygame.display.set_mode((700, 600)) #Définir taille écran
+        pygame.display.set_caption("Powebmon") #Définir titre fenêtre
 
         bdd = PokemonBDD()
 
+        #Création de la bDD si erreur
         try:
             bdd.testBDDFonctionnelle()
         except:
             bdd.resetBDD()
 
+    '''Méthode permettant de lancer les bonnes fenêtre au cours du jeu'''
     def lancement(self):
 
         # Variables

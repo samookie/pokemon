@@ -3,14 +3,16 @@ import pygame
 from Classes.Joueur import Joueur
 from Model.PokemonBDD import PokemonBDD
 
-
+'''Ecran d'accueil du jeu'''
 class Home_Screen:
 
+    '''Constructeur de la classe Home_Screen'''
     def __init__(self, leJeu):
         self.leJeu = leJeu #CLasse jeu
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 15) #Initialiser la police pour le texte
         self.bdd = PokemonBDD()
 
+        #Regarder si il existe une sauvegarde déjà présente
         try:
             self.nbrSav = self.bdd.getSavExist()[0]
         except:
