@@ -403,33 +403,33 @@ class FightPokemon:
         if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
             if self.attaque1:
                 print("attaque1", self.attaque1 , self.attaque2)
+                self.affAllieAtt(self.attA)
                 if self.attaqueUneFois:
                     print("allié attaque")
                     self.attaqueUneFois = False
                     self.attaqueAllie()
-                    self.affAllieAtt(self.attA)
             else:
                 print("attaque2", self.attaque2 , self.attaque1)
+                self.affEnnemyAtt(self.attE)
                 if self.attaqueUneFois:
                     print("ennemie attaque")
                     self.attaqueUneFois = False
                     self.attaqueEnnemi()
-                    self.affEnnemyAtt(self.attE)
         else:
             if self.attaque1:
                 print("attaque 1", self.attaque1 , self.attaque2)
+                self.affEnnemyAtt(self.attE)
                 if self.attaqueUneFois:
                     print("ennemie attaque")
                     self.attaqueUneFois = False
                     self.attaqueEnnemi()
-                    self.affEnnemyAtt(self.attE)
             else:
                 print("attaque2", self.attaque2 , self.attaque1)
+                self.affAllieAtt(self.attA)
                 if self.attaqueUneFois:
                     print("allié attaque")
                     self.attaqueUneFois = False
                     self.attaqueAllie()
-                    self.affAllieAtt(self.attA)
 
     def attaqueAllie(self):
         if self.choixAtt == "att1":
