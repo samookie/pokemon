@@ -9,55 +9,65 @@ from Classes.TypePokemon import TypePokemon
 class FightPokemon:
 
     def __init__(self, leJeu, nomPokemon = "", liste_pokemon = []):
+        '''
+        Constructeur permettant d'initialisier la clasee FightPokemon qui est seulement utilisé contre les pokémons rencontré dans les hautes herbes
+        :param leJeu: la variable qui continent le jeu
+        :param nomPokemon: le nom du pokémon ennemi
+        :param liste_pokemon: la liste pokémon du héro
+        '''
         self.leJeu = leJeu #cLasse jeu
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 15) #Initialiser la police pour le texte
-        self.bdd = PokemonBDD()
-        self.lePokemon = nomPokemon
-        self.liste_pokemon = liste_pokemon
-        self.alliePokemon = 0
+        self.bdd = PokemonBDD() #variable de la bdd
+        self.lePokemon = nomPokemon # le pokémon ennemie
+        self.liste_pokemon = liste_pokemon # la liste des pokémons de l'allié
+        self.alliePokemon = 0 # le compteur des pokémons de l'allié
         self.txtNum = 0 # le numéro d'orde des dialogues
-        self.passer = True
-        self.suivant = True
+        self.passer = True # varier pour savoir si on peut passer les dialogues
+        self.suivant = True # variable pour savoir si on peut apsser les dialogues
         self.choix = "Attaque" #gestion des choix
         self.a = [[1, 0], [0, 0]] #tableau pour la gestion des choix du combat
-        self.choixAtt = "att1"
-        self.actuellement = "txtIntro"
+        self.choixAtt = "att1" # variable permettant de savoir quel attaque on a choisi
+        self.actuellement = "txtIntro" # variable permettant de savoir dans quel situaltion on se trouve dans l'algorithme
         self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon) # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
-        self.dialogueBleu = pygame.image.load("Map/Images/fightDia.png")
+        self.dialogueBleu = pygame.image.load("Map/Images/fightDia.png") # image du dialogue bleue
         self.attaqueOne = True # passer à true quand on attaque
-        self.attaqueUneFois = True
-        self.attaque1 = True
-        self.attaque2 = False
-        self.attA = 0
-        self.attE = 0
+        self.attaqueUneFois = True # attaque permmetant d'attaquer qu'une fois
+        self.attaque1 = True # attaque permettant de faire la première attaque
+        self.attaque2 = False # variable permettatn de faire la seconde attaque
+        self.attA = 0 # variable permettant d'afficher le nombre auquel appartient le dialogue de l'attaque allié
+        self.attE = 0 # variable permettant d'afficher le nombre auquel appartient le dialogue de l'attaque ennemi
 
 
     '''Méthode permettant d'afficher l'écran d'accueil et d'appliquer les modifications dessus'''
     def affichage(self):
-        self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon[0])
+        '''
+        Fonction permettant d'afficher les contenus dans la fenêtre
+        :return:
+        '''
+        self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon[0]) #initialise le tableau de l'attaque de l'ennemi
         self.att_allier = self.bdd.liste_attaque_pokemon(self.liste_pokemon[self.alliePokemon].nomPokemon)  # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         pygame.draw.rect(self.leJeu.screen, (0, 0, 0),pygame.Rect(0, 0, 700, 600))  # Créer un fond noir sur tout l'écran
 
-        self.fight_img = pygame.image.load("Map/Images/fight.png")
+        self.fight_img = pygame.image.load("Map/Images/fight.png") #image du fond de fight
         self.leJeu.screen.blit(self.fight_img, (0, 0)) #Dessiner l'image de fond
 
-        self.afficher_Pokemon_haut(self.lePokemon)
-        self.afficher_Pokemon_bas(self.liste_pokemon[self.alliePokemon].nomPokemon)
+        self.afficher_Pokemon_haut(self.lePokemon) #fonction qui permet d'afficher le pokémon ennemi
+        self.afficher_Pokemon_bas(self.liste_pokemon[self.alliePokemon].nomPokemon) # fonction qui permet d'afficher le pokémon allié
 
-        self.afficher_stat_haut()
-        self.afficher_stat_bas()
+        self.afficher_stat_haut() # fonction permettanant d'afficher les stats du pokémon ennemi
+        self.afficher_stat_bas() # fonction permettant d'affficher les stats de la statup
 
-        self.afficher_bar_vie_haut()
-        self.afficher_bar_vie_bas()
-        self.bdd.getPokemonHero()
-        if self.actuellement == "txtIntro":
+        self.afficher_bar_vie_haut() # fonction permettanant d'afficher la barre de vie du pokémon ennemi
+        self.afficher_bar_vie_bas() # fonction permettanant d'afficher la barre de vie du pokémon allié
+        self.bdd.getPokemonHero() # permettant d'avoir les pokémon de l'allié
+        if self.actuellement == "txtIntro": # si on se trouve actuellement dans l'intro
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
-            if self.txtNum == 0:
+            if self.txtNum == 0: # dialogue 1
                 self.leJeu.screen.blit(self.text.render(f"Un {self.lePokemon[1]} sauvage apparaît!", True, (255,255,255)), (27, 495))
-            elif self.txtNum == 1:
+            elif self.txtNum == 1: # dialogue 2
                 self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon}! GO!", True, (255, 255, 255)), (27, 495))
-            elif self.txtNum == 2:
-                self.actuellement = "choixMenu"
+            elif self.txtNum == 2: # dialogue 3
+                self.actuellement = "choixMenu" #basuler en choixMenu permet de savoir quand passe directement dans le choixMenu
         elif self.actuellement == "choixMenu":
             self.afficher_choix_menu()
         elif self.actuellement == "choixAttaque":
