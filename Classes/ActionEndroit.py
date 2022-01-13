@@ -26,16 +26,19 @@ class ActionEndroit:
         self.carte.jeu.screen.blit(imgDialogue, (0, 0))
         self.carte.jeu.screen.blit(self.text.render(self.dialogueCentre[self.numDialogue], 1, (0, 0, 0)), (45, 500))
 
-    def gestion_touches(self):
-        print(self.numDialogue + 1)
-        print(len(self.dialogueCentre))
+    def soigner(self):
+        pokemons = self.carte.laListePokemon
+        for poke in pokemons:
+            poke.soignerPokemon()
 
+    def gestion_touches(self):
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.continuer:
             if self.numDialogue < len(self.dialogueCentre) - 1:
                 self.numDialogue += 1
-            else:
+                self.continuer = False
+        elif pygame.key.get_pressed()[pygame.K_ESCAPE] and not self.numDialogue < len(self.dialogueCentre) - 1 and self.continuer:
                 self.carte.auCentre = False
                 self.numDialogue = 0
-            self.continuer = False
+                self.continuer = False
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.continuer:
             self.continuer = True

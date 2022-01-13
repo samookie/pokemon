@@ -133,6 +133,7 @@ class Carte:
         if self.auCentre:
             self.actionEndroit.affichage()
             self.actionEndroit.gestion_touches()
+            self.actionEndroit.soigner()
 
         pygame.display.flip()
 
