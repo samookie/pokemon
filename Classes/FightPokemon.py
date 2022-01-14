@@ -68,75 +68,80 @@ class FightPokemon:
                 self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon}! GO!", True, (255, 255, 255)), (27, 495))
             elif self.txtNum == 2: # dialogue 3
                 self.actuellement = "choixMenu" #basuler en choixMenu permet de savoir quand passe directement dans le choixMenu
-        elif self.actuellement == "choixMenu":
+        elif self.actuellement == "choixMenu": # Si on se retrouve dans le choix menu alors on affiche le menu
             self.afficher_choix_menu()
-        elif self.actuellement == "choixAttaque":
+        elif self.actuellement == "choixAttaque": # Si l'on se retrouve dans le choix attaque alors on affiche les attaques
             self.choix_attaque()
-        elif self.actuellement == "attaqueEnCours":
+        elif self.actuellement == "attaqueEnCours": # Si l'on se retouve dans l'attaque en cours alors on active la fonction attaque
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0))  # Dessiner l'image du dialogue bleu
-            self.attaque()
-        elif self.actuellement == "ennemieMort":
-            self.leJeu.screen.blit(self.dialogueBleu, (0, 0))
-            self.ennemieMort()
-        elif self.actuellement == "allieMort":
-            self.leJeu.screen.blit(self.dialogueBleu, (0, 0))
-            self.allieMort()
+            self.attaque() # Fonction attaque permettant de faire les 2 attaques (allié, ennemi)
+        elif self.actuellement == "ennemieMort": # Si l'on se retrouve avec l'ennemi mort alors on affiche le message de mortet on quitte le combat on donne aussi les récompenses
+            self.leJeu.screen.blit(self.dialogueBleu, (0, 0)) # Dessiner l'image du dialogue bleu
+            self.ennemieMort() # Fonction ou l'ennemi meurt
+            # Faire la fonction qui xp le pokémon
+        elif self.actuellement == "allieMort": # Si l'on se retouve avec l'allié mort alors on affiche le message et on quitte
+            self.leJeu.screen.blit(self.dialogueBleu, (0, 0)) # Dessiner l'image du dialogue bleu
+            self.allieMort() # Fonction ou l'allié meurt
 
-        if self.leJeu.mettre_a_jour:
-            self.actuellement = "txtIntro"
-            self.choix = "Attaque"
-            self.choixAtt = "att1"
+        if self.leJeu.mettre_a_jour: # Si le jeu est à jour
+            self.actuellement = "txtIntro" # Donc revenir à l'intro
+            self.choix = "Attaque" # remettre le choix à attaque
+            self.choixAtt = "att1" # remettre l'attaque à l'attaque 1
             self.leJeu.mettre_a_jour = False
         pygame.display.flip()  # MAJ de l'affichage
 
-    '''Méthode permettant de vérifier la frappe des touches sur cette classe'''
     def gestion_touches(self):
+        '''Méthode permettant de vérifier la frappe des touches sur cette classe'''
 
-        if self.actuellement == "txtIntro":
+        if self.actuellement == "txtIntro": # Si l'on se retrouve aux texte d'intro avant le menu :
             if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.suivant: #Si la touche est espace, que l'on peut encore naviguer dans le dialogue et que la variable passer est à True
-                self.txtNum = self.txtNum + 1
+                self.txtNum = self.txtNum + 1 # on passe au dialogue suivant
                 self.passer = False
             elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
                 self.passer = True
-        elif self.actuellement == "choixMenu":
-            self.algorithm_choix()
-            self.gestion_touches_choix()
-        elif self.actuellement == "choixAttaque":
-            self.algorithm_attaque()
-            self.gestion_touches_choix_attaque()
-        elif self.actuellement == "attaqueEnCours":
-            self.gestion_touches_en_attaque()
+        elif self.actuellement == "choixMenu": # Si l'on se retrouve dans le menu
+            self.algorithm_choix() # Alors activer algorithm_choix() qui  permet de se déplacer dans les choix
+            self.gestion_touches_choix() # Alors activer gestion_touches_choix() qui  permet de se déplacer dans les choix
+        elif self.actuellement == "choixAttaque": # Si l'on est sur les choix de l'attaque
+            self.algorithm_attaque() # Alors activer la fonction qui permet de savoir ou on se trouve dans les choix
+            self.gestion_touches_choix_attaque() # Alors activer la fonction qui permet de se déplacer
+        elif self.actuellement == "attaqueEnCours": # Si l'on est en plein dans le combats après avoir choisi l'attaque
+            self.gestion_touches_en_attaque() # gestion de l'ordre de l'attaque
+        elif self.actuellement == "ennemieMort":
+            self.gestion_touche_mort()
 
 
     def gestion_touches_choix(self):
-        if self.choix == "Attaque" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
-            self.actuellement = "choixAttaque"
+        '''Fonction permettant de naviguer dans le menu et par rapport à ton choix faire une action'''
+        if self.choix == "Attaque" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: #Si il choisi l'option attaque il se retrouve dans l'attaque
+            self.actuellement = "choixAttaque" # actuellement se change en choixAttaque ce qui permet de changer la vue
             self.passer = False
 
-        elif self.choix == "Sac" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
-            self.leJeu.ecran_affiche = "sac"
-            self.leJeu.mettre_a_jour = True
-            self.txtNum = 2
-            self.leJeu.sac.carte = "fight"
+        elif self.choix == "Sac" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: #Si il choisi Sac il se retrouve dans la vue du sac
+            self.leJeu.ecran_affiche = "sac" # Le jeu affiche la classe du Sac et donc la vue du sac
+            self.leJeu.mettre_a_jour = True # Pour mettre à jour la vue de la fenêtre complète
+            self.txtNum = 2 #Si il reviens il reviendra dans la vue avec le dialogue 2
+            self.leJeu.sac.carte = "fight" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
 
-        elif self.choix == "Pokemon" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
-            self.leJeu.ecran_affiche = "pokemons"
-            self.leJeu.mettre_a_jour = True
-            self.txtNum = 2
-            self.leJeu.pokemon_ecran.carte = "fight"
+        elif self.choix == "Pokemon" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Pokemon il se retrouve dans la vue du choix de pokemon
+            self.leJeu.ecran_affiche = "pokemons" # le jeu affiche la classe PokemonView
+            self.leJeu.mettre_a_jour = True # Pour mettre à jour la vue de la fênetre complète
+            self.txtNum = 2 # Si il revient il reviendra dans la vue avec le dialogue 2
+            self.leJeu.pokemon_ecran.carte = "fight" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
 
-        elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
-            self.leJeu.ecran_affiche = "jeu"
-            self.leJeu.mettre_a_jour = True
-            self.txtNum = 0
+        elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Fuite il retournera dans la carte
+            self.leJeu.ecran_affiche = "jeu" # le jeu affiche la classe Carte
+            self.leJeu.mettre_a_jour = True #Pour mettre à jour la vue de la fênetre complète
+            self.txtNum = 0 # Si il revient il reviendra dans la première partie du dialogue
             self.passer = False
 
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
 
     def gestion_touches_choix_attaque(self):
+        '''Fonction qui permet de passer de l'attaque à attaque en cours'''
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer:
             self.actuellement = "attaqueEnCours"
             self.passer = False
@@ -144,19 +149,34 @@ class FightPokemon:
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
 
+    def gestion_touche_mort(self):
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "ennemieMort":
+            self.xpPokemon()
+            self.passer = False
+            self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
+            self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
+            self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
+            self.passer = False
+        elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
+            self.passer = True
+
     def gestion_touches_en_attaque(self):
-        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.attaque1:
+        '''Fonction permettant de gérer la partie attaque et combat (lequel attaque en premier)'''
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.attaque1: #Si l'attaque1 est faite
+            print("JATTAQUE UNE FOIS")
             self.passer = False
             self.attaque1 = False
             self.attaque2 = True
             self.attaqueUneFois = True
             self.attaqueOne = True
-        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and self.attaque2:
+        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and self.attaque2 and not self.attaqueUneFois:# Si l'attaque1 et L'attaque2 viennent de se terminer
+            print("JATTAQUE UNE DEUXIEME FOIS")
             self.passer = False
             self.attaque2 = False
-            self.attaqueUneFois = True
+            self.attaqueUneFois = False
             self.attaqueOne = True
-        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and not self.attaque2 and not self.attaqueUneFois:
+        elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and not self.attaque2 and not self.attaqueUneFois: #Si l'attaque1 et l'attaque 2 sont passées
+            print("JAI ATTAQUE")
             self.actuellement = "choixMenu"
             self.passer = False
             self.attaque1 = True
@@ -178,39 +198,46 @@ class FightPokemon:
         self.leJeu.screen.blit(pokemonBasScale, (100, 310))  # Dessiner l'image du pokémon d'en bas
 
     def afficher_Pokemon_haut(self, pokemon):
+        '''
+        Fonction qui permet d'afficher le pokémon d'en bas
+        :param pokemon: le nom du pokémon
+        '''
         pokemonHaut = pygame.image.load(f'Map/Images/{pokemon[12]}.png')  # Dessiner l'image du pokémon d'en haut
         pokemonHautScale = pygame.transform.scale(pokemonHaut, (200, 200))  # Redimensionner l'image du professeur
         self.leJeu.screen.blit(pokemonHautScale, (409, 190))
 
     def changerPokemon(self, pokemon, liste_pokemon):
+        '''
+        Fonction qui permet de changer le pokémon ennemie et la liste pokémon du héro
+        :param pokemon: le pokémon ennemie en mode objet
+        :param liste_pokemon: la liste du héro
+        '''
         self.lePokemon = pokemon
         self.liste_pokemon = liste_pokemon
 
     def afficher_bar_vie_bas(self):
-        calcule = (self.liste_pokemon[self.alliePokemon].hpActu * 100) / self.liste_pokemon[self.alliePokemon].hp
+        '''Fonction qui permet d'afficher la barre de vie du pokémon d'en bas (allié)'''
+        calcule = (self.liste_pokemon[self.alliePokemon].hpActu * 100) / self.liste_pokemon[self.alliePokemon].hp #Fait le calcule de la vie un produit en crois permettant de s'adapter au dessin de la barre de vie
         total = calcule * 128 / 100
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((526,407),(total,8)))
 
     def afficher_bar_vie_haut(self):
-        calcule = (self.lePokemon[13] * 100) / self.lePokemon[4]
+        '''Fonction qui permet d'afficher la barre de vie du pokémon d'en haut (ennemie)'''
+        calcule = (self.lePokemon[13] * 100) / self.lePokemon[4] #Fait le calcule de la vie un produit en crois permettant de s'adapter au dessin de la barre de vie
         total = calcule * 120 / 100
         pygame.draw.rect(self.leJeu.screen,(0,255,0),pygame.Rect((135 ,251),(total,8)))
 
 
     def calculeVie(self, attaque, pokemon):
-        print("STATUT ATTAQUEONE", self.attaqueOne)
         if self.attaqueOne:
             if pokemon == self.lePokemon[0]:
-                print("AVANT ATTAQUE",self.attaqueOne)
+
                 self.liste_pokemon[self.alliePokemon].hpActu = self.liste_pokemon[self.alliePokemon].hpActu - attaque
                 self.attaqueOne = False
-                print("APRES ATTAQUE",self.attaqueOne)
             else:
-                print("AVANT ATTAQUE", self.attaqueOne)
                 self.lePokemon[13] = self.lePokemon[13] - attaque
                 print(self.lePokemon[13])
                 self.attaqueOne = False
-                print("APRES ATTAQUE", self.attaqueOne)
 
     def afficher_stat_bas(self):
         statPB = pygame.image.load("Map/Images/statPokemonAlly.png")
@@ -698,6 +725,8 @@ class FightPokemon:
     def ennemieMort(self):
         self.leJeu.screen.blit(self.text.render(f"Vous avez battu {self.lePokemon[0]}!", True, (255, 255, 255)),(27, 495))
 
+    def xpPokemon(self):
+        self.liste_pokemon[self.alliePokemon].infoXP(self.lePokemon[3])
     def allieMort(self):
         self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} à été battu !", True, (255, 255, 255)),(27, 495))
 

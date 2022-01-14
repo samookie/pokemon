@@ -88,6 +88,14 @@ class Pokemon():
     def soignerPokemon(self):
         self.hpActu = self.hp
 
+    def infoXP(self, niveauEnnemi):
+        xp = 0
+        if niveauEnnemi == 1:
+            xp = 4
+        else :
+            xp = self.lvlExp[niveauEnnemi-1][2]
+        print("xp actuelle :",self.xp , "sur xp max :" ,self.xp_max)
+        self.xp_up(xp)
 
 
 
