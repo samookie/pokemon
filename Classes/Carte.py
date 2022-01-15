@@ -91,6 +91,7 @@ class Carte:
         self.cinematique = []
         self.fight=[]
         self.action=[]
+        self.dresseur=[]
 
         for obj in pytmx.util_pygame.load_pygame(f"Map/{nomCarte}.tmx").objects:
             if obj.type == "collision":
@@ -108,6 +109,8 @@ class Carte:
                 self.fight.append(obj)
             elif obj.type == "action":
                 self.action.append(obj)
+            elif obj.type == "dresseur":
+                self.dresseur.append(obj)
 
     def affichage_carte(self):
         self.joueur.ancienne_position()
@@ -178,6 +181,11 @@ class Carte:
                     if pygame.key.get_pressed()[pygame.K_SPACE] and not self.auCentre:
                         self.auCentre = True
 
+        for obj in self.dresseur:
+            if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)): # si le joueur tombe dans une zone de combat
+                if obj.name == "Omar": # cela correspond à la zone 1
+                    self.attaqueDresseur("Omar") #fonction de choix du pokemon et tp dans le fight pokemon
+
 
 
 
@@ -191,6 +199,30 @@ class Carte:
             temp = Pnj(pnj.name)
             temp.modifPosition([pnj.x, pnj.y])
             self.group.add(temp)
+
+    def attaqueDresseur(self, nomDresseur):
+        liste_PokemonE =[]
+        if nomDresseur == "Omar":
+
+            infoChenipan = self.bdd.searchPokemon("Chenipan")  # chercher dans la base de donnée le pokémon
+            chenipan = Pokemon(self.jeu, infoChenipan[0], "ASPICOT", infoChenipan[1], infoChenipan[2], infoChenipan[3],
+                                infoChenipan[4], infoChenipan[5], infoChenipan[6], infoChenipan[7], infoChenipan[8],
+                                infoChenipan[9], infoChenipan[10], infoChenipan[11],
+                                infoChenipan[12])  # initialisation du pokémon
+            chenipan.setLevelPokemon(6)  # Mettre le pokemon au niveau adaptée
+
+            infoAspicot = self.bdd.searchPokemon("Aspicot")  # chercher dans la base de donnée le pokémon
+            aspicot = Pokemon(self.jeu, infoAspicot[0], "ASPICOT", infoAspicot[1], infoAspicot[2], infoAspicot[3],
+                               infoAspicot[4], infoAspicot[5], infoAspicot[6], infoAspicot[7], infoAspicot[8],
+                               infoAspicot[9], infoAspicot[10], infoAspicot[11],
+                               infoAspicot[12])  # initialisation du pokémon
+            aspicot.setLevelPokemon(6)  # Mettre le pokemon au niveau adaptée
+
+            liste_PokemonE = [chenipan,aspicot]
+
+            self.jeu.fightD.changerPokemon(liste_PokemonE,self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
+            self.jeu.mettre_a_jour = True
 
     def choixPokemon(self, zone , leNb):
         print(leNb)

@@ -8,6 +8,7 @@ from Classes.PokemonView import PokemonView
 from Classes.Sac import Sac
 from Classes.FightPokemon import FightPokemon
 from Model.PokemonBDD import PokemonBDD
+from Classes.FightDresseur import FightDresseur
 
 pygame.init()
 
@@ -46,6 +47,7 @@ class Jeu:
         self.sac = Sac(self)
         self.pokemon_ecran = PokemonView(self)
         self.fightP = FightPokemon(self)
+        self.fightD = FightDresseur(self)
 
 
         # boucle du jeu
@@ -68,6 +70,9 @@ class Jeu:
             elif self.ecran_affiche == "fightP":
                 self.fightP.affichage()
                 self.fightP.gestion_touches()
+            elif self.ecran_affiche == "fightD":
+                self.fightD.affichage()
+                self.fightD.gestion_touches()
             else:
                 pass
 
