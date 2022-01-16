@@ -14,6 +14,7 @@ class FightDresseur:
         :param nomPokemon: le nom du pokémon ennemi
         :param liste_pokemon: la liste pokémon du héro
         '''
+        self.nomEnnemie = ""
         self.leJeu = leJeu #cLasse jeu
         self.text = pygame.font.Font("Map/Polices/Pokemon.ttf", 15) #Initialiser la police pour le texte
         self.bdd = PokemonBDD() #variable de la bdd
@@ -143,6 +144,7 @@ class FightDresseur:
             self.passer = False
 
         elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Fuite il retournera dans la carte
+            self.interdireZone()
             self.leJeu.ecran_affiche = "jeu" # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True #Pour mettre à jour la vue de la fênetre complète
             self.txtNum = 0 # Si il revient il reviendra dans la première partie du dialogue
@@ -162,17 +164,20 @@ class FightDresseur:
 
     def gestion_touche_mort(self):
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "ennemieMort":
+            self.interdireZone()
             self.xpPokemon()
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
             self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
         elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "allieMort":
+            self.interdireZone()
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
             self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "tousMort":
+            self.interdireZone()
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
@@ -759,3 +764,23 @@ class FightDresseur:
         self.leJeu.screen.blit(self.text.render(f"{self.liste_ennemie[self.ennemiePokemon].nomPokemon} ennemie attaque {self.att_ennemy[attaque][0]}!", True, (255, 255, 255)),(27, 495))
     def affAllieAtt(self, attaque):
         self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} attaque avec {self.att_allier[attaque][0]}!", True, (255, 255, 255)),(27, 495))
+
+    def initDresseur(self,nom):
+        self.nomEnnemie = nom
+
+    def interdireZone(self):
+
+        if self.nomEnnemie == "omar":
+            self.leJeu.carte.omar = False
+        elif self.nomEnnemie == "alfred":
+            self.leJeu.carte.alfred = False
+        elif self.nomEnnemie == "anthony":
+            self.leJeu.carte.anthony = False
+        elif self.nomEnnemie == "charles":
+            self.leJeu.carte.charles = False
+        elif self.nomEnnemie == "sammy":
+            self.leJeu.carte.sammy = False
+        elif self.nomEnnemie == "elvin":
+            self.leJeu.carte.elvin = False
+        elif self.nomEnnemie == "pierre":
+            self.leJeu.carte.pierre = False

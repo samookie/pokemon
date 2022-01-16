@@ -37,6 +37,15 @@ class Carte:
             self.laListePokemon[self.cptPoke].setLevelPokemon(poke[3])
             self.cptPoke += 1
 
+        #Dresseur pour eviter la boucle infinie du combat
+        self.omar = True
+        self.alfred = True
+        self.anthony = True
+        self.charles = True
+        self.Sammy = True
+        self.elvin = True
+        self.Pierre = True
+
 
         self.nom_carte = "carte"
         self.numberSpawnPoint = ""
@@ -183,8 +192,23 @@ class Carte:
 
         for obj in self.dresseur:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)): # si le joueur tombe dans une zone de combat
-                if obj.name == "Omar": # cela correspond à la zone 1
+                if self.omar and obj.name == "Omar" : # cela correspond à la zone 1
+                    self.omar = False
                     self.attaqueDresseur("Omar") #fonction de choix du pokemon et tp dans le fight pokemon
+
+                elif self.alfred and obj.name == "Alfred" :
+                    self.alfred = False
+                    self.attaqueDresseur("Alfred")  # fonction de choix du pokemon et tp dans le fight pokemon
+            elif not self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)) :
+                print("JE SUIS PAS DANS LA ZONE")
+                self.omar = True
+                self.alfred = True
+                self.anthony = True
+                self.charles = True
+                self.Sammy = True
+                self.elvin = True
+                self.Pierre = True
+
 
 
 
@@ -221,6 +245,29 @@ class Carte:
             liste_PokemonE = [chenipan,aspicot]
 
             self.jeu.fightD.changerPokemon(liste_PokemonE,self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.fightD.initDresseur("omar")
+            self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
+            self.jeu.mettre_a_jour = True
+        elif nomDresseur == "Alfred":
+            infoChenipan = self.bdd.searchPokemon("Chenipan")  # chercher dans la base de donnée le pokémon
+            chenipan = Pokemon(self.jeu, infoChenipan[0], "ASPICOT", infoChenipan[1], infoChenipan[2],
+                               infoChenipan[3],
+                               infoChenipan[4], infoChenipan[5], infoChenipan[6], infoChenipan[7], infoChenipan[8],
+                               infoChenipan[9], infoChenipan[10], infoChenipan[11],
+                               infoChenipan[12])  # initialisation du pokémon
+            chenipan.setLevelPokemon(6)  # Mettre le pokemon au niveau adaptée
+
+            infoAspicot = self.bdd.searchPokemon("Aspicot")  # chercher dans la base de donnée le pokémon
+            aspicot = Pokemon(self.jeu, infoAspicot[0], "ASPICOT", infoAspicot[1], infoAspicot[2], infoAspicot[3],
+                              infoAspicot[4], infoAspicot[5], infoAspicot[6], infoAspicot[7], infoAspicot[8],
+                              infoAspicot[9], infoAspicot[10], infoAspicot[11],
+                              infoAspicot[12])  # initialisation du pokémon
+            aspicot.setLevelPokemon(6)  # Mettre le pokemon au niveau adaptée
+
+            liste_PokemonE = [chenipan, aspicot]
+
+            self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.fightD.initDresseur("omar")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
             self.jeu.mettre_a_jour = True
 
