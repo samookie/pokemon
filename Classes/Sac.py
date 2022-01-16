@@ -74,6 +74,7 @@ class Sac:
                 self.leJeu.ecran_affiche = "fightP"
                 self.leJeu.mettre_a_jour
                 self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
+                self.leJeu.carte.laListePokemon[self.leJeu.fightD.alliePokemon].soigner(20)
 
         elif not pygame.key.get_pressed()[pygame.K_ESCAPE] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_DOWN] and not self.continuer: #SPAM TOUCHE
             self.continuer = True

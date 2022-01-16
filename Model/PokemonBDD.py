@@ -328,5 +328,9 @@ class PokemonBDD():
         self.c.execute("UPDATE Objet SET nbr = ? WHERE idObj = ?", [nbr, idObjet])
         self.conn.commit()
 
+    def gagnerArgent(self,argent):
+        self.c.execute("UPDATE Hero SET argent = argent + ? WHERE idHero = 1", [argent])
+        self.conn.commit()
+
 
 

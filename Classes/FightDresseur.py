@@ -166,6 +166,7 @@ class FightDresseur:
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "ennemieMort":
             self.interdireZone()
             self.xpPokemon()
+            self.bdd.gagnerArgent(50)
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète

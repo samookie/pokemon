@@ -42,9 +42,9 @@ class Carte:
         self.alfred = True
         self.anthony = True
         self.charles = True
-        self.Sammy = True
+        self.sammy = True
         self.elvin = True
-        self.Pierre = True
+        self.pierre = True
 
 
         self.nom_carte = "carte"
@@ -193,24 +193,33 @@ class Carte:
         for obj in self.dresseur:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)): # si le joueur tombe dans une zone de combat
                 if self.omar and obj.name == "Omar" : # cela correspond à la zone 1
-                    self.omar = False
+
                     self.attaqueDresseur("Omar") #fonction de choix du pokemon et tp dans le fight pokemon
+                    print("JE SUIS DANS LA ZONE DE OMAR")
 
                 elif self.alfred and obj.name == "Alfred" :
                     self.alfred = False
                     self.attaqueDresseur("Alfred")  # fonction de choix du pokemon et tp dans le fight pokemon
-            elif not self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)) :
-                print("JE SUIS PAS DANS LA ZONE")
-                self.omar = True
-                self.alfred = True
-                self.anthony = True
-                self.charles = True
-                self.Sammy = True
-                self.elvin = True
-                self.Pierre = True
 
+                elif self.anthony and obj.name == "Anthony":
+                    self.anthony = False
+                    self.attaqueDresseur("Anthony")  # fonction de choix du pokemon et tp dans le fight pokemon
 
+                elif self.charles and obj.name == "Charles":
+                    self.charles == False
+                    self.attaqueDresseur("Charles")
 
+                elif self.sammy and obj.name == "Sammy":
+                    self.sammy = False
+                    self.attaqueDresseur("Sammy")
+
+                elif self.elvin and obj.name == "Elvin":
+                    self.elvin = False
+                    self.attaqueDresseur("Elvin")
+
+                elif self.pierre and obj.name == "Pierre":
+                    self.pierre = False
+                    self.attaqueDresseur("Pierre")
 
 
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe
