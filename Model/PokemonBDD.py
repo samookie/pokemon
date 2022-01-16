@@ -180,8 +180,7 @@ class PokemonBDD():
 
     '''Méthode permettant de récupérer les objets du héro'''
     def getObjSac(self):
-        print(self.c.execute("SELECT description, image, nbr FROM Objet").fetchall())
-        return self.c.execute("SELECT description, image, nbr FROM Objet").fetchall()
+        return self.c.execute("SELECT description, image, nbr, idObj FROM Objet").fetchall()
 
     def addObjSac(self,qte, desc, image, typeObj):
         verif = self.c.execute(""" SELECT idObj,description, type FROM Objet WHERE description = ? AND type = ? """, [desc,typeObj]).fetchall()
@@ -324,6 +323,10 @@ class PokemonBDD():
 
     def testBDDFonctionnelle(self):
         self.c.execute("SELECT * FROM Hero")
+
+    def majNbOjet(self, idObjet, nbr):
+        self.c.execute("UPDATE Objet SET nbr = ? WHERE idObj = ?", [nbr, idObjet])
+        self.conn.commit()
 
 
 

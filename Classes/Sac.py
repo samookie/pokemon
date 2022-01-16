@@ -67,6 +67,13 @@ class Sac:
             if self.selecObj > 0:
                 self.selecObj -= 1
             self.continuer = False
+        elif pygame.key.get_pressed()[pygame.K_RETURN] and self.continuer:
+            objSelec = self.lesObjets[self.selecObj]
+
+            if self.carte == "fight":
+                self.leJeu.ecran_affiche = "fightP"
+                self.leJeu.mettre_a_jour
+                self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
         elif not pygame.key.get_pressed()[pygame.K_ESCAPE] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_DOWN] and not self.continuer: #SPAM TOUCHE
             self.continuer = True
 

@@ -2,7 +2,7 @@ import pygame.key
 
 from Model.PokemonBDD import PokemonBDD
 
-
+'''Classe permettant d'afficer les pokémon du joueur'''
 class PokemonView:
 
     def __init__(self, leJeu):
@@ -15,36 +15,40 @@ class PokemonView:
         self.carte = "jeu"
         self.nbrPokeSelecActuellement = 0
         self.passer = True
+        self.bougerpoke = False
 
+    '''Méthode pour afficher la liste du joueur'''
     def affichage(self):
-        if self.leJeu.mettre_a_jour:
+        if self.leJeu.mettre_a_jour: #Actions à faire qu'une fois
             self.getPokemons()
             self.leJeu.mettre_a_jour = False
 
+        #Chargement des sprites
         interface = pygame.image.load("Map/Images/poke.png")
         premierPokAct = pygame.transform.scale(pygame.image.load("Map/Images/pokePrincipalAct.png"), (250,170))
         premierPok = pygame.transform.scale(pygame.image.load("Map/Images/pokePrincipalInac.png"), (250, 170))
         pok = pygame.transform.scale(pygame.image.load("Map/Images/pokeInac.png"), (424, 62))
         pokAct = pygame.transform.scale(pygame.image.load("Map/Images/pokeAct.png"), (424, 62))
 
-        self.leJeu.screen.blit(interface, (0, 0))
+        self.leJeu.screen.blit(interface, (0, 0)) #Afficher l'interface
 
         addTxt = 0
         nbrPokeSelec = 0
 
+        #Afficher les pokémon succintement
         for pokemon in self.lesPokemons:
 
             if self.premierPoke:
-                if self.nbrPokeSelecActuellement == 0:
+                if self.nbrPokeSelecActuellement == 0: #Si le pokémon actuel est sélectionné
                     self.leJeu.screen.blit(premierPokAct, (7, 110))
                 else:
                     self.leJeu.screen.blit(premierPok, (7, 110))
                 self.leJeu.screen.blit(self.text.render(f"{pokemon[0]}", 1, (0, 0, 0)), (78, 150))
                 self.leJeu.screen.blit(self.text.render(f"{pokemon[3]}", 1, (0, 0, 0)), (149, 200))
-                self.leJeu.screen.blit(self.text.render(f"{pokemon[4]}", 1, (0, 0, 0)), (146, 245))
+                self.leJeu.screen.blit(self.text.render(f"{pokemon[4]}", 1, (0, 0, 0)), (206, 245))
                 self.premierPoke = False
             else:
-                if nbrPokeSelec == self.nbrPokeSelecActuellement:
+                if nbrPokeSelec == self.nbrPokeSelecActuellement: #Si le pokémon actuel est sélectionné
                     self.leJeu.screen.blit(pokAct, (274, 93 + addTxt))
                 else:
                     self.leJeu.screen.blit(pok, (274, 93 + addTxt))
@@ -57,13 +61,14 @@ class PokemonView:
 
         self.premierPoke = True
 
-        if self.carte == "jeu":
+        if self.carte == "jeu": #En fonction de la carte qui à chargé la vue adapter
             self.leJeu.screen.blit(self.text.render(f"Jeu", 1, (0, 0, 0)), (25, 468))
         elif self.carte == "fight":
             self.leJeu.screen.blit(self.text.render(f"Fight", 1, (0, 0, 0)), (25, 468))
 
         pygame.display.flip()
 
+    '''Méthode pour récupérer les pokémons de la BDD'''
     def getPokemons(self):
         temp = self.laBdd.getPokemonHero()
         self.lesPokemons = []
@@ -71,6 +76,7 @@ class PokemonView:
         for pokemon in temp:
             self.lesPokemons.append(pokemon)
 
+    '''Gestion des touches de la classe'''
     def gestion_touches(self):
 
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
@@ -88,8 +94,14 @@ class PokemonView:
             if self.nbrPokeSelecActuellement > 0:
                 self.nbrPokeSelecActuellement -= 1
             self.passer = False
-        elif not pygame.key.get_pressed()[pygame.K_DOWN] and not pygame.key.get_pressed()[pygame.K_UP] and not self.passer:
+        elif pygame.key.get_pressed()[pygame.K_RETURN] and self.passer:
+            if self.bougerpoke:
+                self.bougerpoke = False
+            else:
+                self.bougerpoke = True
+        elif not pygame.key.get_pressed()[pygame.K_DOWN] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_RETURN] and not self.passer:
             self.passer = True
 
+    '''Mettre à jour la carte affiché'''
     def update_map(self, map):
         self.carte = map
