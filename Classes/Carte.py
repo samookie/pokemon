@@ -51,6 +51,9 @@ class Carte:
         self.numberSpawnPoint = ""
 
         self.tableauTp = {}
+        pygame.mixer.init()  # Initialiser le mixeur musique
+        self.musique = pygame.mixer.Sound("Map/Musiques/06-Route 1.wav")  # Lancer la musique de fond
+        self.musique.play(-1)
 
     '''Méthode permettant de charger une carte spécifique'''
     def chargerCarte(self, nomCarte, spawn):
@@ -179,10 +182,13 @@ class Carte:
                 if proba == leNb: # si le nombre de proba aléatoire et le nombre sont égales
                     if obj.name == "zone1": # cela correspond à la zone 1
                         self.choixPokemon("zone1", leNb) #fonction de choix du pokemon et tp dans le fight pokemon
+                        self.musique.fadeout(2000)
                     elif obj.name == "zone2":
                         self.choixPokemon("zone2", leNb)  # fonction de choix du pokemon et tp dans le fight pokemon
+                        self.musique.fadeout(2000)
                     elif obj.name == "zone3":
                         self.choixPokemon("zone3", leNb)  # fonction de choix du pokemon et tp dans le fight pokemon
+                        self.musique.fadeout(2000)
 
         for obj in self.action:
             if self.joueur.pieds.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)): # si le joueur tombe dans une zone de combat
@@ -200,26 +206,32 @@ class Carte:
                 elif self.alfred and obj.name == "Alfred" :
                     self.alfred = False
                     self.attaqueDresseur("Alfred")  # fonction de choix du pokemon et tp dans le fight pokemon
+                    self.musique.fadeout(2000)
 
                 elif self.anthony and obj.name == "Anthony":
                     self.anthony = False
                     self.attaqueDresseur("Anthony")  # fonction de choix du pokemon et tp dans le fight pokemon
+                    self.musique.fadeout(2000)
 
                 elif self.charles and obj.name == "Charles":
                     self.charles == False
                     self.attaqueDresseur("Charles")
+                    self.musique.fadeout(2000)
 
                 elif self.sammy and obj.name == "Sammy":
                     self.sammy = False
                     self.attaqueDresseur("Sammy")
+                    self.musique.fadeout(2000)
 
                 elif self.elvin and obj.name == "Elvin":
                     self.elvin = False
                     self.attaqueDresseur("Elvin")
+                    self.musique.fadeout(2000)
 
                 elif self.pierre and obj.name == "Pierre":
                     self.pierre = False
                     self.attaqueDresseur("Pierre")
+                    self.musique.fadeout(2000)
 
 
         for sprite in self.group.sprites():  # Récupérer les sprites du groupe

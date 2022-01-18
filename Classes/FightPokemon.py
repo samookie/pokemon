@@ -90,6 +90,9 @@ class FightPokemon:
             self.actuellement = "txtIntro" # Donc revenir à l'intro
             self.choix = "Attaque" # remettre le choix à attaque
             self.choixAtt = "att1" # remettre l'attaque à l'attaque 1
+            pygame.mixer.init()  # Initialiser le mixeur musique
+            self.musique = pygame.mixer.Sound("Map/Musiques/07-Wild Pokemon Battle.wav")  # Lancer la musique de fond
+            self.musique.play(-1)
             self.leJeu.mettre_a_jour = False
         pygame.display.flip()  # MAJ de l'affichage
 
@@ -127,6 +130,7 @@ class FightPokemon:
         elif self.choix == "Sac" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: #Si il choisi Sac il se retrouve dans la vue du sac
             self.leJeu.ecran_affiche = "sac" # Le jeu affiche la classe du Sac et donc la vue du sac
             self.leJeu.mettre_a_jour = True # Pour mettre à jour la vue de la fenêtre complète
+            self.musique.fadeout(2000)
             self.txtNum = 2 #Si il reviens il reviendra dans la vue avec le dialogue 2
             self.leJeu.sac.carte = "fightP" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
@@ -134,6 +138,7 @@ class FightPokemon:
         elif self.choix == "Pokemon" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Pokemon il se retrouve dans la vue du choix de pokemon
             self.leJeu.ecran_affiche = "pokemons" # le jeu affiche la classe PokemonView
             self.leJeu.mettre_a_jour = True # Pour mettre à jour la vue de la fênetre complète
+            self.musique.fadeout(2000)
             self.txtNum = 2 # Si il revient il reviendra dans la vue avec le dialogue 2
             self.leJeu.pokemon_ecran.carte = "fightP" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
@@ -141,6 +146,7 @@ class FightPokemon:
         elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Fuite il retournera dans la carte
             self.leJeu.ecran_affiche = "jeu" # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True #Pour mettre à jour la vue de la fênetre complète
+            self.musique.fadeout(2000)
             self.txtNum = 0 # Si il revient il reviendra dans la première partie du dialogue
             self.passer = False
 
@@ -162,16 +168,19 @@ class FightPokemon:
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
+            self.musique.fadeout(2000)
             self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
         elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "allieMort":
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
+            self.musique.fadeout(2000)
             self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "tousMort":
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
+            self.musique.fadeout(2000)
             self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
