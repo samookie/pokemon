@@ -332,5 +332,15 @@ class PokemonBDD():
         self.c.execute("UPDATE Hero SET argent = argent + ? WHERE idHero = 1", [argent])
         self.conn.commit()
 
+    def sauvPokemons(self, pokemons):
+        self.c.execute("DELETE FROM Liste_Pokemon; ")
+        self.conn.commit()
+        for poke in pokemons:
+            idPoke = self.c.execute("SELECT idPoke FROM Pokemon WHERE nomPoke = ?", [poke.nomPokemon]).fetchone()
+            self.c.execute("INSERT INTO Liste_Pokemon VALUES (1, ?, ?, ?)", [idPoke[0], poke.xp, poke.niveau])
+            self.conn.commit()
+
+
+
 
 

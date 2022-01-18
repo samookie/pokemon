@@ -111,6 +111,8 @@ class MenuInGame():
                     self.menuAffiche["ci"] = True
             elif self.menuSelec == 4: #Si sélection menu est 4
                 self.laBdd.savPartie(self.leJeu.carte.nom_carte, self.leJeu.carte.joueur.position[0], self.leJeu.carte.joueur.position[1])
+                #METTRE LA SAUVEGARDE DES POKEMONS
+                self.laBdd.sauvPokemons(self.leJeu.carte.laListePokemon)
                 self.menuAffiche["haut"] = False
             elif self.menuSelec == 5:
                 pygame.quit()
