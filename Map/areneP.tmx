@@ -55,6 +55,6 @@
    <point/>
   </object>
   <object id="32" name="Elvin" type="dresseur" x="79.5" y="209" width="46.5" height="12.75"/>
-  <object id="33" name="Pierre" type="dresseur" x="81.25" y="119.75" width="41" height="8.75"/>
+  <object id="33" name="Pierre" type="dresseur" x="83.25" y="120" width="41" height="17.25"/>
  </objectgroup>
 </map>

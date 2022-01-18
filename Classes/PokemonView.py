@@ -83,8 +83,11 @@ class PokemonView:
             if self.carte == "jeu":
                 self.leJeu.ecran_affiche = "jeu"
                 self.leJeu.mettre_a_jour = True
-            elif self.carte == "fight":
+            elif self.carte == "fightP":
                 self.leJeu.ecran_affiche = "fightP"
+                self.leJeu.mettre_a_jour = True
+            elif self.carte == "fightD":
+                self.leJeu.ecran_affiche = "fightD"
                 self.leJeu.mettre_a_jour = True
         elif pygame.key.get_pressed()[pygame.K_DOWN] and self.passer:
             if self.nbrPokeSelecActuellement < len(self.lesPokemons) - 1:

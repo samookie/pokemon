@@ -136,7 +136,7 @@ class FightDresseur:
             self.leJeu.ecran_affiche = "pokemons" # le jeu affiche la classe PokemonView
             self.leJeu.mettre_a_jour = True # Pour mettre à jour la vue de la fênetre complète
             self.txtNum = 2 # Si il revient il reviendra dans la vue avec le dialogue 2
-            self.leJeu.pokemon_ecran.carte = "fight" #Faire comprendre que l'on se trouve toujours dans le combat
+            self.leJeu.pokemon_ecran.carte = "fightD" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
 
         elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Fuite il retournera dans la carte
@@ -161,7 +161,8 @@ class FightDresseur:
     def gestion_touche_mort(self):
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "ennemieMort":
             self.interdireZone()
-            self.xpPokemon()
+            for poke in self.liste_ennemie:
+                self.xpPokemon()
             self.bdd.gagnerArgent(50)
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte

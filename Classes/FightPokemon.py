@@ -135,7 +135,7 @@ class FightPokemon:
             self.leJeu.ecran_affiche = "pokemons" # le jeu affiche la classe PokemonView
             self.leJeu.mettre_a_jour = True # Pour mettre à jour la vue de la fênetre complète
             self.txtNum = 2 # Si il revient il reviendra dans la vue avec le dialogue 2
-            self.leJeu.pokemon_ecran.carte = "fight" #Faire comprendre que l'on se trouve toujours dans le combat
+            self.leJeu.pokemon_ecran.carte = "fightP" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
 
         elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Fuite il retournera dans la carte
@@ -419,7 +419,7 @@ class FightPokemon:
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
             if self.liste_pokemon[self.alliePokemon].niveau >= 7:
-                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+                self.leJeu.screen.blit(self.text.render(f">{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][1]}", True, (0, 0, 0)), (562, 496))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][2]}", True, (0, 0, 0)), (573, 543))
             else:
@@ -435,7 +435,7 @@ class FightPokemon:
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
             if self.liste_pokemon[self.alliePokemon].niveau >= 7:
-                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+                self.leJeu.screen.blit(self.text.render(f">{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
             else:
                 self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (32, 541))
             if self.liste_pokemon[self.alliePokemon].niveau >= 14:

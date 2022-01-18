@@ -99,8 +99,9 @@ class Pokemon():
         if niveauEnnemi == 1:
             xp = 4
         else :
+            print("xp actuelle :", self.xp , "sur xp max :" , self.xp_max)
             xp = self.lvlExp[niveauEnnemi-1][2]
-        print("xp actuelle :",self.xp , "sur xp max :" ,self.xp_max)
+
         self.xp_up(xp)
 
 
