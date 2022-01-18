@@ -70,8 +70,13 @@ class Sac:
         elif pygame.key.get_pressed()[pygame.K_RETURN] and self.continuer:
             objSelec = self.lesObjets[self.selecObj]
 
-            if self.carte == "fight":
+            if self.carte == "fightP":
                 self.leJeu.ecran_affiche = "fightP"
+                self.leJeu.mettre_a_jour
+                self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
+                self.leJeu.carte.laListePokemon[self.leJeu.fightP.alliePokemon].soigner(20)
+            else :
+                self.leJeu.ecran_affiche = "fightD"
                 self.leJeu.mettre_a_jour
                 self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
                 self.leJeu.carte.laListePokemon[self.leJeu.fightD.alliePokemon].soigner(20)

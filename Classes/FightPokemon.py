@@ -43,10 +43,6 @@ class FightPokemon:
         Fonction permettant d'afficher les contenus dans la fenêtre
         :return:
         '''
-        if self.liste_pokemon[self.alliePokemon].hpActu == 0 and len(self.liste_pokemon) == self.alliePokemon +1:
-            self.alliePokemon +=1
-        elif self.liste_pokemon[self.alliePokemon].hpActu == 0 and len(self.liste_pokemon) == self.alliePokemon +1:
-            self.actuellement = "tousMort"
 
         self.att_ennemy = self.bdd.liste_attaque_pokemon(self.lePokemon[0]) #initialise le tableau de l'attaque de l'ennemi
         self.att_allier = self.bdd.liste_attaque_pokemon(self.liste_pokemon[self.alliePokemon].nomPokemon)  # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
@@ -132,7 +128,7 @@ class FightPokemon:
             self.leJeu.ecran_affiche = "sac" # Le jeu affiche la classe du Sac et donc la vue du sac
             self.leJeu.mettre_a_jour = True # Pour mettre à jour la vue de la fenêtre complète
             self.txtNum = 2 #Si il reviens il reviendra dans la vue avec le dialogue 2
-            self.leJeu.sac.carte = "fight" #Faire comprendre que l'on se trouve toujours dans le combat
+            self.leJeu.sac.carte = "fightP" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
 
         elif self.choix == "Pokemon" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Pokemon il se retrouve dans la vue du choix de pokemon

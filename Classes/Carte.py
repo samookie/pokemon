@@ -238,7 +238,7 @@ class Carte:
         if nomDresseur == "Omar":
 
             infoChenipan = self.bdd.searchPokemon("Chenipan")  # chercher dans la base de donnée le pokémon
-            chenipan = Pokemon(self.jeu, infoChenipan[0], "ASPICOT", infoChenipan[1], infoChenipan[2], infoChenipan[3],
+            chenipan = Pokemon(self.jeu, infoChenipan[0], "CHENIPAN", infoChenipan[1], infoChenipan[2], infoChenipan[3],
                                 infoChenipan[4], infoChenipan[5], infoChenipan[6], infoChenipan[7], infoChenipan[8],
                                 infoChenipan[9], infoChenipan[10], infoChenipan[11],
                                 infoChenipan[12])  # initialisation du pokémon
@@ -258,25 +258,154 @@ class Carte:
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
             self.jeu.mettre_a_jour = True
         elif nomDresseur == "Alfred":
+            infoAspicot1 = self.bdd.searchPokemon("Aspicot")  # chercher dans la base de donnée le pokémon
+            aspicot1 = Pokemon(self.jeu, infoAspicot1[0], "ASPICOT", infoAspicot1[1], infoAspicot1[2],
+                               infoAspicot1[3],
+                               infoAspicot1[4], infoAspicot1[5], infoAspicot1[6], infoAspicot1[7], infoAspicot1[8],
+                               infoAspicot1[9], infoAspicot1[10], infoAspicot1[11],
+                               infoAspicot1[12])  # initialisation du pokémon
+            aspicot1.setLevelPokemon(7)  # Mettre le pokemon au niveau adaptée
+
+            infoCoconfort = self.bdd.searchPokemon("Coconfort")  # chercher dans la base de donnée le pokémon
+            coconfort = Pokemon(self.jeu, infoCoconfort[0], "COCONFORT", infoCoconfort[1], infoCoconfort[2], infoCoconfort[3],
+                              infoCoconfort[4], infoCoconfort[5], infoCoconfort[6], infoCoconfort[7], infoCoconfort[8],
+                              infoCoconfort[9], infoCoconfort[10], infoCoconfort[11],
+                              infoCoconfort[12])  # initialisation du pokémon
+            coconfort.setLevelPokemon(7)  # Mettre le pokemon au niveau adaptée
+
+            infoAspicot2 = self.bdd.searchPokemon("Aspicot")  # chercher dans la base de donnée le pokémon
+            aspicot2 = Pokemon(self.jeu, infoAspicot2[0], "ASPICOT", infoAspicot2[1], infoAspicot2[2],
+                               infoAspicot2[3],
+                               infoAspicot2[4], infoAspicot2[5], infoAspicot2[6], infoAspicot2[7], infoAspicot2[8],
+                               infoAspicot2[9], infoAspicot2[10], infoAspicot2[11],
+                               infoAspicot2[12])  # initialisation du pokémon
+            aspicot2.setLevelPokemon(7)  # Mettre le pokemon au niveau adaptée
+
+
+            liste_PokemonE = [aspicot1, coconfort,aspicot2]
+
+            self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.fightD.initDresseur("alfred")
+            self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
+            self.jeu.mettre_a_jour = True
+        elif nomDresseur == "Anthony":
             infoChenipan = self.bdd.searchPokemon("Chenipan")  # chercher dans la base de donnée le pokémon
-            chenipan = Pokemon(self.jeu, infoChenipan[0], "ASPICOT", infoChenipan[1], infoChenipan[2],
+            chenipan = Pokemon(self.jeu, infoChenipan[0], "CHENIPAN", infoChenipan[1], infoChenipan[2],
                                infoChenipan[3],
                                infoChenipan[4], infoChenipan[5], infoChenipan[6], infoChenipan[7], infoChenipan[8],
                                infoChenipan[9], infoChenipan[10], infoChenipan[11],
                                infoChenipan[12])  # initialisation du pokémon
-            chenipan.setLevelPokemon(6)  # Mettre le pokemon au niveau adaptée
+            chenipan.setLevelPokemon(7)  # Mettre le pokemon au niveau adaptée
 
-            infoAspicot = self.bdd.searchPokemon("Aspicot")  # chercher dans la base de donnée le pokémon
-            aspicot = Pokemon(self.jeu, infoAspicot[0], "ASPICOT", infoAspicot[1], infoAspicot[2], infoAspicot[3],
-                              infoAspicot[4], infoAspicot[5], infoAspicot[6], infoAspicot[7], infoAspicot[8],
-                              infoAspicot[9], infoAspicot[10], infoAspicot[11],
-                              infoAspicot[12])  # initialisation du pokémon
-            aspicot.setLevelPokemon(6)  # Mettre le pokemon au niveau adaptée
+            infoChenipan2 = self.bdd.searchPokemon("Chenipan")  # chercher dans la base de donnée le pokémon
+            chenipan2 = Pokemon(self.jeu, infoChenipan2[0], "CHENIPAN", infoChenipan2[1], infoChenipan2[2],
+                               infoChenipan2[3],
+                               infoChenipan2[4], infoChenipan2[5], infoChenipan2[6], infoChenipan2[7], infoChenipan2[8],
+                               infoChenipan2[9], infoChenipan2[10], infoChenipan2[11],
+                               infoChenipan2[12])  # initialisation du pokémon
+            chenipan2.setLevelPokemon(8)  # Mettre le pokemon au niveau adaptée
 
-            liste_PokemonE = [chenipan, aspicot]
+            liste_PokemonE = [chenipan, chenipan2]
 
             self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
-            self.jeu.fightD.initDresseur("omar")
+            self.jeu.fightD.initDresseur("anthony")
+            self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
+            self.jeu.mettre_a_jour = True
+        elif nomDresseur == "Charles":
+            infoChrysacier = self.bdd.searchPokemon("Chrysacier")  # chercher dans la base de donnée le pokémon
+            chrysacier = Pokemon(self.jeu, infoChrysacier[0], "CHRYSACIER", infoChrysacier[1], infoChrysacier[2],
+                                 infoChrysacier[3],
+                                 infoChrysacier[4], infoChrysacier[5], infoChrysacier[6], infoChrysacier[7],
+                                 infoChrysacier[8],
+                                 infoChrysacier[9], infoChrysacier[10], infoChrysacier[11],
+                                 infoChrysacier[12])  # initialisation du pokémon
+            chrysacier.setLevelPokemon(7)  # Mettre le pokemon au niveau adaptée
+
+            infoChenipan = self.bdd.searchPokemon("Chenipan")  # chercher dans la base de donnée le pokémon
+            chenipan = Pokemon(self.jeu, infoChenipan[0], "CHENIPAN", infoChenipan[1], infoChenipan[2],
+                               infoChenipan[3],
+                               infoChenipan[4], infoChenipan[5], infoChenipan[6], infoChenipan[7], infoChenipan[8],
+                               infoChenipan[9], infoChenipan[10], infoChenipan[11],
+                               infoChenipan[12])  # initialisation du pokémon
+            chenipan.setLevelPokemon(7)  # Mettre le pokemon au niveau adaptée
+
+            infoChrysacier2 = self.bdd.searchPokemon("Chrysacier")  # chercher dans la base de donnée le pokémon
+            chrysacier2 = Pokemon(self.jeu, infoChrysacier2[0], "CHRYSACIER", infoChrysacier2[1], infoChrysacier2[2],
+                                 infoChrysacier2[3],
+                                 infoChrysacier2[4], infoChrysacier2[5], infoChrysacier2[6], infoChrysacier2[7],
+                                 infoChrysacier2[8],
+                                 infoChrysacier2[9], infoChrysacier2[10], infoChrysacier2[11],
+                                 infoChrysacier2[12])  # initialisation du pokémon
+            chrysacier2.setLevelPokemon(7)  # Mettre le pokemon au niveau adaptée
+
+
+
+            liste_PokemonE = [chrysacier,chenipan,chrysacier2 ]
+
+            self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.fightD.initDresseur("charles")
+            self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
+            self.jeu.mettre_a_jour = True
+        elif nomDresseur == "Sammy":
+            infoAspicot = self.bdd.searchPokemon("Aspicot")  # chercher dans la base de donnée le pokémon
+            aspicot = Pokemon(self.jeu, infoAspicot[0], "ASPICOT", infoAspicot[1], infoAspicot[2],
+                               infoAspicot[3],
+                               infoAspicot[4], infoAspicot[5], infoAspicot[6], infoAspicot[7], infoAspicot[8],
+                               infoAspicot[9], infoAspicot[10], infoAspicot[11],
+                               infoAspicot[12])  # initialisation du pokémon
+            aspicot.setLevelPokemon(9)  # Mettre le pokemon au niveau adaptée
+
+            liste_PokemonE = [aspicot]
+
+            self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.fightD.initDresseur("sammy")
+            self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
+            self.jeu.mettre_a_jour = True
+
+        elif nomDresseur == "Elvin":
+            infoRacaillou = self.bdd.searchPokemon("Racaillou")  # chercher dans la base de donnée le pokémon
+            racaillou = Pokemon(self.jeu, infoRacaillou[0], "RACAILLOU", infoRacaillou[1], infoRacaillou[2],
+                               infoRacaillou[3],
+                               infoRacaillou[4], infoRacaillou[5], infoRacaillou[6], infoRacaillou[7], infoRacaillou[8],
+                               infoRacaillou[9], infoRacaillou[10], infoRacaillou[11],
+                               infoRacaillou[12])  # initialisation du pokémon
+            racaillou.setLevelPokemon(10)  # Mettre le pokemon au niveau adaptée
+
+            infoSabelette = self.bdd.searchPokemon("Sabelette")  # chercher dans la base de donnée le pokémon
+            sabelette = Pokemon(self.jeu, infoSabelette[0], "SABELETTE", infoSabelette[1], infoSabelette[2], infoSabelette[3],
+                              infoSabelette[4], infoSabelette[5], infoSabelette[6], infoSabelette[7], infoSabelette[8],
+                              infoSabelette[9], infoSabelette[10], infoSabelette[11],
+                              infoSabelette[12])  # initialisation du pokémon
+            sabelette.setLevelPokemon(11)  # Mettre le pokemon au niveau adaptée
+
+            liste_PokemonE = [racaillou, sabelette]
+
+            self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.fightD.initDresseur("elvin")
+            self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
+            self.jeu.mettre_a_jour = True
+
+        elif nomDresseur == "Pierre":
+            infoRacaillou = self.bdd.searchPokemon("Racaillou")  # chercher dans la base de donnée le pokémon
+            racaillou = Pokemon(self.jeu, infoRacaillou[0], "RACAILLOU", infoRacaillou[1], infoRacaillou[2],
+                                infoRacaillou[3],
+                                infoRacaillou[4], infoRacaillou[5], infoRacaillou[6], infoRacaillou[7],
+                                infoRacaillou[8],
+                                infoRacaillou[9], infoRacaillou[10], infoRacaillou[11],
+                                infoRacaillou[12])  # initialisation du pokémon
+            racaillou.setLevelPokemon(12)  # Mettre le pokemon au niveau adaptée
+
+            infoOnix = self.bdd.searchPokemon("Onix")  # chercher dans la base de donnée le pokémon
+            onix = Pokemon(self.jeu, infoOnix[0], "ONIX", infoOnix[1], infoOnix[2], infoOnix[3],
+                              infoOnix[4], infoOnix[5], infoOnix[6], infoOnix[7], infoOnix[8],
+                              infoOnix[9], infoOnix[10], infoOnix[11],
+                              infoOnix[12])  # initialisation du pokémon
+            onix.setLevelPokemon(14)  # Mettre le pokemon au niveau adaptée
+
+            liste_PokemonE = [racaillou, onix]
+
+            self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
+            self.jeu.fightD.initDresseur("pierre")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
             self.jeu.mettre_a_jour = True
 
