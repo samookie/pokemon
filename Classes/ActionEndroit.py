@@ -30,7 +30,6 @@ class ActionEndroit:
         pokemons = self.carte.laListePokemon
         for poke in pokemons:
             poke.soignerPokemon()
-        self.l
 
     def gestion_touches(self):
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.continuer:
