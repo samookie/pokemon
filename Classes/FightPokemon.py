@@ -85,6 +85,12 @@ class FightPokemon:
         elif self.actuellement == "tousMort":
             self.leJeu.screen.blit(self.dialogueBleu, (0,0))
             self.tousMort()
+        elif self.actuellement == "capture":
+            self.leJeu.screen.blit(self.dialogueBleu, (0, 0))
+            if self.capture:
+                self.pokemonCapture()
+            else:
+                self.pokemonNonCapture()
 
         if self.leJeu.mettre_a_jour: # Si le jeu est à jour
             self.actuellement = "txtIntro" # Donc revenir à l'intro
@@ -118,6 +124,8 @@ class FightPokemon:
         elif self.actuellement == "allieMort":
             self.gestion_touche_mort()
         elif self.actuellement == "tousMort":
+            self.gestion_touche_mort()
+        elif self.actuellement == "capture":
             self.gestion_touche_mort()
 
 
@@ -177,6 +185,12 @@ class FightPokemon:
             self.musique.fadeout(2000)
             self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "tousMort":
+            self.passer = False
+            self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
+            self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
+            self.musique.fadeout(2000)
+            self.txtNum = 0  # Si il revient il reviendra dans la première partie du dialogue
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.actuellement == "capture":
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
@@ -764,3 +778,30 @@ class FightPokemon:
         self.leJeu.screen.blit(self.text.render(f"{self.lePokemon[0]} ennemie attaque {self.att_ennemy[attaque][0]}!", True, (255, 255, 255)),(27, 495))
     def affAllieAtt(self, attaque):
         self.leJeu.screen.blit(self.text.render(f"{self.liste_pokemon[self.alliePokemon].nomPokemon} attaque avec {self.att_allier[attaque][0]}!", True, (255, 255, 255)),(27, 495))
+
+    def algorithmCapture(self):
+        self.actuellement = "capture"
+        nb = random.randint(1, 100)
+        self.capture = False
+
+        if self.lePokemon[13] >= self.lePokemon[4] * 0.75:
+            if nb <= self.lePokemon[4] * 0.25:
+                self.capture = True
+                self.bdd.ajouterPokemonJoueur( self.lePokemon, self.lePokemon[3])
+        elif self.lePokemon[13] >= self.lePokemon[4] * 0.50 and self.lePokemon[13] < self.lePokemon[4] * 0.75:
+            if nb <= self.lePokemon[4] * 0.50:
+                self.capture = True
+                self.bdd.ajouterPokemonJoueur(self.lePokemon, self.lePokemon[3])
+        elif self.lePokemon[13] >= self.lePokemon[4] * 0.25 and self.lePokemon[13] < self.lePokemon[4] * 0.50:
+            if nb <= self.lePokemon[4] * 0.75:
+                self.capture = True
+                self.bdd.ajouterPokemonJoueur(self.lePokemon, self.lePokemon[3])
+        elif self.lePokemon[13] < self.lePokemon[4] * 0.25:
+            self.capture = True
+            self.bdd.ajouterPokemonJoueur(self.lePokemon, self.lePokemon[3])
+
+
+    def pokemonCapture(self):
+        self.leJeu.screen.blit(self.text.render(f"Vous avez capturé {self.lePokemon[0]}!", True,(255, 255, 255)), (27, 495))
+    def pokemonNonCapture(self):
+        self.leJeu.screen.blit(self.text.render(f"{self.lePokemon[0]} s'est enfui!", True,(255, 255, 255)), (27, 495))

@@ -317,8 +317,8 @@ class PokemonBDD():
         return lesAttaques
 
     def ajouterPokemonJoueur(self, pokemon, niv):
-        idPoke = self.c.execute("SELECT idPoke FROM Pokemon WHERE nomPoke = ?", [pokemon.nomPokemon]).fetchone()
-        self.c.execute("INSERT INTO Liste_Pokemon VALUES (1, ?, ?, ?)", [idPoke[0], pokemon.xp, niv])
+        idPoke = self.c.execute("SELECT idPoke FROM Pokemon WHERE nomPoke = ?", [pokemon[0]]).fetchone()
+        self.c.execute("INSERT INTO Liste_Pokemon VALUES (1, ?, ?, ?)", [idPoke[0], pokemon[14], niv])
         self.conn.commit()
 
     def testBDDFonctionnelle(self):

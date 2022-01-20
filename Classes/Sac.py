@@ -69,17 +69,25 @@ class Sac:
             self.continuer = False
         elif pygame.key.get_pressed()[pygame.K_RETURN] and self.continuer:
             objSelec = self.lesObjets[self.selecObj]
-
-            if self.carte == "fightP":
-                self.leJeu.ecran_affiche = "fightP"
-                self.leJeu.mettre_a_jour
-                self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
-                self.leJeu.carte.laListePokemon[self.leJeu.fightP.alliePokemon].soigner(20)
-            else :
-                self.leJeu.ecran_affiche = "fightD"
-                self.leJeu.mettre_a_jour
-                self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
-                self.leJeu.carte.laListePokemon[self.leJeu.fightD.alliePokemon].soigner(20)
+            if self.selecObj > 0: #Si c'est pokéball
+                #if objSelec[2] > 0:
+                if self.carte == "fightP":
+                    self.leJeu.ecran_affiche = "fightP"
+                    self.leJeu.mettre_a_jour
+                    self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
+                    self.leJeu.carte.laListePokemon[self.leJeu.fightP.alliePokemon].soigner(20)
+                else :
+                    self.leJeu.ecran_affiche = "fightD"
+                    self.leJeu.mettre_a_jour
+                    self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
+                    self.leJeu.carte.laListePokemon[self.leJeu.fightD.alliePokemon].soigner(20)
+            else: # Si c'est potion
+                # if objSelec[2] > 0:
+                if self.carte == "fightP":
+                    self.leJeu.fightP.algorithmCapture()
+                    self.leJeu.ecran_affiche = "fightP"
+                    self.leJeu.mettre_a_jour
+                    self.laBdd.majNbOjet(objSelec[3], objSelec[2] - 1)
 
         elif not pygame.key.get_pressed()[pygame.K_ESCAPE] and not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_DOWN] and not self.continuer: #SPAM TOUCHE
             self.continuer = True

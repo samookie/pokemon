@@ -169,7 +169,7 @@ class FightDresseur:
             self.interdireZone()
             for poke in self.liste_ennemie:
                 self.xpPokemon()
-            self.bdd.gagnerArgent(50)
+                self.bdd.gagnerArgent(25)
             self.passer = False
             self.leJeu.ecran_affiche = "jeu"  # le jeu affiche la classe Carte
             self.leJeu.mettre_a_jour = True  # Pour mettre à jour la vue de la fênetre complète
