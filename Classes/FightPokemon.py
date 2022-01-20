@@ -458,11 +458,11 @@ class FightPokemon:
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
             if self.liste_pokemon[self.alliePokemon].niveau >= 7:
-                self.leJeu.screen.blit(self.text.render(f">{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
             else:
                 self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (32, 541))
             if self.liste_pokemon[self.alliePokemon].niveau >= 14:
-                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+                self.leJeu.screen.blit(self.text.render(f">{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][1]}", True, (0, 0, 0)), (562, 496))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][2]}", True, (0, 0, 0)), (573, 543))
             else:
@@ -481,32 +481,24 @@ class FightPokemon:
 
         if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
             if self.attaque1:
-                print("attaque1", self.attaque1 , self.attaque2)
                 self.affAllieAtt(self.attA)
                 if self.attaqueUneFois:
-                    print("allié attaque")
                     self.attaqueUneFois = False
                     self.attaqueAllie()
             else:
-                print("attaque2", self.attaque2 , self.attaque1)
                 self.affEnnemyAtt(self.attE)
                 if self.attaqueUneFois:
-                    print("ennemie attaque")
                     self.attaqueUneFois = False
                     self.attaqueEnnemi()
         else:
             if self.attaque1:
-                print("attaque 1", self.attaque1 , self.attaque2)
                 self.affEnnemyAtt(self.attE)
                 if self.attaqueUneFois:
-                    print("ennemie attaque")
                     self.attaqueUneFois = False
                     self.attaqueEnnemi()
             else:
-                print("attaque2", self.attaque2 , self.attaque1)
                 self.affAllieAtt(self.attA)
                 if self.attaqueUneFois:
-                    print("allié attaque")
                     self.attaqueUneFois = False
                     self.attaqueAllie()
 

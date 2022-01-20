@@ -44,7 +44,6 @@ class FightDresseur:
         Fonction permettant d'afficher les contenus dans la fenêtre
         :return:
         '''
-
         self.att_ennemy = self.bdd.liste_attaque_pokemon(self.liste_ennemie[self.ennemiePokemon].nomPokemon) #initialise le tableau de l'attaque de l'ennemi
         self.att_allier = self.bdd.liste_attaque_pokemon(self.liste_pokemon[self.alliePokemon].nomPokemon)  # Tableau contenant le nom de l'attaque, l'attaque, et le type de l'attaque du pokémon allié
         pygame.draw.rect(self.leJeu.screen, (0, 0, 0),pygame.Rect(0, 0, 700, 600))  # Créer un fond noir sur tout l'écran
@@ -79,6 +78,7 @@ class FightDresseur:
         elif self.actuellement == "ennemieMort": # Si l'on se retrouve avec l'ennemi mort alors on affiche le message de mortet on quitte le combat on donne aussi les récompenses
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0)) # Dessiner l'image du dialogue bleu
             self.ennemieMort() # Fonction ou l'ennemi meurt
+            print(len(self.liste_ennemie), self.ennemiePokemon)
             # Faire la fonction qui xp le pokémon
         elif self.actuellement == "allieMort": # Si l'on se retouve avec l'allié mort alors on affiche le message et on quitte
             self.leJeu.screen.blit(self.dialogueBleu, (0, 0)) # Dessiner l'image du dialogue bleu
@@ -144,14 +144,6 @@ class FightDresseur:
             self.leJeu.pokemon_ecran.carte = "fightD" #Faire comprendre que l'on se trouve toujours dans le combat
             self.passer = False
 
-        elif self.choix == "Fuite" and pygame.key.get_pressed()[pygame.K_SPACE] and self.passer: # Si il choisi Fuite il retournera dans la carte
-            self.interdireZone()
-            self.leJeu.ecran_affiche = "jeu" # le jeu affiche la classe Carte
-            self.leJeu.mettre_a_jour = True #Pour mettre à jour la vue de la fênetre complète
-            self.musique.fadeout(2000)
-            self.txtNum = 0 # Si il revient il reviendra dans la première partie du dialogue
-            self.passer = False
-
         elif not pygame.key.get_pressed()[pygame.K_SPACE] and not self.passer:
             self.passer = True
 
@@ -195,20 +187,20 @@ class FightDresseur:
     def gestion_touches_en_attaque(self):
         '''Fonction permettant de gérer la partie attaque et combat (lequel attaque en premier)'''
         if pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and self.attaque1: #Si l'attaque1 est faite
-            print("JATTAQUE UNE FOIS")
+
             self.passer = False
             self.attaque1 = False
             self.attaque2 = True
             self.attaqueUneFois = True
             self.attaqueOne = True
         elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and self.attaque2 and not self.attaqueUneFois:# Si l'attaque1 et L'attaque2 viennent de se terminer
-            print("JATTAQUE UNE DEUXIEME FOIS")
+
             self.passer = False
             self.attaque2 = False
             self.attaqueUneFois = False
             self.attaqueOne = True
         elif pygame.key.get_pressed()[pygame.K_SPACE] and self.passer and not self.attaque1 and not self.attaque2 and not self.attaqueUneFois: #Si l'attaque1 et l'attaque 2 sont passées
-            print("JAI ATTAQUE")
+
             self.actuellement = "choixMenu"
             self.passer = False
             self.attaque1 = True
@@ -294,22 +286,22 @@ class FightDresseur:
             self.leJeu.screen.blit(self.text.render(">ATTAQUE ", True, (0, 0, 0)), (380, 494))
             self.leJeu.screen.blit(self.text.render("SAC", True, (0, 0, 0)), (585, 494))
             self.leJeu.screen.blit(self.text.render("POKEMON", True, (0, 0, 0)), (380, 545))
-            self.leJeu.screen.blit(self.text.render("FUITE", True, (0, 0, 0)), (585, 545))
+
         elif self.choix == "Sac":
             self.leJeu.screen.blit(self.text.render("ATTAQUE ", True, (0, 0, 0)), (380, 494))
             self.leJeu.screen.blit(self.text.render(">SAC", True, (0, 0, 0)), (585, 494))
             self.leJeu.screen.blit(self.text.render("POKEMON", True, (0, 0, 0)), (380, 545))
-            self.leJeu.screen.blit(self.text.render("FUITE", True, (0, 0, 0)), (585, 545))
+
         elif self.choix == "Pokemon":
             self.leJeu.screen.blit(self.text.render("ATTAQUE ", True, (0, 0, 0)), (380, 494))
             self.leJeu.screen.blit(self.text.render("SAC", True, (0, 0, 0)), (585, 494))
             self.leJeu.screen.blit(self.text.render(">POKEMON", True, (0, 0, 0)), (380, 545))
-            self.leJeu.screen.blit(self.text.render("FUITE", True, (0, 0, 0)), (585, 545))
+
         elif self.choix == "Fuite":
             self.leJeu.screen.blit(self.text.render("ATTAQUE ", True, (0, 0, 0)), (380, 494))
             self.leJeu.screen.blit(self.text.render("SAC", True, (0, 0, 0)), (585, 494))
             self.leJeu.screen.blit(self.text.render("POKEMON", True, (0, 0, 0)), (380, 545))
-            self.leJeu.screen.blit(self.text.render(">FUITE", True, (0, 0, 0)), (585, 545))
+
 
     def algorithm_choix(self):
         if self.a[0][0] == 1 and pygame.key.get_pressed()[pygame.K_RIGHT]:  # attaque pour passer à sac
@@ -321,11 +313,6 @@ class FightDresseur:
             self.a[0][0] = 0
             self.a[1][0] = 1
             self.choix = "Pokemon"
-
-        elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_DOWN]:  # sac pour passer à fuite
-            self.a[0][1] = 0
-            self.a[1][1] = 1
-            self.choix = "Fuite"
 
         elif self.a[0][1] == 1 and pygame.key.get_pressed()[pygame.K_LEFT]:  # sac pour passer à attaque
             self.a[0][1] = 0
@@ -347,10 +334,6 @@ class FightDresseur:
             self.a[0][0] = 1
             self.choix = "Attaque"
 
-        elif self.a[1][0] == 1 and pygame.key.get_pressed()[pygame.K_RIGHT]:  # pokemon pour passer à fuite
-            self.a[1][0] = 0
-            self.a[1][1] = 1
-            self.choix = "Fuite"
 
     def algorithm_attaque(self):
         if self.a[0][0] == 1 and pygame.key.get_pressed()[pygame.K_RIGHT]:  # attaque 1 pour passer à l'attaque 2
@@ -434,7 +417,7 @@ class FightDresseur:
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[0][0]}", True, (0, 0, 0)), (32, 490))
             self.leJeu.screen.blit(self.text.render(f"{self.att_allier[1][0]}", True, (0, 0, 0)), (262, 490))
             if self.liste_pokemon[self.alliePokemon].niveau >= 7:
-                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
+                self.leJeu.screen.blit(self.text.render(f">{self.att_allier[2][0]}", True, (0, 0, 0)), (32, 541))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][1]}", True, (0, 0, 0)), (562, 496))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[2][2]}", True, (0, 0, 0)), (573, 543))
             else:
@@ -454,7 +437,7 @@ class FightDresseur:
             else:
                 self.leJeu.screen.blit(self.text.render(f" ---", True, (0, 0, 0)), (32, 541))
             if self.liste_pokemon[self.alliePokemon].niveau >= 14:
-                self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
+                self.leJeu.screen.blit(self.text.render(f">{self.att_allier[3][0]}", True, (0, 0, 0)), (262, 541))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][1]}", True, (0, 0, 0)), (562, 496))
                 self.leJeu.screen.blit(self.text.render(f"{self.att_allier[3][2]}", True, (0, 0, 0)), (573, 543))
             else:
@@ -463,25 +446,24 @@ class FightDresseur:
                 self.leJeu.screen.blit(self.text.render(f" inconnu", True, (0, 0, 0)), (573, 543))
 
     def attaque(self):
-        if self.liste_ennemie[self.ennemiePokemon].hpActu <= 0 and len(self.liste_pokemon) == self.ennemiePokemon+1:
+        if self.liste_ennemie[self.ennemiePokemon].hpActu <= 0 and len(self.liste_ennemie) == self.ennemiePokemon + 1:
             self.actuellement = "ennemieMort"
-        elif self.liste_pokemon[self.alliePokemon].hpActu <= 0 and len(self.liste_pokemon) == self.alliePokemon+1:
+        elif self.liste_pokemon[self.alliePokemon].hpActu <= 0 and len(self.liste_pokemon) == self.alliePokemon + 1:
             self.actuellement = "allieMort"
-        elif len(self.liste_pokemon) > self.alliePokemon and self.liste_pokemon[self.alliePokemon].hpActu <= 0:
+        elif len(self.liste_pokemon) > self.alliePokemon and self.liste_pokemon[self.alliePokemon].hpActu <= 0 :
             self.alliePokemon += 1
-        elif len(self.liste_ennemie) > self.ennemiePokemon and self.liste_ennemie[self.ennemiePokemon].hpActu <= 0:
-            self.ennemiePokemon +=1
-
+        elif len(self.liste_ennemie) > self.ennemiePokemon and self.liste_ennemie[self.ennemiePokemon].hpActu <= 0 and not len(self.liste_ennemie) == self.ennemiePokemon + 1 :
+            self.ennemiePokemon += 1
         if self.liste_pokemon[self.alliePokemon].vitesse > self.liste_ennemie[self.ennemiePokemon].vitesse:
             if self.attaque1:
-                print("attaque1", self.attaque1 , self.attaque2)
+                print("attaque1", self.attaque1, self.attaque2)
                 self.affAllieAtt(self.attA)
                 if self.attaqueUneFois:
                     print("allié attaque")
                     self.attaqueUneFois = False
                     self.attaqueAllie()
             else:
-                print("attaque2", self.attaque2 , self.attaque1)
+                print("attaque2", self.attaque2, self.attaque1)
                 self.affEnnemyAtt(self.attE)
                 if self.attaqueUneFois:
                     print("ennemie attaque")
@@ -489,14 +471,14 @@ class FightDresseur:
                     self.attaqueEnnemi()
         else:
             if self.attaque1:
-                print("attaque 1", self.attaque1 , self.attaque2)
+                print("attaque 1", self.attaque1, self.attaque2)
                 self.affEnnemyAtt(self.attE)
                 if self.attaqueUneFois:
                     print("ennemie attaque")
                     self.attaqueUneFois = False
                     self.attaqueEnnemi()
             else:
-                print("attaque2", self.attaque2 , self.attaque1)
+                print("attaque2", self.attaque2, self.attaque1)
                 self.affAllieAtt(self.attA)
                 if self.attaqueUneFois:
                     print("allié attaque")

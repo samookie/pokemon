@@ -265,6 +265,7 @@ class Carte:
 
             liste_PokemonE = [chenipan,aspicot]
 
+            self.jeu.fightD.ennemiePokemon = 0
             self.jeu.fightD.changerPokemon(liste_PokemonE,self.laListePokemon)  # passer les informations à FightPokemon
             self.jeu.fightD.initDresseur("omar")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
@@ -295,7 +296,7 @@ class Carte:
 
 
             liste_PokemonE = [aspicot1, coconfort,aspicot2]
-
+            self.jeu.fightD.ennemiePokemon = 0
             self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
             self.jeu.fightD.initDresseur("alfred")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
@@ -318,7 +319,7 @@ class Carte:
             chenipan2.setLevelPokemon(8)  # Mettre le pokemon au niveau adaptée
 
             liste_PokemonE = [chenipan, chenipan2]
-
+            self.jeu.fightD.ennemiePokemon = 0
             self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
             self.jeu.fightD.initDresseur("anthony")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
@@ -353,7 +354,7 @@ class Carte:
 
 
             liste_PokemonE = [chrysacier,chenipan,chrysacier2 ]
-
+            self.jeu.fightD.ennemiePokemon = 0
             self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
             self.jeu.fightD.initDresseur("charles")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
@@ -368,7 +369,7 @@ class Carte:
             aspicot.setLevelPokemon(9)  # Mettre le pokemon au niveau adaptée
 
             liste_PokemonE = [aspicot]
-
+            self.jeu.fightD.ennemiePokemon = 0
             self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
             self.jeu.fightD.initDresseur("sammy")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
@@ -391,7 +392,7 @@ class Carte:
             sabelette.setLevelPokemon(11)  # Mettre le pokemon au niveau adaptée
 
             liste_PokemonE = [racaillou, sabelette]
-
+            self.jeu.fightD.ennemiePokemon = 0
             self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
             self.jeu.fightD.initDresseur("elvin")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
@@ -415,7 +416,7 @@ class Carte:
             onix.setLevelPokemon(14)  # Mettre le pokemon au niveau adaptée
 
             liste_PokemonE = [racaillou, onix]
-
+            self.jeu.fightD.ennemiePokemon = 0
             self.jeu.fightD.changerPokemon(liste_PokemonE, self.laListePokemon)  # passer les informations à FightPokemon
             self.jeu.fightD.initDresseur("pierre")
             self.jeu.ecran_affiche = "fightD"  # Change l'écran d'affichage au fightPokemon
