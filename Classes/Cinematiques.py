@@ -141,8 +141,8 @@ class Cinematiques:
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.carte.joueur.addPokemon(lautre,2)
                     self.laBdd.setCurrentCinematique(5)
-                    self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
-                    self.laBdd.addObjSac(2, "potion", "image", "potion")
+                    self.laBdd.addObjSac(4, "pokeball", "image", "pokeball")
+                    self.laBdd.addObjSac(50, "potion", "image", "potion")
 
                 elif self.pokemonChoisis == "salameche": #Si c'est salamèche
 
@@ -162,8 +162,8 @@ class Cinematiques:
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.carte.joueur.addPokemon(lautre, 2)
                     self.laBdd.setCurrentCinematique(5)
-                    self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
-                    self.laBdd.addObjSac(2, "potion", "image", "potion")
+                    self.laBdd.addObjSac(4, "pokeball", "image", "pokeball")
+                    self.laBdd.addObjSac(50, "potion", "image", "potion")
 
                 elif self.pokemonChoisis == "carapuce": #Si c'est carapuce
 
@@ -183,8 +183,8 @@ class Cinematiques:
                     self.carte.joueur.addPokemon(lePokemon,5)
                     self.carte.joueur.addPokemon(lautre, 2)
                     self.laBdd.setCurrentCinematique(5)
-                    self.laBdd.addObjSac(5, "pokeball", "image", "pokeball")
-                    self.laBdd.addObjSac(2, "potion", "image", "potion")
+                    self.laBdd.addObjSac(4, "pokeball", "image", "pokeball")
+                    self.laBdd.addObjSac(50, "potion", "image", "potion")
 
                 #self.carte.jeu.ecran_affiche = "fightP"
                 #self.carte.jeu.mettre_a_jour = True
