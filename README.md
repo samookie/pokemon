@@ -13,11 +13,6 @@ Attendez vous à dur lourd !
 - [@Adrien](https://github.com/Adrien-Fr)
 
   
-## Fonctionnalités
-
-Pour le moment aucune mais ça avance
-
-  
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
