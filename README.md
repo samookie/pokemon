@@ -68,7 +68,7 @@ Pour passer les dialogues :
 Pour se déplacer :
 
 ```bash
-    utiliser les flèches directionelles 
+    utilisez les flèches directionelles 
 ```
 
 Pour accèder au menu:
