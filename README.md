@@ -54,3 +54,50 @@ Pour installer le projet il faut posséder les prérequis suivant :
 ```bash
     python3 main.py
 ```
+
+## Tutoriel
+
+Dans l'écran de démarrage :
+
+```bash
+    utilisez ENTRER pour démarrer,
+    CONTINUER : continuer une partie déjà enregistrée
+    NOUVELLE PARTIE : Créer une nouvelle partie
+```
+Pour passer les dialogues :
+
+```bash
+    utilisez ESPACE
+```
+
+Pour se déplacer :
+
+```bash
+    utiliser les flèches directionelles 
+```
+
+Pour accèder au menu:
+
+```bash
+    appuyez sur ESC , pour confirmer appuyez sur ENTRER
+```
+
+Lors des combats:
+
+```bash
+    appuyez sur ESPACE pour confirmer et passer
+```
+
+Au centre pokémon:
+
+```bash
+    Allez au comtoir et pressez ESPACE, elle vous soignera vos pokémon .
+    Pour sortir du dialogue pressez ESC
+    Et encore ESC pour sortir du menu
+```
+
+Lors des choix pokémons du début:
+
+```bash
+    Allez devant les pokéballs et pressez ESPACE et ENTRER : puis spammez en bougeant la touche ESPACE jusqu'à ce que vous trouvez le pokémon
+```
