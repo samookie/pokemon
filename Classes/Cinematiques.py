@@ -138,8 +138,8 @@ class Cinematiques:
                                         autre[8], autre[9], autre[10],
                                         autre[11], autre[12])  # initialisation du pokémon
                     lautre.setLevelPokemon(2)
-                    self.carte.joueur.addPokemon(lePokemon,5)
-                    self.carte.joueur.addPokemon(lautre,2)
+                    self.carte.joueur.addPoke(lePokemon,5)
+                    self.carte.joueur.addPoke(lautre,2)
                     self.laBdd.setCurrentCinematique(5)
                     self.laBdd.addObjSac(4, "pokeball", "image", "pokeball")
                     self.laBdd.addObjSac(50, "potion", "image", "potion")
@@ -159,8 +159,8 @@ class Cinematiques:
                                      autre[8], autre[9], autre[10],
                                      autre[11], autre[12])  # initialisation du pokémon
                     lautre.setLevelPokemon(2)
-                    self.carte.joueur.addPokemon(lePokemon,5)
-                    self.carte.joueur.addPokemon(lautre, 2)
+                    self.carte.joueur.addPoke(lePokemon,5)
+                    self.carte.joueur.addPoke(lautre, 2)
                     self.laBdd.setCurrentCinematique(5)
                     self.laBdd.addObjSac(4, "pokeball", "image", "pokeball")
                     self.laBdd.addObjSac(50, "potion", "image", "potion")
@@ -180,8 +180,8 @@ class Cinematiques:
                                      autre[8], autre[9], autre[10],
                                      autre[11], autre[12])  # initialisation du pokémon
                     lautre.setLevelPokemon(2)
-                    self.carte.joueur.addPokemon(lePokemon,5)
-                    self.carte.joueur.addPokemon(lautre, 2)
+                    self.carte.joueur.addPoke(lePokemon,5)
+                    self.carte.joueur.addPoke(lautre, 2)
                     self.laBdd.setCurrentCinematique(5)
                     self.laBdd.addObjSac(4, "pokeball", "image", "pokeball")
                     self.laBdd.addObjSac(50, "potion", "image", "potion")

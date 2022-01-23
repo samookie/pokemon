@@ -70,3 +70,6 @@ class Joueur(Animation):
     def addPokemon(self, pokemon, niv):
         self.bdd.ajouterPokemonJoueur(pokemon, niv)
 
+    def addPoke(self, pokemon, niv):
+        self.bdd.ajouterPokemon(pokemon,niv)
+
