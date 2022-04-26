@@ -8,7 +8,7 @@ class Animation(pygame.sprite.Sprite):
         self.animation_index = 0 #index permettant de savoir sur quel images d'animation on est
         self.clock = 0
         self.images = {
-            'bas': self.get_images(0),
+            'bas': self.get_images(0), # this is the first image 
             'haut': self.get_images(20),
             'gauche': self.get_images(40),
             'droite': self.get_images(60)

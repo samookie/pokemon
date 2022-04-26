@@ -478,6 +478,7 @@ class FightPokemon:
         elif len(self.liste_pokemon) > self.alliePokemon and self.liste_pokemon[self.alliePokemon].hpActu <= 0 :
             self.alliePokemon += 1
             print(self.alliePokemon)
+            
 
         if self.liste_pokemon[self.alliePokemon].vitesse > self.lePokemon[5]:
             if self.attaque1:
